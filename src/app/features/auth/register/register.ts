@@ -26,18 +26,18 @@ export class Register{
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
       ]],
-      role: ['doctor'],
-      address: [''],
+      role: ['Doctor'],
+      address: ['',Validators.required],
       dateOfBirth: [null, [Validators.required]],
       gender: [null, Validators.required],
       phone: ['', [
         Validators.required,
         Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)
       ]],
-      licenceNumber: [null],
-      specialization: [null],
-      bookingPrice: [null],
-      imageUrl: [null]
+      licenceNumber: [null, Validators.required],
+      specializationId: [null, Validators.required],
+      bookingPrice: [null, Validators.required],
+      imageUrl: [null, Validators.required]
     });
   }
   
