@@ -2,6 +2,7 @@ import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angula
 import { Auth } from './../../../core/services/auth';
 import { Component} from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class Register{
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _authService: Auth
+    private _authService: Auth,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,8 +53,8 @@ export class Register{
       next: (res:any) => {
     if (res.isSuccess && res.token) {
       this._authService.saveToken(res.token);
-      alert('تم التسجيل بنجاح!');
       this.registerForm.reset();
+      this._router.navigate(['/home']);
     } else {
       alert('حدث خطأ أثناء التسجيل');
     }
