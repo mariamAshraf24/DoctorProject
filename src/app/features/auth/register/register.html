@@ -27,22 +27,60 @@
             <div class="row">
               <!-- Left Column -->
               <div class="col-md-6">
-                <!-- الاسم -->
+                <!-- UserName -->
                 <div class="mb-2">
-                  <label for="name" class="form-label">الاسم</label>
+                  <label for="userName" class="form-label">اسم المستخدم</label>
                   <input
                     type="text"
-                    id="name"
-                    formControlName="name"
+                    id="userName"
+                    formControlName="userName"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('name')?.touched &&
-                  registerForm.get('name')?.invalid) {
+                  @if (registerForm.get('userName')?.touched &&
+                  registerForm.get('userName')?.invalid) {
                   <div class="form-error">
-                    @if (registerForm.get('name')?.errors?.['required']) {
-                    <span>الاسم مطلوب</span>
-                    } @if (registerForm.get('name')?.errors?.['pattern']) {
-                    <span>الاسم يجب أن يحتوي على حروف فقط</span>
+                    @if (registerForm.get('userName')?.errors?.['required']) {
+                    <span>اسم المستخدم مطلوب</span>
+                    }
+                  </div>
+                  }
+                </div>
+                <!-- FName -->
+                <div class="mb-2">
+                  <label for="FName" class="form-label">الاسم الأول</label>
+                  <input
+                    type="text"
+                    id="FName"
+                    formControlName="FName"
+                    class="form-control form-input"
+                  />
+                  @if (registerForm.get('FName')?.touched &&
+                  registerForm.get('FName')?.invalid) {
+                  <div class="form-error">
+                    @if (registerForm.get('FName')?.errors?.['required']) {
+                    <span>الاسم الأول مطلوب</span>
+                    } @if (registerForm.get('FName')?.errors?.['pattern']) {
+                    <span>يجب أن يحتوي على حروف فقط</span>
+                    }
+                  </div>
+                  }
+                </div>
+                <!-- LName -->
+                <div class="mb-2">
+                  <label for="LName" class="form-label">الاسم الأخير</label>
+                  <input
+                    type="text"
+                    id="LName"
+                    formControlName="LName"
+                    class="form-control form-input"
+                  />
+                  @if (registerForm.get('LName')?.touched &&
+                  registerForm.get('LName')?.invalid) {
+                  <div class="form-error">
+                    @if (registerForm.get('LName')?.errors?.['required']) {
+                    <span>الاسم الأخير مطلوب</span>
+                    } @if (registerForm.get('LName')?.errors?.['pattern']) {
+                    <span>يجب أن يحتوي على حروف فقط</span>
                     }
                   </div>
                   }
@@ -50,21 +88,21 @@
 
                 <!-- البريد الإلكتروني -->
                 <div class="mb-2">
-                  <label for="email" class="form-label"
+                  <label for="Email" class="form-label"
                     >البريد الإلكتروني</label
                   >
                   <input
                     type="email"
-                    id="email"
-                    formControlName="email"
+                    id="Email"
+                    formControlName="Email"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('email')?.touched &&
-                  registerForm.get('email')?.invalid) {
+                  @if (registerForm.get('Email')?.touched &&
+                  registerForm.get('Email')?.invalid) {
                   <div class="form-error">
-                    @if (registerForm.get('email')?.errors?.['required']) {
+                    @if (registerForm.get('Email')?.errors?.['required']) {
                     <span>البريد الإلكتروني مطلوب</span>
-                    } @if (registerForm.get('email')?.errors?.['email']) {
+                    } @if (registerForm.get('Email')?.errors?.['email']) {
                     <span>صيغة البريد الإلكتروني غير صحيحة</span>
                     }
                   </div>
@@ -73,22 +111,22 @@
 
                 <!-- كلمة المرور -->
                 <div class="mb-2">
-                  <label for="password" class="form-label">كلمة المرور</label>
+                  <label for="Password" class="form-label">كلمة المرور</label>
                   <input
                     type="password"
-                    id="password"
-                    formControlName="password"
+                    id="Password"
+                    formControlName="Password"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('password')?.touched &&
-                  registerForm.get('password')?.invalid) {
+                  @if (registerForm.get('Password')?.touched &&
+                  registerForm.get('Password')?.invalid) {
                   <div class="form-error">
-                    @if (registerForm.get('password')?.errors?.['required']) {
+                    @if (registerForm.get('Password')?.errors?.['required']) {
                     <span>كلمة المرور مطلوبة</span>
-                    } @if (registerForm.get('password')?.errors?.['minlength'])
+                    } @if (registerForm.get('Password')?.errors?.['minlength'])
                     {
                     <span>يجب أن تكون كلمة المرور 8 أحرف على الأقل</span>
-                    } @if (registerForm.get('password')?.errors?.['pattern']) {
+                    } @if (registerForm.get('Password')?.errors?.['pattern']) {
                     <span
                       >كلمة المرور يجب أن تحتوي على حرف كبير، رقم، ورمز
                       خاص</span
@@ -100,19 +138,19 @@
 
                 <!-- الهاتف -->
                 <div class="mb-2">
-                  <label for="phone" class="form-label">رقم الهاتف</label>
+                  <label for="Phone" class="form-label">رقم الهاتف</label>
                   <input
                     type="text"
-                    id="phone"
-                    formControlName="phone"
+                    id="Phone"
+                    formControlName="Phone"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('phone')?.touched &&
-                  registerForm.get('phone')?.invalid) {
+                  @if (registerForm.get('Phone')?.touched &&
+                  registerForm.get('Phone')?.invalid) {
                   <div class="form-error">
-                    @if (registerForm.get('phone')?.errors?.['required']) {
+                    @if (registerForm.get('Phone')?.errors?.['required']) {
                     <span>رقم الهاتف مطلوب</span>
-                    } @if (registerForm.get('phone')?.errors?.['pattern']) {
+                    } @if (registerForm.get('Phone')?.errors?.['pattern']) {
                     <span>رقم الهاتف غير صحيح</span>
                     }
                   </div>
@@ -121,38 +159,19 @@
 
                 <!-- تاريخ الميلاد -->
                 <div class="mb-2">
-                  <label for="dateOfBirth" class="form-label"
+                  <label for="DateOfBirth" class="form-label"
                     >تاريخ الميلاد</label
                   >
                   <input
                     type="date"
-                    id="dateOfBirth"
-                    formControlName="dateOfBirth"
+                    id="DateOfBirth"
+                    formControlName="DateOfBirth"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('dateOfBirth')?.touched &&
-                  registerForm.get('dateOfBirth')?.invalid) {
+                  @if (registerForm.get('DateOfBirth')?.touched &&
+                  registerForm.get('DateOfBirth')?.invalid) {
                   <div class="form-error">
                     <span>تاريخ الميلاد مطلوب</span>
-                  </div>
-                  }
-                </div>
-
-                <!-- الرخصة -->
-                <div class="mb-2">
-                  <label for="licenceNumber" class="form-label"
-                    >رقم الرخصة الطبية</label
-                  >
-                  <input
-                    type="text"
-                    id="licenceNumber"
-                    formControlName="licenceNumber"
-                    class="form-control form-input"
-                  />
-                  @if (registerForm.get('licenceNumber')?.touched &&
-                  registerForm.get('licenceNumber')?.invalid) {
-                  <div class="form-error">
-                    <span>رقم الرخصة الطبية مطلوب</span>
                   </div>
                   }
                 </div>
@@ -160,19 +179,37 @@
 
               <!-- Right Column -->
               <div class="col-md-6">
+                <!-- الرخصة -->
+                <div class="mb-2">
+                  <label for="LicenceNumber" class="form-label"
+                    >رقم الرخصة الطبية</label
+                  >
+                  <input
+                    type="text"
+                    id="LicenceNumber"
+                    formControlName="LicenceNumber"
+                    class="form-control form-input"
+                  />
+                  @if (registerForm.get('LicenceNumber')?.touched &&
+                  registerForm.get('LicenceNumber')?.invalid) {
+                  <div class="form-error">
+                    <span>رقم الرخصة الطبية مطلوب</span>
+                  </div>
+                  }
+                </div>
                 <!-- التخصص -->
                 <div class="mb-2">
-                  <label for="specializationId" class="form-label"
+                  <label for="SpecializationId" class="form-label"
                     >التخصص</label
                   >
                   <input
                     type="number"
-                    id="specializationId"
-                    formControlName="specializationId"
+                    id="SpecializationId"
+                    formControlName="SpecializationId"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('specializationId')?.touched &&
-                  registerForm.get('specializationId')?.invalid) {
+                  @if (registerForm.get('SpecializationId')?.touched &&
+                  registerForm.get('SpecializationId')?.invalid) {
                   <div class="form-error">
                     <span>التخصص مطلوب</span>
                   </div>
@@ -181,15 +218,15 @@
 
                 <!-- السعر -->
                 <div class="mb-2">
-                  <label for="bookingPrice" class="form-label">سعر الكشف</label>
+                  <label for="BookingPrice" class="form-label">سعر الكشف</label>
                   <input
                     type="number"
-                    id="bookingPrice"
-                    formControlName="bookingPrice"
+                    id="BookingPrice"
+                    formControlName="BookingPrice"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('bookingPrice')?.touched &&
-                  registerForm.get('bookingPrice')?.invalid) {
+                  @if (registerForm.get('BookingPrice')?.touched &&
+                  registerForm.get('BookingPrice')?.invalid) {
                   <div class="form-error">
                     <span>سعر الكشف مطلوب</span>
                   </div>
@@ -198,65 +235,103 @@
 
                 <!-- الصورة -->
                 <div class="mb-2">
-                  <label for="imageUrl" class="form-label">الصورة</label>
+                  <label for="ImageFile" class="form-label">الصورة</label>
                   <input
-                    type="text"
-                    id="imageUrl"
-                    formControlName="imageUrl"
-                    class="form-control form-input"
+                    type="file"
+                    id="ImageFile"
+                    (change)="onImageSelected($event)"
+                    class="form-control"
+                    accept="image/*"
                   />
-                  @if (registerForm.get('imageUrl')?.touched &&
-                  registerForm.get('imageUrl')?.invalid) {
+                  @if (registerForm.get('ImageFile')?.touched &&
+                  registerForm.get('ImageFile')?.invalid) {
                   <div class="form-error">
                     <span>الصورة مطلوبة</span>
                   </div>
                   }
                 </div>
-
                 <!-- العنوان -->
                 <div class="mb-2">
-                  <label for="address" class="form-label">العنوان</label>
+                  <div class="row g-2">
+                    <!-- المدينة -->
+                    <div class="col-md-6">
+                      <label for="City" class="form-label">المدينة</label>
+                      <input
+                        type="text"
+                        id="City"
+                        formControlName="City"
+                        class="form-control form-input"
+                      />
+                      @if (registerForm.get('City')?.touched &&
+                      registerForm.get('City')?.invalid) {
+                      <div class="form-error">
+                        <span>المدينة مطلوبة</span>
+                      </div>
+                      }
+                    </div>
+
+                    <!-- الدولة -->
+                    <div class="col-md-6">
+                      <label for="Country" class="form-label">الدولة</label>
+                      <input
+                        type="text"
+                        id="Country"
+                        formControlName="Country"
+                        class="form-control form-input"
+                      />
+                      @if (registerForm.get('Country')?.touched &&
+                      registerForm.get('Country')?.invalid) {
+                      <div class="form-error">
+                        <span>الدولة مطلوبة</span>
+                      </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <!-- الشارع -->
+                <div class="mb-4">
+                  <label for="Street" class="form-label">الشارع</label>
                   <input
                     type="text"
-                    id="address"
-                    formControlName="address"
+                    id="Street"
+                    formControlName="Street"
                     class="form-control form-input"
                   />
-                  @if (registerForm.get('address')?.touched &&
-                  registerForm.get('address')?.invalid) {
+                  @if (registerForm.get('Street')?.touched &&
+                  registerForm.get('Street')?.invalid) {
                   <div class="form-error">
-                    <span>العنوان مطلوب</span>
+                    <span>الشارع مطلوب</span>
                   </div>
                   }
                 </div>
-
                 <!-- النوع -->
                 <div class="mb-4">
-                  <label class="form-label d-block">النوع</label>
+                  <label class="form-label">النوع</label>
                   <div class="d-flex gap-3">
                     <!-- Male Button -->
                     <button
                       type="button"
-                      class="btn male-button flex-grow-1 d-flex flex-column align-items-center py-1"
+                      class="btn male-button flex-grow-1 align-items-center py-1"
                       [class.active]="registerForm.get('gender')?.value === 0"
                       (click)="registerForm.get('gender')?.setValue(0)"
                     >
                       <i
-                        class="fa-solid fa-person m-3 fa-xl"
+                        class="fa-solid fa-person m-1 fa-xl"
                         style="color: #3b82f6"
                       ></i>
-                      <span class="mb-2">ذكر</span>
+                      <span>ذكر</span>
                     </button>
 
                     <!-- Female Button -->
                     <button
                       type="button"
-                      class="btn female-button flex-grow-1 d-flex flex-column align-items-center py-1"
+                      class="btn female-button flex-grow-1 align-items-center py-1"
                       [class.active]="registerForm.get('gender')?.value === 1"
                       (click)="registerForm.get('gender')?.setValue(1)"
                     >
                       <i
-                        class="fa-solid fa-person-dress m-3 fa-xl"
+                        class="fa-solid fa-person-dress m-1 fa-xl"
                         style="color: #b197fc"
                       ></i>
                       <span class="mb-2">أنثى</span>
