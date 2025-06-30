@@ -1,24 +1,26 @@
 import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { Auth } from './../../../core/services/auth';
-import { Component, Inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login {
-  LoginForm!: FormGroup;
-  private readonly _formBuilder = Inject(FormBuilder);
-  private readonly _authService = Inject(Auth);
-  private readonly _Router = Inject(Router);
+export class Login implements OnInit {
+  loginForm!: FormGroup;
+  private readonly _authService = inject(Auth);
+  private readonly _formBuilder = inject(FormBuilder);
+  private readonly _Router = inject(Router);
 
   ngOnInit(): void {
-    this.LoginForm = this._formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+    this.loginForm = this._formBuilder.group({
+      userName: [null, [Validators.required, Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)]],
       password: [null, [
         Validators.required,
         Validators.minLength(8),
@@ -28,21 +30,30 @@ export class Login {
     });
   }
 
-  LoginSubmit(): void {
-    if (this.LoginForm.invalid) {
-      this.LoginForm.markAllAsTouched();
+  loginSubmit(): void {
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       return;
     }
-    const formData = this.LoginForm.value;
+    const formData = this.loginForm.value;
     this._authService.login(formData).subscribe({
-      next: (res: any) => {
+      next: (res) => {
+
         if (res.isSuccess && res.token) {
           this._authService.saveToken(res.token);
           alert('تم التسجيل بنجاح!');
-          // this.LoginForm.reset();
-          setTimeout(()=>{
-            this._Router.navigate('/home');
-          },1000)
+          this.loginForm.reset();
+
+          localStorage.setItem('roles', res.roles);
+          if (this._authService.isAdmin()) {
+            this._Router.navigate(['/admin']);
+          } else {
+            this._Router.navigate(['/doctor']);
+          }
+          // setTimeout(() => {
+          //   this._Router.navigate(['/home']);
+          // }, 1000)
         } else {
           alert('حدث خطأ أثناء التسجيل');
         }
