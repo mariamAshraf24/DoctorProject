@@ -28,7 +28,7 @@
               <!-- Left Column -->
               <div class="col-md-6">
                 <!-- UserName -->
-                <div class="mb-2">
+                <!-- <div class="mb-2">
                   <label for="userName" class="form-label">اسم المستخدم</label>
                   <input
                     type="text"
@@ -41,7 +41,42 @@
                   <div class="form-error">
                     @if (registerForm.get('userName')?.errors?.['required']) {
                     <span>اسم المستخدم مطلوب</span>
+                    }@if (registerForm.get('userName')?.errors?.['pattern']) {
+                    <div class="form-error">
+                      يجب أن يحتوي على حروف أوأرقام فقط (بدون مسافات أو رموز)
+                    </div>
                     }
+                  </div>
+                  } @if (usernameError) {
+                  <div class="invalid-feedback">
+                    {{ usernameError }}
+                  </div>
+                  }
+                </div> -->
+                <div class="mb-2">
+                  <label for="userName" class="form-label">اسم المستخدم</label>
+                  <input
+                    type="text"
+                    id="userName"
+                    formControlName="userName"
+                    class="form-control form-input"
+                    [class.is-invalid]="usernameError"
+                  />
+
+                  @if (registerForm.get('userName')?.touched &&
+                  registerForm.get('userName')?.invalid) {
+                  <div class="invalid-feedback">
+                    @if (registerForm.get('userName')?.errors?.['required']) {
+                    <div>اسم المستخدم مطلوب</div>
+                    } @if (registerForm.get('userName')?.errors?.['pattern']) {
+                    <div>
+                      يجب أن يحتوي على حروف أو أرقام فقط (بدون مسافات أو رموز)
+                    </div>
+                    }
+                  </div>
+                  } @if (usernameError) {
+                  <div class="invalid-feedback">
+                    {{ usernameError }}
                   </div>
                   }
                 </div>
@@ -250,69 +285,61 @@
                   </div>
                   }
                 </div>
-                <!-- العنوان -->
+
+                <!-- المدينة -->
                 <div class="mb-2">
-                  <div class="row g-2">
-                    <!-- المدينة -->
-                    <div class="col-md-6">
-                      <label for="City" class="form-label">المدينة</label>
-                      <input
+                  <label for="City" class="form-label">المدينة</label>
+                  <!-- <input
                         type="text"
                         id="City"
                         formControlName="City"
                         class="form-control form-input"
-                      />
-                      @if (registerForm.get('City')?.touched &&
-                      registerForm.get('City')?.invalid) {
-                      <div class="form-error">
-                        <span>المدينة مطلوبة</span>
-                      </div>
-                      }
-                    </div>
-
-                    <!-- الدولة -->
-                    <div class="col-md-6">
-                      <label for="Country" class="form-label">الدولة</label>
-                      <input
-                        type="text"
-                        id="Country"
-                        formControlName="Country"
-                        class="form-control form-input"
-                      />
-                      @if (registerForm.get('Country')?.touched &&
-                      registerForm.get('Country')?.invalid) {
-                      <div class="form-error">
-                        <span>الدولة مطلوبة</span>
-                      </div>
-                      }
-                    </div>
+                      /> -->
+                  <select id="City" formControlName="City" class="form-select-sm form-control custom-city-select form-input">
+                    <option value="" disabled >اختر المدينة</option>
+                    @for ( city of Cities; track city) {
+                    <option [value]="city">{{ city }}</option>
+                    }
+                  </select>
+              
+                  @if (registerForm.get('City')?.touched &&
+                  registerForm.get('City')?.invalid) {
+                  <div class="form-error">
+                    <span>المدينة مطلوبة</span>
                   </div>
+                  }
                 </div>
 
                 <!-- الشارع -->
-                <div class="mb-4">
+                <div class="mb-2">
                   <label for="Street" class="form-label">الشارع</label>
                   <input
                     type="text"
                     id="Street"
                     formControlName="Street"
-                    class="form-control form-input"
+                    class="form-control form-input placeholder-sm"
+                    placeholder="اسم المنطقة ورقم العمارة (مثال: مدينة نصر 15)"
                   />
                   @if (registerForm.get('Street')?.touched &&
                   registerForm.get('Street')?.invalid) {
                   <div class="form-error">
                     <span>الشارع مطلوب</span>
                   </div>
+                  } @if (registerForm.get('Street')?.errors?.['pattern']) {
+                  <div class="form-error">
+                    يجب أن يحتوي على اسم المنطقة ورقم العمارة (مثال: المهندسين
+                    25)
+                  </div>
                   }
                 </div>
                 <!-- النوع -->
-                <div class="mb-4">
-                  <label class="form-label">النوع</label>
+                <div class="mb-2">
+                  <label class="form-label mb-2">النوع</label>
                   <div class="d-flex gap-3">
                     <!-- Male Button -->
                     <button
                       type="button"
-                      class="btn male-button flex-grow-1 align-items-center py-1"
+                      class="btn male-button flex-grow-1 align-items-center py-2"
                       [class.active]="registerForm.get('gender')?.value === 0"
                       (click)="registerForm.get('gender')?.setValue(0)"
                     >
@@ -326,7 +353,7 @@
                     <!-- Female Button -->
                     <button
                       type="button"
-                      class="btn female-button flex-grow-1 align-items-center py-1"
+                      class="btn female-button flex-grow-1 align-items-center py-2"
                       [class.active]="registerForm.get('gender')?.value === 1"
                       (click)="registerForm.get('gender')?.setValue(1)"
                     >
