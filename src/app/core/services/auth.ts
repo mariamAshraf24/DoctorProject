@@ -22,23 +22,14 @@ export class Auth {
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
-  // setEmailVerify(data: object): Observable<any> {
-  //   return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, data)
-  // }
-  //  setCodeVerify(data:object):Observable<any>{
-  //   return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`,data)
-  // }
 
-  // setRestPassword(data: object): Observable<any> {
-  //   return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data)
-  // }
-
-  forgotPassword(data: { email: string }) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, data);
+  forgotPassword(email: string) {
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email },{ responseType: 'text' as 'json' });
+  
   }
 
-  resetPassword(data: { email: string; resetCode: string; password: string }) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data);
+  resetPassword(data: { token: string; newPassword: string }) {
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data,{ responseType: 'text' as 'json' });
   }
 
   isAdmin(): boolean {

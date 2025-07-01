@@ -1,49 +1,7 @@
-// import { Component, Inject, inject } from '@angular/core';
-// import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-// import { Auth } from '../../core/services/auth';
-
-// @Component({
-//   selector: 'app-forgot-password',
-//   imports: [ReactiveFormsModule],
-//   templateUrl: './forgot-password.html',
-//   styleUrl: './forgot-password.scss'
-// })
-// export class ForgotPassword {
-//   private readonly _Auth=inject(Auth);
-//     private readonly _formBuilder = inject(FormBuilder);
-//   step:number=1;
-
-//   verifyEmail: FormGroup = this._formBuilder.group({
-//     email: [null, [Validators.required, Validators.email]],
-//   })
-
-//   verifyCode: FormGroup = this._formBuilder.group({
-//     resetCode: [null, [Validators.required, Validators.pattern(/^[0,9]{6}$/)]],
-//   })
-
-
-//   verifyPassword: FormGroup = this._formBuilder.group({
-//     email: [null, [Validators.required, Validators.email]],
-//     password: [null, [
-//       Validators.required,
-//       Validators.minLength(8),
-//       Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
-//     ]],
-//   })
-// verivyEmailSubmit():void{
-// this._Auth.setEmailVerify(this.verifyEmail.value).subscribe({
-//   next:(res)=>{
-//     console.log(rse);
-//   },
-//   error:()=>{
-
-//   }
-// })
-// }
-// }
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Auth } from '../../core/services/auth';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -52,70 +10,69 @@ import { Auth } from '../../core/services/auth';
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.scss'
 })
-export class ForgotPassword {
-  private readonly _auth = inject(Auth);
-  private readonly _formBuilder = inject(FormBuilder);
+export class ForgotPassword implements OnInit {
+  private fb = inject(FormBuilder);
+  private auth = inject(Auth);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   step: number = 1;
 
-  verifyEmail: FormGroup = this._formBuilder.group({
-    email: [null, [Validators.required, Validators.email]],
+  forgotPassword: FormGroup = this.fb.group({
+    email: [null, [Validators.required, Validators.email]]
   });
 
-  verifyCode: FormGroup = this._formBuilder.group({
-    resetCode: [null, [Validators.required, Validators.pattern(/^\d{6}$/)]],
-  });
-
-  verifyPassword: FormGroup = this._formBuilder.group({
+  resetPassword: FormGroup = this.fb.group({
+    token: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
-    password: [null, [
+    newPassword: [null, [
       Validators.required,
       Validators.minLength(8),
       Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
     ]]
   });
 
-  verivyEmailSubmit(): void {
-    if (this.verifyEmail.invalid) return;
+  ngOnInit(): void {
+    const tokenFromUrl = this.route.snapshot.queryParamMap.get('token');
+    const emailFromUrl = this.route.snapshot.queryParamMap.get('email');
 
-    this._auth.forgotPassword(this.verifyEmail.value).subscribe({
-      next: (res) => {
-        alert('تم إرسال رمز التحقق إلى بريدك الإلكتروني');
-        this.verifyPassword.controls['email'].setValue(this.verifyEmail.value.email);
-        this.step = 2;
+    if (tokenFromUrl && emailFromUrl) {
+      this.resetPassword.controls['token'].setValue(tokenFromUrl);
+      this.resetPassword.controls['email'].setValue(emailFromUrl);
+      this.step = 2;
+    }
+  }
+
+  submitEmail() {
+    if (this.forgotPassword.invalid) return;
+
+    this.auth.forgotPassword(this.forgotPassword.value.email).subscribe({
+      next: () => {
+        alert('تم إرسال رابط إعادة التعيين إلى بريدك الإلكتروني');
+        // لا يتم تغيير الخطوة هنا، فقط تأكيد الإرسال
       },
-      error: () => {
-        alert('فشل إرسال رمز التحقق');
+      error: (err) => {
+        console.log('فشل:', err);
+        alert('حدث خطأ أثناء إرسال الإيميل');
       }
     });
   }
 
-  verifyCodeSubmit(): void {
-    if (this.verifyCode.invalid) return;
+  submitResetPassword(): void {
+    if (this.resetPassword.invalid) {
+      alert('البيانات غير مكتملة أو خاطئة');
+      return;
+    }
 
-    const code = this.verifyCode.value.resetCode;
-    // تقدرِ تعملي تحقق إضافي هنا لو محتاجة
-    this.step = 3;
-  }
+    const data = this.resetPassword.value;
 
-  resetPasswordSubmit(): void {
-    if (this.verifyPassword.invalid || this.verifyCode.invalid) return;
-
-    const data = {
-      email: this.verifyPassword.value.email,
-      password: this.verifyPassword.value.password,
-      resetCode: this.verifyCode.value.resetCode
-    };
-
-    this._auth.resetPassword(data).subscribe({
+    this.auth.resetPassword(data).subscribe({
       next: () => {
-        alert('تم تعيين كلمة مرور جديدة بنجاح');
-        this.step = 1;
-        this.verifyEmail.reset();
-        this.verifyCode.reset();
-        this.verifyPassword.reset();
+        alert('تم تعيين كلمة المرور بنجاح');
+        this.router.navigate(['/login']); // ✅ تحويل لصفحة تسجيل الدخول
       },
-      error: () => {
+      error: (err) => {
+        console.error('فشل تعيين كلمة المرور:', err);
         alert('فشل تعيين كلمة المرور');
       }
     });
