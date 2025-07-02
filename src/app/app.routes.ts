@@ -9,15 +9,17 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { AdminDashboard } from './features/admin-dashboard/admin-dashboard';
 
 export const routes: Routes = [
-    { path: 'login', component: Login},
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: Login },
     { path: 'Register', component: Register },
-    { path: 'forgotPassword', component:ForgotPassword},
+    { path: 'forgotPassword', component: ForgotPassword },
     {
         path: 'doctor',
         component: DoctorLayout,
         canActivate: [RoleGuard],
-        data: { role: 'Doctor' }, 
-        children:[{ path: '', component:Home}] 
+        data: { role: 'Doctor' },
+        children: [{ path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: Home }]
     },
     {
         path: 'admin',
@@ -26,4 +28,4 @@ export const routes: Routes = [
         component: AdminLayout,
         children: [
             { path: 'dashboard', component: AdminDashboard }]
-        }]
+    }]

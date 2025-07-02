@@ -1,1 +1,106 @@
-<p>home works!</p>
+<!--  <section class="container mt-5">
+    <h2 class="text-center mb-4 text-main">مواعيد اليوم</h2>
+
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">جارٍ تحميل المواعيد...</p>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger text-center">
+        {{ error }}
+    </div>
+
+    <div *ngIf="appointments.length > 0" class="row g-3">
+        <div *ngFor="let appointment of appointments" class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ appointment.patientName }}</h5>
+                    <p class="card-text">
+                        <strong>الوقت:</strong> {{ appointment.time }}<br />
+                        <strong>نوع الجلسة:</strong> {{ appointment.sessionType }}<br />
+                        <strong>الحالة:</strong> {{ appointment.status }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!loading && appointments.length === 0" class="alert alert-info text-center">
+        لا توجد مواعيد اليوم.
+    </div>
+</section> -->
+
+
+<div class="container py-4">
+  <!-- ✅ السلايدر -->
+  <div id="motivationSlider" class="carousel slide mb-5 shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active text-center bg-light p-4">
+        <img src="/images/5.jpg" class="slider-img d-block mx-auto mb-3" alt="نظّم وقتك" />
+        <h5 class="text-main fw-bold">ابدأ يومك بنشاط!</h5>
+        <p class="text-muted small">نظّم وقتك وتذكر أن نجاحك يبدأ من هنا</p>
+      </div>
+      <div class="carousel-item text-center bg-light p-4">
+        <img src="/images/6.jpg" class="slider-img d-block mx-auto mb-3" alt="مساعدة" />
+        <h5 class="text-main fw-bold">نحن هنا لمساعدتك</h5>
+        <p class="text-muted small">لا تتردد في التواصل مع فريقنا</p>
+      </div>
+      <div class="carousel-item text-center bg-light p-4">
+        <img src="/images/2.jpg" class="slider-img d-block mx-auto mb-3" alt="اطمئنان" />
+        <h5 class="text-main fw-bold">راحة المريض أولويتنا</h5>
+        <p class="text-muted small">احرص دائماً على تقديم أفضل رعاية</p>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#motivationSlider" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#motivationSlider" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- العنوان -->
+  <h4 class="fw-bold text-center text-main mb-4">مواعيد اليوم</h4>
+
+  <!-- @if: التحميل -->
+  @if (loading) {
+    <div class="text-center text-muted my-4">
+      <div class="spinner-border text-main" role="status"></div>
+      <p class="mt-2">جاري تحميل المواعيد...</p>
+    </div>
+  }
+
+  <!-- @if: في حالة الخطأ -->
+  @if (error) {
+    <div class="alert alert-danger text-center">{{ error }}</div>
+  }
+
+  <!-- @if: المواعيد -->
+  @if (!loading && appointments.length > 0) {
+    <div class="row g-3 justify-content-center">
+      @for (appointment of appointments; track appointment.id) {
+        <div class="col-6 col-md-4 col-lg-3">
+          <div class="card appointment-card text-center h-100" role="button" (click)="selected = appointment">
+            <div class="card-body">
+              <h6 class="mb-1">{{ formatTime(appointment.startTime) }}</h6>
+              <p class="mb-0 small">{{ appointment.patientName }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (!loading && appointments.length === 0) {
+    <div class="text-center text-muted mt-4">لا توجد مواعيد اليوم.</div>
+  }
+
+  <!-- @if: تفاصيل الموعد -->
+  @if (selected) {
+    <div class="appointment-popup rounded shadow p-3 mt-4 text-center bg-light border position-relative">
+      <button class="btn-close position-absolute top-0 end-0 m-2" (click)="selected = null"></button>
+      <h6 class="fw-bold">تفاصيل الموعد</h6>
+      <p class="mb-1"><strong>الاسم:</strong> {{ selected.patientName }}</p>
+      <p class="mb-1"><strong>الوقت:</strong> {{ formatTime(selected.startTime) }}</p>
+      <p class="mb-1"><strong>نوع الجلسة:</strong> {{ selected.appointmentType == 0 ? 'كشف' : 'متابعة' }}</p>
+    </div>
+  }
+</div>
