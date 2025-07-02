@@ -9,6 +9,7 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { AdminDashboard } from './features/admin-dashboard/admin-dashboard';
 
 export const routes: Routes = [
+    {path:'' , component: Register},
     { path: 'login', component: Login},
     { path: 'Register', component: Register },
     { path: 'forgotPassword', component:ForgotPassword},
