@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
+  <div class="container-fluid">
+
+    <!-- Logo on the right -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img src="images/logo.jpg" alt="الشعار" width="120" height="40" class="ms-2" />
+    </a>
+
+    <!-- Center links and left user info -->
+    <div class="collapse navbar-collapse justify-content-between" id="navbarMain">
+
+      <!-- Center Links -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="home" >مواعيد اليوم</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="Calendar" >مواعيدي</a>
+        </li>
+      </ul>
+
+      <!-- Left User Info -->
+      <div class="d-flex align-items-center gap-2">
+        <span class="fw-semibold">المستخدم</span>
+        <i class="bi bi-person-circle fs-4"></i>
+        <button class="btn btn-outline-danger btn-sm" (click)="logout()">تسجيل الخروج</button>
+      </div>
+
+    </div>
+  </div>
+</nav>

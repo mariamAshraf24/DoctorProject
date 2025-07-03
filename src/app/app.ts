@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Profile } from "./features/doctor/profile/profile";
+import { Navbar } from "./features/doctor/navbar/navbar";
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Profile],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected title = 'DoctorProject';
+  protected title = 'Nazzem';
 }

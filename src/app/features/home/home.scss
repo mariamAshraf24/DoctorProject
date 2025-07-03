@@ -1,0 +1,62 @@
+// ألوان مخصصة
+$text-main: #6f42c1;
+$gradient-start: hsl(272, 87%, 67%);
+$gradient-end: hsl(217, 91%, 60%);
+
+// نصوص رئيسية
+.text-main {
+  color: $text-main;
+}
+
+// صورة الدكتور داخل السلايدر
+.slider-img {
+  max-height: 280px;
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+// الكروت
+.appointment-card {
+  background: linear-gradient(135deg, $gradient-start, $gradient-end);
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  h6 {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+}
+
+// popup الخاص بالتفاصيل
+.appointment-popup {
+  max-width: 500px;
+  margin: auto;
+}
+
+// تعديل عام على الصفحة
+body, html {
+  overflow-x: hidden;
+}
+
+.container {
+  overflow-x: hidden;
+}
