@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #dcd7ff);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  padding: 1rem;
+  background: url('https://www.transparenttextures.com/patterns/batthern.png');
+}
+
+.login-card {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+
+/* تأثير زجاجي */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo-circle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgb(233 213 255);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: #c084fc;
+  box-shadow: 0 0 0 4px rgba(216, 180, 254, 0.3);
+  outline: none;
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+.gradient-button {
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  transition: 0.3s;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.gradient-button:hover {
+  opacity: 0.95;
+  transform: scale(1.01);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+@media (max-width: 576px) {
+  .login-card {
+    padding: 1rem;
+  }
+}
