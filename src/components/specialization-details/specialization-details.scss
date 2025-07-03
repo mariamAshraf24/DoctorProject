@@ -1,0 +1,17 @@
+ .doctor-badge-simple {
+    background: #f3e8ff !important;
+    color: #4b2997 !important;
+    font-size: 1rem;
+    min-width: 90px;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 1px 4px 0 rgba(123,47,242,0.06);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }

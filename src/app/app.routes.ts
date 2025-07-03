@@ -1,4 +1,17 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
+<<<<<<< HEAD
+import { AdminComponent } from '../components/admin/admin'; // عدلي المسار حسب مكان الملف
+import { SpecializationDetails } from '../components/specialization-details/specialization-details';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'Specializations', pathMatch: 'full' },
+  { path: 'Specializations', component: AdminComponent },
+  { path: 'SpecializationDetails/:id', component: SpecializationDetails },
+  { path: 'SpecializationDetails/:id', component: AdminComponent} // تأكدي من استيراد المكون المناسب
+  // أضيفي هنا أي مسارات أخرى تحتاجينها
+];
+=======
 import { Register } from './features/auth/register/register';
 import { Login } from './features/auth/login/login';
 import { ForgotPassword } from './features/forgot-password/forgot-password';
@@ -38,3 +51,4 @@ export const routes: Routes = [
 ]
 
     
+>>>>>>> 8d6e5e9f63d415147212ceed0fd32ddf05f0b5b5
