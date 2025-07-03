@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h3 class="mb-3">تأجيل المواعيد بتاريخ محدد</h3>
+
+    <form [formGroup]="delayForm" (ngSubmit)="onDelaySubmit()">
+        <div class="mb-3">
+            <label for="date" class="form-label">اختر التاريخ</label>
+            <input type="date" id="date" class="form-control" formControlName="date" />
+            @if (delayForm.get('date')?.invalid && delayForm.get('date')?.touched) {
+            <div class="text-danger">التاريخ مطلوب</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="duration" class="form-label">مدة التأجيل (بصيغة HH:mm:ss)</label>
+            <input type="text" id="duration" class="form-control" formControlName="delayDuration" />
+            @if (delayForm.get('delayDuration')?.invalid && delayForm.get('delayDuration')?.touched) {
+            <div class="text-danger">مدة التأجيل مطلوبة</div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            {{ isLoading ? 'جارٍ التأجيل...' : 'تأجيل المواعيد' }}
+        </button>
+    </form>
+
+    @if (message) {
+    <div class="alert mt-3" [ngClass]="{
+      'alert-success': message.includes('successfully'),
+      'alert-danger': message.includes('فشل') || message.includes('خطأ')
+    }">
+        {{ message }}
+    </div>
+    }
+</div>

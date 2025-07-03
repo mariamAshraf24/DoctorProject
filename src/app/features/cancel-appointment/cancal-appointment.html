@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h3 class="mb-3">إلغاء مواعيد بتاريخ محدد</h3>
+
+    <form [formGroup]="cancelForm" (ngSubmit)="onCancelSubmit()">
+        <div class="mb-3">
+            <label for="date" class="form-label">اختر التاريخ</label>
+            <input type="date" id="date" class="form-control" formControlName="date" />
+
+            @if (cancelForm.get('date')?.invalid && cancelForm.get('date')?.touched) {
+            <div class="text-danger">التاريخ مطلوب</div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-danger" [disabled]="isLoading">
+            {{ isLoading ? 'جارٍ الإلغاء...' : 'إلغاء المواعيد' }}
+        </button>
+    </form>
+
+    @if (message) {
+    <div class="alert mt-3" [ngClass]="{
+      'alert-success': message.includes('نجاح'),
+      'alert-danger': message.includes('فشل')
+    }">
+        {{ message }}
+    </div>
+    }
+</div>
