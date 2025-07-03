@@ -1,106 +1,162 @@
-<!--  <section class="container mt-5">
-    <h2 class="text-center mb-4 text-main">مواعيد اليوم</h2>
-
-    <div *ngIf="loading" class="text-center">
-        <div class="spinner-border text-primary" role="status"></div>
-        <p class="mt-2">جارٍ تحميل المواعيد...</p>
-    </div>
-
-    <div *ngIf="error" class="alert alert-danger text-center">
-        {{ error }}
-    </div>
-
-    <div *ngIf="appointments.length > 0" class="row g-3">
-        <div *ngFor="let appointment of appointments" class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">{{ appointment.patientName }}</h5>
-                    <p class="card-text">
-                        <strong>الوقت:</strong> {{ appointment.time }}<br />
-                        <strong>نوع الجلسة:</strong> {{ appointment.sessionType }}<br />
-                        <strong>الحالة:</strong> {{ appointment.status }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="!loading && appointments.length === 0" class="alert alert-info text-center">
-        لا توجد مواعيد اليوم.
-    </div>
-</section> -->
-
-
-<div class="container py-4">
-  <!-- ✅ السلايدر -->
-  <div id="motivationSlider" class="carousel slide mb-5 shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+<!-- Full Width Motivational Slider -->
+<div class="hero-section">
+  <div id="fullWidthSlider" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active text-center bg-light p-4">
-        <img src="/images/5.jpg" class="slider-img d-block mx-auto mb-3" alt="نظّم وقتك" />
-        <h5 class="text-main fw-bold">ابدأ يومك بنشاط!</h5>
-        <p class="text-muted small">نظّم وقتك وتذكر أن نجاحك يبدأ من هنا</p>
-      </div>
-      <div class="carousel-item text-center bg-light p-4">
-        <img src="/images/6.jpg" class="slider-img d-block mx-auto mb-3" alt="مساعدة" />
-        <h5 class="text-main fw-bold">نحن هنا لمساعدتك</h5>
-        <p class="text-muted small">لا تتردد في التواصل مع فريقنا</p>
-      </div>
-      <div class="carousel-item text-center bg-light p-4">
-        <img src="/images/2.jpg" class="slider-img d-block mx-auto mb-3" alt="اطمئنان" />
-        <h5 class="text-main fw-bold">راحة المريض أولويتنا</h5>
-        <p class="text-muted small">احرص دائماً على تقديم أفضل رعاية</p>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#motivationSlider" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#motivationSlider" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="slider-item">
+          <div class="slider-overlay"></div>
+          <img src="/images/5.jpg" class="slider-full-img" alt="نشاط" loading="lazy"/>
+          <div class="slider-caption text-white text-center">
+            <h1 class="fw-bold mb-3 animate__animated animate__fadeInDown">مرحبًا دكتور!
+</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">استعد لليوم المليء بالإنجازات الطبية 👨‍⚕️
 
-  <!-- العنوان -->
-  <h4 class="fw-bold text-center text-main mb-4">مواعيد اليوم</h4>
-
-  <!-- @if: التحميل -->
-  @if (loading) {
-    <div class="text-center text-muted my-4">
-      <div class="spinner-border text-main" role="status"></div>
-      <p class="mt-2">جاري تحميل المواعيد...</p>
-    </div>
-  }
-
-  <!-- @if: في حالة الخطأ -->
-  @if (error) {
-    <div class="alert alert-danger text-center">{{ error }}</div>
-  }
-
-  <!-- @if: المواعيد -->
-  @if (!loading && appointments.length > 0) {
-    <div class="row g-3 justify-content-center">
-      @for (appointment of appointments; track appointment.id) {
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="card appointment-card text-center h-100" role="button" (click)="selected = appointment">
-            <div class="card-body">
-              <h6 class="mb-1">{{ formatTime(appointment.startTime) }}</h6>
-              <p class="mb-0 small">{{ appointment.patientName }}</p>
+</p>
+            <div class="slider-wave">
+              <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#fff"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#fff"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#fff"></path>
+              </svg>
             </div>
           </div>
         </div>
-      }
-    </div>
-  } @else if (!loading && appointments.length === 0) {
-    <div class="text-center text-muted mt-4">لا توجد مواعيد اليوم.</div>
-  }
+      </div>
 
-  <!-- @if: تفاصيل الموعد -->
-  @if (selected) {
-    <div class="appointment-popup rounded shadow p-3 mt-4 text-center bg-light border position-relative">
-      <button class="btn-close position-absolute top-0 end-0 m-2" (click)="selected = null"></button>
-      <h6 class="fw-bold">تفاصيل الموعد</h6>
-      <p class="mb-1"><strong>الاسم:</strong> {{ selected.patientName }}</p>
-      <p class="mb-1"><strong>الوقت:</strong> {{ formatTime(selected.startTime) }}</p>
-      <p class="mb-1"><strong>نوع الجلسة:</strong> {{ selected.appointmentType == 0 ? 'كشف' : 'متابعة' }}</p>
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="slider-item">
+          <div class="slider-overlay"></div>
+          <img src="/images/6.jpg" class="slider-full-img" alt="دعم" loading="lazy"/>
+          <div class="slider-caption text-white text-center">
+            <h1 class="fw-bold mb-3 animate__animated animate__fadeInDown"> رعاية بمعايير عالمية</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">قدم أفضل رعاية طبية لمرضاك ❤️</p>
+            <div class="slider-wave">
+              <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#fff"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#fff"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#fff"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="slider-item">
+          <div class="slider-overlay"></div>
+          <img src="/images/3.jpg" class="slider-full-img" alt="راحة" loading="lazy"/>
+          <div class="slider-caption text-white text-center">
+            <h1 class="fw-bold mb-3 animate__animated animate__fadeInDown">إدارة المواعيد بسهولة</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">نظام متكامل لتنظيم جدولك اليومي 📅</p>
+            <div class="slider-wave">
+              <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#fff"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#fff"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#fff"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  }
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
+<!-- باقي الصفحة -->
+<div class="appointments-container">
+  <div class="container py-5">
+    <div class="section-header">
+      <h4 class="section-title animate__animated animate__fadeIn">مواعيد اليوم</h4>
+      <div class="section-divider"></div>
+    </div>
+
+    @if (loading) {
+      <div class="text-center text-muted my-5 py-4">
+        <div class="spinner-loader">
+          <div class="spinner-circle"></div>
+          <div class="spinner-text">جاري تحميل المواعيد...</div>
+        </div>
+      </div>
+    }
+
+    @if (error) {
+      <div class="alert alert-danger alert-elegant text-center animate__animated animate__shakeX">{{ error }}</div>
+    }
+
+    @if (!loading && appointments.length > 0) {
+      <div class="row g-4 justify-content-center">
+        @for (appointment of appointments; track appointment.id) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="appointment-card" role="button" (click)="selected = appointment">
+              <div class="card-inner">
+                <div class="card-time">{{ formatTime(appointment.startTime) }}</div>
+                <div class="card-patient">{{ appointment.patientName }}</div>
+                <!-- <div class="card-type">{{ selected.appointmentType == 0 ? 'كشف' : 'متابعة' }}</div> -->
+                <div class="card-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (!loading && appointments.length === 0) {
+      <div class="no-appointments text-center animate__animated animate__fadeIn">
+        <div class="empty-state">
+          <i class="fas fa-calendar-times empty-icon"></i>
+          <h5>لا توجد مواعيد اليوم</h5>
+          <p>يمكنك إضافة مواعيد جديدة من لوحة التحكم</p>
+        </div>
+      </div>
+    }
+
+    @if (selected) {
+      <div class="appointment-modal animate__animated animate__fadeIn">
+        <div class="modal-content">
+          <button class="modal-close" (click)="selected = null">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="modal-header">
+            <h5>تفاصيل الموعد</h5>
+          </div>
+          <div class="modal-body">
+            <div class="detail-row">
+              <i class="fas fa-user detail-icon"></i>
+              <div>
+                <span class="detail-label">الاسم:</span>
+                <span class="detail-value">{{ selected.patientName }}</span>
+              </div>
+            </div>
+            <div class="detail-row">
+              <i class="fas fa-clock detail-icon"></i>
+              <div>
+                <span class="detail-label">الوقت:</span>
+                <span class="detail-value">{{ formatTime(selected.startTime) }}</span>
+              </div>
+            </div>
+            <div class="detail-row">
+              <i class="fas fa-stethoscope detail-icon"></i>
+              <div>
+                <span class="detail-label">نوع الجلسة:</span>
+                <span class="detail-value">{{ selected.appointmentType == 0 ? 'كشف' : 'متابعة' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
 </div>
