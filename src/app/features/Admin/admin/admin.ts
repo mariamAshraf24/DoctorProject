@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Admin } from '../../app/core/services/admin';
-import { IAdmin } from '../../app/core/interfaces/iadmin';
+import { Admin } from '../../../core/services/admin';
+import { IAdmin } from '../../../core/models/IAdmin';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';

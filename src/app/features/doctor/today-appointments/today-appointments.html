@@ -85,10 +85,10 @@
         </div>
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="prev" title="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#fullWidthSlider" data-bs-slide="next" title="next">
             <span class="carousel-control-next-icon"></span>
         </button>
     </div>
@@ -147,7 +147,7 @@
         @if (selected) {
         <div class="appointment-modal animate__animated animate__fadeIn">
             <div class="modal-content">
-                <button class="modal-close" (click)="selected = null">
+                <button class="modal-close" (click)="selected = null" title="details">
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="modal-header">
