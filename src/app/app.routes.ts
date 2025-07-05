@@ -1,38 +1,3 @@
-
-
-
-// export const routes: Routes = [
-
-//     { path: '', redirectTo: 'login', pathMatch: 'full' },
-//     { path: 'login', component: Login },
-//     { path: 'Register', component: Register },
-//     { path: 'forgotPassword', component: ForgotPassword },
-//     {
-//         path: 'doctor',
-//         component: DoctorLayout,
-//         canActivate: [RoleGuard],
-//         data: { role: 'Doctor' },
-//         children: [{ path: '', redirectTo: 'home', pathMatch: 'full' },
-//             { path: 'home', component: Home }]
-//     },
-//     {
-//         path: 'admin',
-//         canActivate: [RoleGuard],
-//         data: { role: 'Admin' },
-//         component: AdminLayout,
-//         children: [
-//             { path: 'dashboard', component: AdminDashboard }]
-//     },
-//     { path: 'calendar', component: Calendar },
-//     { path: 'AppointmentsByDate/:date', component: AppointmentsByDate },
-//       { path: '', redirectTo: 'Specializations', pathMatch: 'full' },
-
-//   { path: '', redirectTo: 'Specializations', pathMatch: 'full' },
-//   { path: 'Specializations', component: AdminComponent },
-//   { path: 'SpecializationDetails/:id', component: SpecializationDetails },
-//   { path: 'SpecializationDetails/:id', component: AdminComponent}
-// ]
-
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
