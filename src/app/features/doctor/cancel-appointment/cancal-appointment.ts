@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Appointments } from '../../../../core/services/appointments';
+import { Appointments } from '../../../core/services/appointments';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass, CommonModule } from '@angular/common';
 
