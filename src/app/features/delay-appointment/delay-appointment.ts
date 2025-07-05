@@ -6,12 +6,12 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-delay-appointment',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './delay-appointment.html',
   styleUrl: './delay-appointment.scss'
 })
 export class DelayAppointment {
- delayForm: FormGroup;
+  delayForm: FormGroup;
   isLoading = false;
   message: string | null = null;
 
