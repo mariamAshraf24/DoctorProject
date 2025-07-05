@@ -46,6 +46,8 @@ import { AdminComponent } from './features/Admin/admin/admin';
 import { SpecializationDetails } from './features/Admin/specialization-details/specialization-details';
 import { Profile } from './features/doctor/profile/profile';
 import { TodayAppointments } from './features/doctor/today-appointments/today-appointments';
+import { CancalAppointment } from './features/doctor/cancel-appointment/cancal-appointment';
+import { DelayAppointment } from './features/doctor/delay-appointment/delay-appointment';
 
 
 export const routes: Routes = [
@@ -65,6 +67,8 @@ export const routes: Routes = [
             { path: 'calendar', component: Calendar },
             { path: 'AppointmentsByDate/:date', component: AppointmentsByDate },
             { path: 'profile', component: Profile },
+            { path: 'cancel-appointment', component: CancalAppointment },
+            { path: 'delay-appointment', component: DelayAppointment },
         ],
     },
 

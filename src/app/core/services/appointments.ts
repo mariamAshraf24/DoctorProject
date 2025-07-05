@@ -43,5 +43,6 @@ export class Appointments {
     body,
     { headers: { 'Content-Type': 'application/json' } }
   );
+  
 }
 }
