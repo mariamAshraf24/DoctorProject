@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { inject } from '@angular/core';
-import { Admin } from '../../app/core/services/admin';
-import { IAdmin } from '../../app/core/interfaces/iadmin';
+import { Admin } from '../../../core/services/admin';
+import { IAdmin } from '../../../core/models/IAdmin';
 
 @Component({
   selector: 'app-specialization-details',

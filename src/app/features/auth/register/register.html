@@ -237,12 +237,17 @@
                   <label for="SpecializationId" class="form-label"
                     >التخصص</label
                   >
-                  <input
-                    type="number"
+                  <!-- Dropdown when loaded -->
+                  <select
                     id="SpecializationId"
                     formControlName="SpecializationId"
-                    class="form-control form-input"
-                  />
+                    class="form-control form-input form-select-sm custom-city-select"
+                  >
+                    @for (spec of Specializations; track spec.id) {
+                    <option [value]="spec.id">{{ spec.name }}</option>
+                    }
+                  </select>
+
                   @if (registerForm.get('SpecializationId')?.touched &&
                   registerForm.get('SpecializationId')?.invalid) {
                   <div class="form-error">
@@ -250,7 +255,6 @@
                   </div>
                   }
                 </div>
-
                 <!-- السعر -->
                 <div class="mb-2">
                   <label for="BookingPrice" class="form-label">سعر الكشف</label>
@@ -295,13 +299,17 @@
                         formControlName="City"
                         class="form-control form-input"
                       /> -->
-                  <select id="City" formControlName="City" class="form-select-sm form-control custom-city-select form-input">
-                    <option value="" disabled >اختر المدينة</option>
+                  <select
+                    id="City"
+                    formControlName="City"
+                    class="form-select-sm form-control custom-city-select form-input"
+                  >
+                    <option value="" disabled>اختر المدينة</option>
                     @for ( city of Cities; track city) {
                     <option [value]="city">{{ city }}</option>
                     }
                   </select>
-              
+
                   @if (registerForm.get('City')?.touched &&
                   registerForm.get('City')?.invalid) {
                   <div class="form-error">
@@ -388,7 +396,7 @@
           <!-- Centered Footer -->
           <p class="text-center mt-2">
             هل لديك حساب بالفعل؟
-            <a routerLink="/auth/login" style="color: rgb(147 51 234)"
+            <a class="text-decoration-none" routerLink="/login" style="color: rgb(147 51 234)"
               >تسجيل الدخول</a
             >
           </p>

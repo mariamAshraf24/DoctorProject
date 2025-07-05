@@ -75,7 +75,7 @@ export class Calendar implements OnInit {
 
   onDateClick(date: Date): void {
     const dateString = this.getFormattedRouteDate(date);
-    this._Router.navigate(['/AppointmentsByDate', dateString]);
+    this._Router.navigate(['/doctor/AppointmentsByDate', dateString]);
   }
 
   isToday(date: Date): boolean {

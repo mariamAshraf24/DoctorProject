@@ -11,3 +11,10 @@ export interface Doctor {
   specializationName: string;
   imageUrl: string;
 }
+
+export interface DoctorProfileResponse {
+  success: boolean;
+  message: string;
+  data: Doctor;
+  errors: null | any;
+}

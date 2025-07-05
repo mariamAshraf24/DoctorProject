@@ -15,7 +15,7 @@ export const AuthInterceptor: HttpInterceptorFn = (
 
   const token = localStorage.getItem('token');
 
-  if (token) {
+  if (token && !req.url.includes('/Notifications')) {
     const clonedReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

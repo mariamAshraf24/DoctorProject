@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Appointment } from '../../../core/models/appointment';
+import { Appointment } from '../../../core/models/IAppointment';
 import { ActivatedRoute } from '@angular/router';
 import { Appointments } from '../../../core/services/appointments';
 import { CommonModule, DatePipe } from '@angular/common';

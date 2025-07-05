@@ -1,0 +1,77 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h2>Doctor Profile</h2>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Loading profile...</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="error-message">
+      <span style="color: #e53935; font-size: 2rem;">&#9888;</span>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadDoctorProfile()">Retry</button>
+    </div>
+  }
+
+  @if (doctorProfile && !isLoading) {
+    <div class="profile-content">
+      <div class="profile-image-section">
+        <img [src]="doctorProfile.imageUrl" alt="Doctor's Profile Picture" class="profile-image">
+        <div class="profile-badge">
+          <span style="color: #1976d2; font-size: 1.2rem;">&#9877;</span>
+          <span>{{ doctorProfile.specializationName }}</span>
+        </div>
+      </div>
+
+      <div class="profile-details-section">
+        <div class="profile-name">
+          <h1>Dr. {{ doctorProfile.fName }} {{ doctorProfile.lName }}</h1>
+          <div class="profile-meta">
+            <span class="meta-item">
+              <span style="font-size: 1.1rem;">&#128100;</span>
+              {{ getGenderText(doctorProfile.gender) }}
+            </span>
+            <span class="meta-item">
+              <span style="font-size: 1.1rem;">&#127874;</span>
+              {{ formatDate(doctorProfile.dateOfBirth) }}
+            </span>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="profile-info">
+          <div class="info-row">
+            <span style="font-size: 1.1rem;">&#128205;</span>
+            <div>
+              <p class="info-label">Address</p>
+              <p class="info-value">{{ doctorProfile.street }}, {{ doctorProfile.city }}, {{ doctorProfile.country }}</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span style="font-size: 1.1rem;">&#128181;</span>
+            <div>
+              <p class="info-label">Booking Price</p>
+              <p class="info-value">{{ doctorProfile.bookingPrice }} EGP</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="action-button primary">
+            &#9998; Edit Profile
+          </button>
+          <button class="action-button accent" routerLink='/doctor/today-appointments'>
+            &#9200; View Schedule
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
