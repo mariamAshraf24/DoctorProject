@@ -1,4 +1,3 @@
-import { FirebaseMessaging } from './../../../core/services/firebase-messaging';
 import { DoctorService } from './../../../core/services/doctor-service';
 import {
   Specialization,
@@ -13,14 +12,14 @@ import {
 import { Auth } from './../../../core/services/auth';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router , RouterModule} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { cities } from '../../../core/constants/cities';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgSelectModule , RouterModule],
+  imports: [ReactiveFormsModule, NgSelectModule, RouterModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -36,7 +35,6 @@ export class Register implements OnInit {
     private _authService: Auth,
     private _router: Router,
     private _DoctorService: DoctorService,
-    private _FirebaseMessaging: FirebaseMessaging
   ) {}
 
   ngOnInit(): void {
@@ -103,80 +101,7 @@ export class Register implements OnInit {
     });
   }
 
-  // async registerSubmit(): Promise<void> {
-  //   this.usernameError = '';
-
-  //   if (this.registerForm.invalid || !this.selectedImage) {
-  //     this.registerForm.markAllAsTouched();
-  //     return;
-  //   }
-
-  //   try {
-  //     // 1. Get FCM token
-  //     const fcmToken =
-  //       await this._FirebaseMessaging.requestPermissionAndGetToken();
-
-  //     const formData = new FormData();
-
-  //     // Append all form values
-  //     Object.keys(this.registerForm.value).forEach((key) => {
-  //       if (key !== 'ImageFile' && this.registerForm.value[key] !== null) {
-  //         formData.append(key, this.registerForm.value[key]);
-  //       }
-  //     });
-
-  //     if (this.registerForm.value.DateOfBirth) {
-  //       const date = new Date(this.registerForm.value.DateOfBirth);
-  //       if (!isNaN(date.getTime())) {
-  //         // Check if valid date
-  //         formData.set('DateOfBirth', date.toISOString());
-  //       }
-  //     }
-
-  //     // Append the image file
-  //     if (this.selectedImage) {
-  //       formData.append('ImageFile', this.selectedImage);
-  //     }
-
-  //     // const formData = this.registerForm.value;
-  //     this._authService.register(formData).subscribe({
-  //       next: (res: any) => {
-  //         if (res.isSuccess && res.token) {
-  //           this._authService.saveToken(res.token);
-  //           this.registerForm.reset();
-  //           if (fcmToken) {
-  //             try {
-  //               await this._FirebaseMessaging
-  //                 .sendTokenToBackend(fcmToken)
-  //                 .toPromise();
-  //               console.log('FCM token successfully sent to backend');
-  //             } catch (error) {
-  //               console.error('Error sending FCM token to backend:', error);
-  //             }
-  //           }
-  //           alert('succesful');
-  //           // this._router.navigate(['/home']);
-  //         } else {
-  //           alert('حدث خطأ أثناء التسجيل');
-  //         }
-  //       },
-  //       error: (err: HttpErrorResponse) => {
-  //         console.error(err);
-  //         if (err.error?.message?.includes('Username already exists')) {
-  //           this.usernameError =
-  //             'اسم المستخدم موجود بالفعل، يرجى اختيار اسم آخر';
-  //           this.registerForm.get('userName')?.setErrors({ notUnique: true });
-  //           this.registerForm.get('userName')?.markAsTouched();
-  //         }
-  //         // alert('حدث خطأ أثناء التسجيل');
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Error in registration process:', error);
-  //     alert('حدث خطأ أثناء التسجيل');
-  //   }
-  // }
-  async registerSubmit(): Promise<void> {
+  registerSubmit(): void {
     this.usernameError = '';
 
     if (this.registerForm.invalid || !this.selectedImage) {
@@ -184,72 +109,51 @@ export class Register implements OnInit {
       return;
     }
 
-    try {
-      // 1. Get FCM token
-      const fcmToken =
-        await this._FirebaseMessaging.requestPermissionAndGetToken();
+    const formData = new FormData();
 
-      const formData = new FormData();
-
-      // 2. Append form values
-      Object.keys(this.registerForm.value).forEach((key) => {
-        if (key !== 'ImageFile' && this.registerForm.value[key] !== null) {
-          formData.append(key, this.registerForm.value[key]);
-        }
-      });
-
-      // 3. Format date
-      if (this.registerForm.value.DateOfBirth) {
-        const date = new Date(this.registerForm.value.DateOfBirth);
-        if (!isNaN(date.getTime())) {
-          formData.set('DateOfBirth', date.toISOString());
-        }
+    // Append all form values
+    Object.keys(this.registerForm.value).forEach((key) => {
+      if (key !== 'ImageFile' && this.registerForm.value[key] !== null) {
+        formData.append(key, this.registerForm.value[key]);
       }
+    });
 
-      // 4. Add image
-      if (this.selectedImage) {
-        formData.append('ImageFile', this.selectedImage);
-      }
-
-      // 5. Register
-      const res: any = await this._authService.register(formData).toPromise();
-
-      if (res.isSuccess && res.token) {
-        this._authService.saveToken(res.token);
-        console.log('Token saved:', localStorage.getItem('token'));
-        this.registerForm.reset();
-
-        // 6. Send token
-        if (fcmToken) {
-          try {
-            await this._FirebaseMessaging
-              .sendTokenToBackend(fcmToken, res.token)
-              .toPromise();
-            console.log('Token before sending to backend:', localStorage.getItem('token'));  
-            console.log('✅ FCM token sent to backend');
-          } catch (error) {
-            console.error('❌ Error sending FCM token:', error);
-          }
-        }
-
-        alert('✅ تم التسجيل بنجاح');
-        this._router.navigate(['/TodayAppointments']);
-      } else {
-        alert('❌ حدث خطأ أثناء التسجيل');
-      }
-    } catch (err: any) {
-      console.error('❌ Error during registration:', err);
-
-      if (err.error?.message?.includes('Username already exists')) {
-        this.usernameError = 'اسم المستخدم موجود بالفعل، يرجى اختيار اسم آخر';
-        this.registerForm.get('userName')?.setErrors({ notUnique: true });
-        this.registerForm.get('userName')?.markAsTouched();
-      } else {
-        alert('❌ حدث خطأ أثناء التسجيل');
+    if (this.registerForm.value.DateOfBirth) {
+      const date = new Date(this.registerForm.value.DateOfBirth);
+      if (!isNaN(date.getTime())) {
+        // Check if valid date
+        formData.set('DateOfBirth', date.toISOString());
       }
     }
-  }
 
+    // Append the image file
+    if (this.selectedImage) {
+      formData.append('ImageFile', this.selectedImage);
+    }
+
+    // const formData = this.registerForm.value;
+    this._authService.register(formData).subscribe({
+      next: (res: any) => {
+        if (res.isSuccess && res.token) {
+          this._authService.saveToken(res.token);
+          this.registerForm.reset();
+          alert('succesful');
+          this._router.navigate(['/doctor/today-appointments']);
+        } else {
+          alert('حدث خطأ أثناء التسجيل');
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        if (err.error?.message?.includes('Username already exists')) {
+          this.usernameError = 'اسم المستخدم موجود بالفعل، يرجى اختيار اسم آخر';
+          this.registerForm.get('userName')?.setErrors({ notUnique: true });
+          this.registerForm.get('userName')?.markAsTouched();
+        }
+        // alert('حدث خطأ أثناء التسجيل');
+      },
+    });
+  }
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
