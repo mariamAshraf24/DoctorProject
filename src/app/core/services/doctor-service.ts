@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { DoctorProfileResponse } from '../models/IDoctor';
@@ -34,4 +34,15 @@ export class DoctorService {
         })
       );
   }
+ getMonthlyReport(year: number, month: number): Observable<any> {
+    const params = new HttpParams()
+      .set('year', year.toString())
+      .set('month', month.toString());
+    return this._HttpClient.get(`${environment.apiBaseUrl}/Doctor/Doctor_Monthly_Report`, { params });
+  }
+
+  getReportHistory(): Observable<any> {
+    return this._HttpClient.get(`${environment.apiBaseUrl}/Doctor/reports/history`);
+  }
+
 }

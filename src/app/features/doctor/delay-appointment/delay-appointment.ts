@@ -34,11 +34,16 @@ export class DelayAppointment {
 
     this.appointmentService.delayAppointmentsByDate(date, delayDuration).subscribe({
       next: (res: any) => {
-        this.message = res?.message || 'تم تأجيل المواعيد بنجاح ✅';
+        if (res?.message === 'Appointments delayed successfully.') {
+          this.message = 'تم تأجيل جميع المواعيد بنجاح ✅';
+        } else {
+          this.message = res?.message || 'تم التأجيل';
+        }
         this.isLoading = false;
         this.delayForm.reset({ delayDuration: '01:00:00' });
       },
       error: (err: HttpErrorResponse) => {
+
         console.error(err);
         this.message = 'حدث خطأ أثناء تأجيل المواعيد ❌';
         this.isLoading = false;

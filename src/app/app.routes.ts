@@ -48,6 +48,7 @@ import { Profile } from './features/doctor/profile/profile';
 import { TodayAppointments } from './features/doctor/today-appointments/today-appointments';
 import { CancalAppointment } from './features/doctor/cancel-appointment/cancal-appointment';
 import { DelayAppointment } from './features/doctor/delay-appointment/delay-appointment';
+import { DoctorReport } from './features/doctor/doctor-report/doctor-report';
 
 
 export const routes: Routes = [
@@ -69,6 +70,7 @@ export const routes: Routes = [
             { path: 'profile', component: Profile },
             { path: 'cancel-appointment', component: CancalAppointment },
             { path: 'delay-appointment', component: DelayAppointment },
+            { path: 'doctor-report', component: DoctorReport }
         ],
     },
 

@@ -39,7 +39,7 @@ export class Appointments {
   };
   
   return this._HttpClient.post(
-    `${environment.apiBaseUrl}/Appointment/delayAppointments`,
+    `${environment.apiBaseUrl}/Appointment/delayAppointmes`,
     body,
     { headers: { 'Content-Type': 'application/json' } }
   );

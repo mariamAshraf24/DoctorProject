@@ -14,6 +14,7 @@ import { NgClass } from '@angular/common';
 })
 export class Login implements OnInit {
   loginForm!: FormGroup;
+  usernameError: string = '';
   private readonly _authService = inject(Auth);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _Router = inject(Router);
