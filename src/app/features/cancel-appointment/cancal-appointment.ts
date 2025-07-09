@@ -36,17 +36,17 @@ export class CancalAppointment {
     this.isLoading = true;
     this.message = null;
 
-    this._appointmentService.cancelAppointmentsByDate(formattedDate).subscribe({
-      next: (res: any) => {
-        this.message = res?.message || 'تم إلغاء جميع المواعيد بنجاح ✅';
-        this.isLoading = false;
-        this.cancelForm.reset();
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error(err);
-        this.message = 'فشل في إلغاء المواعيد ❌';
-        this.isLoading = false;
-      }
-    });
+    // this._appointmentService.cancelAppointmentsByDate(formattedDate).subscribe({
+    //   next: (res: any) => {
+    //     this.message = res?.message || 'تم إلغاء جميع المواعيد بنجاح ✅';
+    //     this.isLoading = false;
+    //     this.cancelForm.reset();
+    //   },
+    //   error: (err: HttpErrorResponse) => {
+    //     console.error(err);
+    //     this.message = 'فشل في إلغاء المواعيد ❌';
+    //     this.isLoading = false;
+    //   }
+    // });
   }
 }

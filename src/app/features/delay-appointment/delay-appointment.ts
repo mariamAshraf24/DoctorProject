@@ -32,17 +32,17 @@ export class DelayAppointment {
     this.isLoading = true;
     this.message = null;
 
-    this.appointmentService.delayAppointmentsByDate(date, delayDuration).subscribe({
-      next: (res: any) => {
-        this.message = res?.message || 'تم تأجيل المواعيد بنجاح ✅';
-        this.isLoading = false;
-        this.delayForm.reset({ delayDuration: '01:00:00' });
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error(err);
-        this.message = 'حدث خطأ أثناء تأجيل المواعيد ❌';
-        this.isLoading = false;
-      }
-    });
+    // this.appointmentService.delayAppointmentsByDate(date, delayDuration).subscribe({
+    //   next: (res: any) => {
+    //     this.message = res?.message || 'تم تأجيل المواعيد بنجاح ✅';
+    //     this.isLoading = false;
+    //     this.delayForm.reset({ delayDuration: '01:00:00' });
+    //   },
+    //   error: (err: HttpErrorResponse) => {
+    //     console.error(err);
+    //     this.message = 'حدث خطأ أثناء تأجيل المواعيد ❌';
+    //     this.isLoading = false;
+    //   }
+    // });
   }
 }
