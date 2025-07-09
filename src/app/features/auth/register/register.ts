@@ -1,3 +1,8 @@
+import { DoctorService } from './../../../core/services/doctor-service';
+import {
+  Specialization,
+  SpecializationResponse,
+} from '../../../core/models/ISpecialization';
 import {
   FormGroup,
   ReactiveFormsModule,
@@ -5,29 +10,31 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Auth } from './../../../core/services/auth';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { cities } from '../../../core/constants/cities';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule , NgSelectModule],
+  imports: [ReactiveFormsModule, NgSelectModule, RouterModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
-export class Register {
+export class Register implements OnInit {
   registerForm!: FormGroup;
   selectedImage: File | null = null;
   usernameError: string = '';
   Cities = cities;
+  Specializations: Specialization[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: Auth,
-    private _router: Router
+    private _router: Router,
+    private _DoctorService: DoctorService,
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +87,18 @@ export class Register {
       BookingPrice: [null, Validators.required],
       ImageFile: [null, Validators.required],
     });
+    this.loadSpecializations();
+  }
+
+  loadSpecializations(): void {
+    this._DoctorService.getSpecializations().subscribe({
+      next: (response: SpecializationResponse) => {
+        this.Specializations = response.data;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Error loading specializations:', err);
+      },
+    });
   }
 
   registerSubmit(): void {
@@ -89,6 +108,7 @@ export class Register {
       this.registerForm.markAllAsTouched();
       return;
     }
+
     const formData = new FormData();
 
     // Append all form values
@@ -118,7 +138,7 @@ export class Register {
           this._authService.saveToken(res.token);
           this.registerForm.reset();
           alert('succesful');
-          // this._router.navigate(['/home']);
+          this._router.navigate(['/doctor/today-appointments']);
         } else {
           alert('حدث خطأ أثناء التسجيل');
         }
@@ -134,7 +154,6 @@ export class Register {
       },
     });
   }
-
   onImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

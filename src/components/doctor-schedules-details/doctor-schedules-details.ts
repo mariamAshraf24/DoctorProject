@@ -1,8 +1,9 @@
+import { IDoctorSchedules } from './../../app/core/models/idoctor-schedules';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DoctorSchedulesService } from '../../app/core/services/doctor-schedules';
 import { CommonModule } from '@angular/common';
-import { IDoctorSchedules } from '../../app/core/interfaces/idoctor-schedules';
+
 
 @Component({
   selector: 'app-doctor-schedules-details',

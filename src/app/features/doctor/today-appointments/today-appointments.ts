@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Appointments } from '../../core/services/appointments';
 import { CommonModule } from '@angular/common';
+import { Appointments } from '../../../core/services/appointments';
 
 @Component({
   selector: 'app-today-appointments',

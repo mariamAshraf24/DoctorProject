@@ -1,0 +1,67 @@
+<div class="dashboard">
+  <h2 class="dashboard-title">لوحة تحكم الدكتور</h2>
+
+  <div class="dashboard-stats">
+    <!-- الشهر الحالي -->
+    <div class="stats-card">
+      <div class="card-header">
+        <h3>إحصائيات الشهر الحالي</h3>
+        <div class="current-month">{{ getCurrentMonthName() }}</div>
+      </div>
+
+      <div class="stats-summary">
+        <div class="stat-item">
+          <span class="stat-label">إجمالي الحجوزات</span>
+          <span class="stat-value primary">{{ currentMonthReport?.totalAppointments || 0 }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">نسبة الحضور</span>
+          <span class="stat-value success">{{ attendancePercentage }}%</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas #monthChart></canvas>
+      </div>
+    </div>
+
+    <!-- السنة الحالية -->
+    <div class="stats-card">
+      <div class="card-header">
+        <h3>إحصائيات السنة الحالية</h3>
+        <div class="current-year">{{ currentYear }}</div>
+      </div>
+
+      <div class="stats-summary">
+        <div class="stat-item">
+          <span class="stat-label">إجمالي الحجوزات</span>
+          <span class="stat-value primary">{{ yearlyTotal }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">عدد الحضور</span>
+          <span class="stat-value success">{{ yearlyAttended }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">عدد الإلغاءات</span>
+          <span class="stat-value danger">{{ yearlyCancelled }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">عدد المؤجلات</span>
+          <span class="stat-value warning">{{ yearlyPostponed }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">عدد الغياب</span>
+          <span class="stat-value muted">{{ yearlyMissed }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">أعلى شهر</span>
+          <span class="stat-value warning">{{ busiestMonth }}</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas #yearChart></canvas>
+      </div>
+    </div>
+  </div>
+</div>

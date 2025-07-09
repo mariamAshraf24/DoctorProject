@@ -1,0 +1,98 @@
+.dashboard {
+  padding: 20px;
+  background-color: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+  &-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  .dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 25px;
+  }
+
+  .stats-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+
+      h3 {
+        margin: 0;
+        font-size: 1.4rem;
+        color: #3498db;
+      }
+
+      .current-month, .current-year {
+        background: #f0f7ff;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        color: #2980b9;
+      }
+    }
+
+    .stats-summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 15px;
+      margin-bottom: 25px;
+
+      .stat-item {
+        text-align: center;
+        flex: 1 1 200px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+        .stat-label {
+          font-size: 0.95rem;
+          color: #7f8c8d;
+          margin-bottom: 8px;
+        }
+
+        .stat-value {
+          font-size: 1.8rem;
+          font-weight: bold;
+
+          &.primary { color: #7b2cbf; }
+          &.success { color: #06d6a0; }
+          &.warning { color: #ffd166; }
+          &.danger { color: #ef476f; }
+          &.muted { color: #95a5a6; }
+        }
+      }
+    }
+
+    .chart-container {
+      height: 280px;
+      position: relative;
+      margin-top: auto;
+    }
+  }
+}

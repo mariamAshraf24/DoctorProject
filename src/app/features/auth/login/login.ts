@@ -14,6 +14,7 @@ import { NgClass } from '@angular/common';
 })
 export class Login implements OnInit {
   loginForm!: FormGroup;
+  usernameError: string = '';
   private readonly _authService = inject(Auth);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _Router = inject(Router);
@@ -55,9 +56,9 @@ export class Login implements OnInit {
 
           localStorage.setItem('roles', res.roles);
           if (this._authService.isAdmin()) {
-            this._Router.navigate(['/admin']);
+            this._Router.navigate(['/admin/Specializations']);
           } else {
-            this._Router.navigate(['/doctor']);
+            this._Router.navigate(['/doctor/today-appointments']);
           }
           // setTimeout(() => {
           //   this._Router.navigate(['/home']);

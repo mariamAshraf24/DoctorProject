@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Appointment } from '../models/appointment';
+import { Appointment } from '../models/IAppointment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,4 +20,29 @@ export class Appointments {
     const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     return this._HttpClient.get<Appointment[]>(`${environment.apiBaseUrl}/Doctor/AppointmentsByDate?date=${dateString}`);
   }
+
+  cancelAppointmentsByDate(date: string) {
+  return this._HttpClient.post(
+    `${environment.apiBaseUrl}/Appointment/cancelAppointments`,
+    `"${date}"`,
+    {
+      headers: { 'Content-Type': 'application/json' },
+      responseType: 'text' as 'json'
+    }
+  );
+}
+
+  delayAppointmentsByDate(date: string, delayDuration: string): Observable<any> {
+  const body = {
+    date,
+    delayDuration
+  };
+  
+  return this._HttpClient.post(
+    `${environment.apiBaseUrl}/Appointment/delayAppointmes`,
+    body,
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+  
+}
 }

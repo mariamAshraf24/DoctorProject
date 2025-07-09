@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Doctor } from './../../app/core/models/Doctor';
-import { IDoctorSchedules } from './../../app/core/interfaces/idoctor-schedules';
+import { IDoctorSchedules } from '../../app/core/models/doctor-schedules.';
 import { DoctorSchedulesService } from '../../app/core/services/doctor-schedules';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
