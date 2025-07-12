@@ -1,82 +1,99 @@
-<div class="login-wrapper d-flex justify-content-center align-items-center">
-    <div class="login-card glass-card p-4">
-        <!-- Logo -->
-        <div class="text-center mb-3">
-            <div class="logo-circle mx-auto">
-                <i class="bi bi-person-circle text-white fs-3"></i>
+<div class="register-bg">
+    <div class="register-overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-10">
+                <div class="card register-card glass-card shadow-lg border-0 d-flex flex-row flex-wrap overflow-hidden">
+                    <!-- الجزء الجانبي للصورة -->
+                    <div class="col-md-6 d-flex p-0">
+                        <div class="register-image w-100 h-100">
+                            <img src="/images/8.jpeg" alt="Doctor" />
+                        </div>
+                    </div>
+
+                    <!-- جزء الفورم -->
+                    <div class="col-md-6 register-form-section p-4">
+                        <!-- الشعار -->
+                        <div class="text-center mb-3">
+                            <div class="logo-circle mx-auto">
+                                <i class="bi bi-person-circle text-white fs-3"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-center mb-2" style="color: hsl(272 87% 67%);">
+                            مرحبًا بعودتك
+                        </h3>
+                        <p class="text-center mb-4" style="color: #6b7280; font-size: 0.9rem;">
+                            سجّل الدخول إلى حسابك
+                        </p>
+
+                        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="p-2">
+                            <!-- اسم المستخدم -->
+                            <div class="mb-3 form-group">
+                                <label for="userName" class="form-label">اسم المستخدم</label>
+                                <input type="text" id="userName" formControlName="userName"
+                                    class="form-control form-input" [class.is-invalid]="usernameError" />
+                                @if (loginForm.get('userName')?.touched && loginForm.get('userName')?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (loginForm.get('userName')?.errors?.['required']) {
+                                    <div>اسم المستخدم مطلوب</div>
+                                    } @if (loginForm.get('userName')?.errors?.['pattern']) {
+                                    <div>
+                                        يجب أن يحتوي على حروف أو أرقام فقط (بدون مسافات أو رموز)
+                                    </div>
+                                    }
+                                </div>
+                                } @if (usernameError) {
+                                <div class="invalid-feedback">
+                                    {{ usernameError }}
+                                </div>
+                                }
+                            </div>
+
+                            <!-- كلمة المرور -->
+                            <div class="mb-3 form-group">
+                                <label for="password" class="form-label">كلمة المرور</label>
+                                <input type="password" id="password" formControlName="password"
+                                    class="form-control form-input"
+                                    [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
+                                @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                                <div class="invalid-feedback">
+                                    @if (loginForm.get('password')?.errors?.['required']) {
+                                    <span>كلمة المرور مطلوبة</span>
+                                    } @if (loginForm.get('password')?.errors?.['minlength']) {
+                                    <span>يجب أن تكون 8 أحرف على الأقل</span>
+                                    } @if (loginForm.get('password')?.errors?.['pattern']) {
+                                    <span>يجب أن تحتوي على حرف كبير، رقم، ورمز خاص</span>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- نسيان كلمة المرور -->
+                            <div class="d-flex justify-content-end mb-3">
+                                <a [routerLink]="['/forgotPassword']" class="text-decoration-none"
+                                    style="color: hsl(272 87% 67%);">هل نسيت كلمة المرور؟</a>
+                            </div>
+
+                            <!-- زر الدخول -->
+                            <button type="submit" class="btn gradient-button text-white w-100 py-3 border-0">
+                                تسجيل الدخول
+                            </button>
+                        </form>
+
+                        <!-- رابط التسجيل -->
+                        <p class="text-center mt-4">
+                            <span style="color: #6b7280;">ليس لديك حساب؟</span>
+                            <a class="text-decoration-none ms-1 fw-bold" routerLink="/Register"
+                                style="color: hsl(272 87% 67%); transition: all 0.3s ease;"
+                                onmouseover="this.style.textShadow='0 0 8px rgba(147, 51, 234, 0.4)'"
+                                onmouseout="this.style.textShadow='none'">
+                                أنشئ حسابًا
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <h4 class="text-center fw-bold mb-2" style="color: #9d4de8">مرحبًا بعودتك</h4>
-        <p class="text-center text-muted mb-4">سجّل الدخول إلى حسابك</p>
-
-        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="p-2">
-            <!-- اسم المستخدم -->
-            <!-- <div class="mb-3">
-                <label for="name" class="form-label">الاسم</label>
-                <input type="text" id="name" formControlName="userName" [ngClass]="{'is-valid': !loginForm.get('userName')?.errors && loginForm.get('userName')?.touched,
-                        'is-invalid': loginForm.get('userName')?.errors && loginForm.get('userName')?.touched}"
-                    class="form-control form-input" />
-                @if (loginForm.get('userName')?.touched && loginForm.get('userName')?.invalid) {
-                <div class="form-error">
-                    @if (loginForm.get('userName')?.errors?.['required']) { <span>الاسم مطلوب</span> }
-                    @if (loginForm.get('userName')?.errors?.['pattern']) { <span>الاسم يجب أن يحتوي على حروف فقط</span>
-                    }
-                </div>
-                }
-            </div> -->
-            <div class="mb-3">
-                <label for="userName" class="form-label">اسم المستخدم</label>
-                <input type="text" id="userName" formControlName="userName" class="form-control form-input"
-                    [class.is-invalid]="usernameError" />
-
-                @if (loginForm.get('userName')?.touched &&
-                loginForm.get('userName')?.invalid) {
-                <div class="invalid-feedback">
-                    @if (loginForm.get('userName')?.errors?.['required']) {
-                    <div>اسم المستخدم مطلوب</div>
-                    } @if (loginForm.get('userName')?.errors?.['pattern']) {
-                    <div>
-                        يجب أن يحتوي على حروف أو أرقام فقط (بدون مسافات أو رموز)
-                    </div>
-                    }
-                </div>
-                } @if (usernameError) {
-                <div class="invalid-feedback">
-                    {{ usernameError }}
-                </div>
-                }
-            </div>
-
-            <!-- كلمة المرور -->
-            <div class="mb-3">
-                <label for="password" class="form-label">كلمة المرور</label>
-                <input type="password" id="password" formControlName="password" [ngClass]="{'is-valid': !loginForm.get('password')?.errors && loginForm.get('password')?.touched,
-                           'is-invalid': loginForm.get('password')?.errors && loginForm.get('password')?.touched}"
-                    class="form-control form-input" />
-                @if ((loginForm.get('password')?.touched || loginForm.get('password')?.dirty) &&
-                loginForm.get('password')?.invalid) {
-                <div class="form-error">
-                    @if (loginForm.get('password')?.errors?.['required']) { <span>كلمة المرور مطلوبة</span> }
-                    @if (loginForm.get('password')?.errors?.['minlength']) { <span>يجب أن تكون 8 أحرف على الأقل</span> }
-                    @if (loginForm.get('password')?.errors?.['pattern']) { <span>يجب أن تحتوي على حرف كبير، رقم، ورمز
-                        خاص</span> }
-                </div>
-                }
-            </div>
-
-            <!-- نسيان كلمة المرور -->
-            <div class="d-flex justify-content-end mb-3">
-                <a [routerLink]="['/forgotPassword']" class="text-decoration-none text-purple">هل نسيت كلمة المرور؟</a>
-            </div>
-
-            <!-- زر الدخول -->
-            <button type="submit" class="btn gradient-button text-white w-100 py-2">تسجيل الدخول</button>
-        </form>
-
-        <p class="text-center mt-3 mb-0">
-            ليس لديك حساب؟
-            <a class="text-decoration-none text-purple fw-bold" [routerLink]="['/Register']">أنشئ حسابًا</a>
-        </p>
     </div>
 </div>
