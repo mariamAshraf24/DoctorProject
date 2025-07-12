@@ -41,9 +41,25 @@ export class Profile implements OnInit{
     return gender === 1 ? 'Male' : gender === 2 ? 'Female' : 'Other';
   }
 
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
+  // formatDate(dateString: string): string {
+  //   const date = new Date(dateString);
+  //   return date.toLocaleDateString();
+  // }
+
+  getAge(dateString: string): number {
+  const birthDate = new Date(dateString);
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  const dayDiff = today.getDate() - birthDate.getDate();
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--;
   }
+
+  return age;
+}
+
 
 }
