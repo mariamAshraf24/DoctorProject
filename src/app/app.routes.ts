@@ -21,6 +21,8 @@ import { DoctorReport } from './features/doctor/doctor-report/doctor-report';
 import { DoctorSchedulesDetails } from './features/doctor/doctor-schedules-details/doctor-schedules-details';
 import { DoctorSchedules } from './features/doctor/doctor-schedules/doctor-schedules';
 
+import { NotFound } from './features/not-found/not-found';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
@@ -42,8 +44,10 @@ export const routes: Routes = [
       { path: 'update-profile', component: UpdateProfile },
       { path: 'cancel-appointment', component: CancalAppointment },
       { path: 'delay-appointment', component: DelayAppointment },
+      { path: 'doctor-report', component: DoctorReport },
       { path: 'appointment-calendar', component: AppointmentCalendar },
       { path: 'doctor-report', component: DoctorReport },
+
       { path: 'doctor-schedules', component: DoctorSchedules },
       {
         path: 'doctor-schedules-details/:doctorId/:date',
@@ -62,5 +66,5 @@ export const routes: Routes = [
     ],
   },
 
-  { path: '**', redirectTo: 'login' }, // fallback route
+  { path: '**', component: NotFound }, // fallback route
 ];
