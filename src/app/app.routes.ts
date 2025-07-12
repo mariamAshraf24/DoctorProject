@@ -1,3 +1,4 @@
+
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
@@ -14,6 +15,7 @@ import { TodayAppointments } from './features/doctor/today-appointments/today-ap
 import { CancalAppointment } from './features/doctor/cancel-appointment/cancal-appointment';
 import { DelayAppointment } from './features/doctor/delay-appointment/delay-appointment';
 import { DoctorReport } from './features/doctor/doctor-report/doctor-report';
+import { NotFound } from './features/not-found/not-found';
 
 
 export const routes: Routes = [
@@ -35,7 +37,8 @@ export const routes: Routes = [
             { path: 'profile', component: Profile },
             { path: 'cancel-appointment', component: CancalAppointment },
             { path: 'delay-appointment', component: DelayAppointment },
-            { path: 'doctor-report', component: DoctorReport }
+            { path: 'doctor-report', component: DoctorReport },
+
         ],
     },
 
@@ -47,9 +50,10 @@ export const routes: Routes = [
         children: [
             { path: 'Specializations', component: AdminComponent },
             { path: 'SpecializationDetails/:id', component: SpecializationDetails },
+            
         ],
     },
 
-    { path: '**', redirectTo: 'login' }, // fallback route
+   { path: '**', component:NotFound}, // fallback route
 ];
 

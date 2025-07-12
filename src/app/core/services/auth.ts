@@ -23,14 +23,14 @@ export class Auth {
   }
 
   forgotPassword(email: string) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email },{ responseType: 'text' as 'json' });
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email });
   
   }
 
   resetPassword(data: { token: string; newPassword: string }) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data,{ responseType: 'text' as 'json' });
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data);
   }
-
+//,{ responseType: 'text' as 'json' }
   isAdmin(): boolean {
     return localStorage.getItem('roles') === 'Admin';
   }
