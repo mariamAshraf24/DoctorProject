@@ -1,0 +1,87 @@
+.mini-navbar {
+  position: fixed;
+  flex-shrink: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 70px;
+  background: linear-gradient(135deg, hsl(272, 87%, 67%) 0%, hsl(217, 91%, 60%) 100%);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  
+  .nav-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    
+    .nav-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      width: 100%;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      
+      i {
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+      }
+      
+      .icon-label {
+        font-size: 0.75rem;
+        margin-top: 5px;
+        font-family: 'Cairo', sans-serif;
+        opacity: 0.9;
+      }
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        
+        i {
+          transform: scale(1.1);
+        }
+      }
+      
+      &.active {
+        background: rgba(255, 255, 255, 0.2);
+        
+        i {
+          color: #fff;
+        }
+      }
+    }
+  }
+  
+  &:hover {
+    width: 90px;
+    
+    .nav-icon {
+      padding: 15px 0;
+      
+      i {
+        font-size: 1.7rem;
+      }
+    }
+  }
+}
+
+/* Tooltip customization */
+.mat-tooltip {
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 0.9rem !important;
+  padding: 6px 12px !important;
+}

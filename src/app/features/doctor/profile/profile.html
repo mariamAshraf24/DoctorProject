@@ -24,6 +24,7 @@
         <img [src]="doctorProfile.imageUrl" alt="Doctor's Profile Picture" class="profile-image">
         <div class="profile-badge">
           <span style="color: #1976d2; font-size: 1.2rem;">&#9877;</span>
+          <span>{{ doctorProfile.username }}</span>
           <span>{{ doctorProfile.specializationName }}</span>
         </div>
       </div>
@@ -64,7 +65,7 @@
         </div>
 
         <div class="profile-actions">
-          <button class="action-button primary">
+          <button class="action-button primary" routerLink="/doctor/update-profile">
             &#9998; Edit Profile
           </button>
           <button class="action-button accent" routerLink='/doctor/today-appointments'>

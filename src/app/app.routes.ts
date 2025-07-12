@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
@@ -13,6 +14,9 @@ import { Profile } from './features/doctor/profile/profile';
 import { TodayAppointments } from './features/doctor/today-appointments/today-appointments';
 import { CancalAppointment } from './features/doctor/cancel-appointment/cancal-appointment';
 import { DelayAppointment } from './features/doctor/delay-appointment/delay-appointment';
+import { UpdateProfile } from './features/doctor/update-profile/update-profile';
+import { AppointmentCalendar } from './features/doctor/appointment-calendar/appointment-calendar';
+import { Home } from './features/doctor/home/home';
 
 
 export const routes: Routes = [
@@ -27,13 +31,17 @@ export const routes: Routes = [
         canActivate: [RoleGuard],
         data: { role: 'Doctor' },
         children: [
-            { path: '', redirectTo: 'today-appointments', pathMatch: 'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: Home },
             { path: 'today-appointments', component: TodayAppointments },
             { path: 'calendar', component: Calendar },
             { path: 'AppointmentsByDate/:date', component: AppointmentsByDate },
             { path: 'profile', component: Profile },
+            { path: 'update-profile', component: UpdateProfile },
             { path: 'cancel-appointment', component: CancalAppointment },
             { path: 'delay-appointment', component: DelayAppointment },
+            { path: 'appointment-calendar', component: AppointmentCalendar },
+
         ],
     },
 

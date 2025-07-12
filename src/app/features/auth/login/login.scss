@@ -1,16 +1,6 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Cairo', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #dcd7ff);
-  background-attachment: fixed;
-  background-size: cover;
-}
-
 .login-wrapper {
   min-height: 100vh;
   padding: 1rem;
-  background: url('https://www.transparenttextures.com/patterns/batthern.png');
 }
 
 .login-card {
@@ -24,7 +14,7 @@ body {
 /* تأثير زجاجي */
 .glass-card {
   background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
+  // backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 

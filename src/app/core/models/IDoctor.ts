@@ -2,6 +2,7 @@ export interface Doctor {
   id: string;
   fName: string;
   lName: string;
+  username: string;
   city: string;
   street: string;
   country: string;

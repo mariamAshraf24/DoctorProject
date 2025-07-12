@@ -23,7 +23,7 @@ export class Login implements OnInit {
       userName: [null, [Validators.required, Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)]],
       password: [null, [
         Validators.required,
-        Validators.minLength(8),
+        // Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
       ]],
 

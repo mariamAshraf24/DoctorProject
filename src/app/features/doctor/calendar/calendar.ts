@@ -30,20 +30,20 @@ export class Calendar implements OnInit {
     const today = new Date();
     this.days = [];
 
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
+    // for (let i = 0; i < 30; i++) {
+    //   const date = new Date(today);
+    //   date.setDate(today.getDate() + i);
 
-      const dateString = this.getFormattedRouteDate(date);
-      const appointments = await this._AppointmentsService
-        .getAppointmentsByDate(date)
-        .toPromise();
+    //   const dateString = this.getFormattedRouteDate(date);
+    //   const appointments = await this._AppointmentsService
+    //     .getAppointmentsByDate(date)
+    //     .toPromise();
 
-      this.days.push({
-        date,
-        hasAppointments: appointments ? appointments.length > 0 : false,
-      });
-    }
+    //   this.days.push({
+    //     date,
+    //     hasAppointments: appointments ? appointments.length > 0 : false,
+    //   });
+    // }
   }
 
   getArabicDayName(date: Date): string {
