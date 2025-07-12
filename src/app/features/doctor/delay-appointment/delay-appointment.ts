@@ -8,6 +8,7 @@ import {
 import { Appointments } from '../../../core/services/appointments';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-delay-appointment',
   imports: [CommonModule, ReactiveFormsModule],
@@ -40,19 +41,22 @@ export class DelayAppointment {
     this.message = null;
     console.log('Sending delay request with:', { date, delayDuration });
 
-    this.appointmentService
-      .delayAppointmentsByDate(date, delayDuration)
-      .subscribe({
-        next: (res: any) => {
-          this.message = res?.message || 'تم تأجيل المواعيد بنجاح ✅';
-          this.isLoading = false;
-          this.delayForm.reset({ delayDuration: '01:00:00' });
-        },
-        error: (err: HttpErrorResponse) => {
-          console.error(err);
-          this.message = 'حدث خطأ أثناء تأجيل المواعيد ❌';
-          this.isLoading = false;
-        },
-      });
+    this.appointmentService.delayAppointmentsByDate(date, delayDuration).subscribe({
+      next: (res: any) => {
+        if (res?.message === 'Appointments delayed successfully.') {
+          this.message = 'تم تأجيل جميع المواعيد بنجاح ✅';
+        } else {
+          this.message = res?.message || 'تم التأجيل';
+        }
+        this.isLoading = false;
+        this.delayForm.reset({ delayDuration: '01:00:00' });
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.message = 'حدث خطأ أثناء تأجيل المواعيد ❌';
+        this.isLoading = false;
+      }
+    });
   }
 }
+

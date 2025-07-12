@@ -14,6 +14,7 @@ import { NgClass } from '@angular/common';
 })
 export class Login implements OnInit {
   loginForm!: FormGroup;
+  usernameError: string = '';
   private readonly _authService = inject(Auth);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _Router = inject(Router);
@@ -44,6 +45,14 @@ export class Login implements OnInit {
           this._authService.saveToken(res.token);
           alert('تم التسجيل بنجاح!');
           this.loginForm.reset();
+
+
+          //  استخراج doctorId من التوكن وتخزينه
+          const doctorId = this._authService.getDoctorIdFromToken();
+          localStorage.setItem('doctorId', doctorId);
+
+        
+
 
           localStorage.setItem('roles', res.roles);
           if (this._authService.isAdmin()) {

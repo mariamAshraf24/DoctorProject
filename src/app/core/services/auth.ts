@@ -22,6 +22,10 @@ export class Auth {
     localStorage.setItem('token', token);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   forgotPassword(email: string) {
     return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email },{ responseType: 'text' as 'json' });
   
@@ -38,5 +42,26 @@ export class Auth {
   isDoctor(): boolean {
     return localStorage.getItem('roles') === 'Doctor';
   }
+
+
+  //extract doctorid from token
+  getDoctorIdFromToken(): string {
+  const token = this.getToken();
+  if (!token) return '';
+
+  try {
+    const payload = token.split('.')[1]; // الجزء الأوسط من التوكن
+    const decodedPayload = JSON.parse(atob(payload));
+    return decodedPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || '';
+  } catch (e) {
+    console.error('Error decoding token:', e);
+    return '';
+  }
+}
+
+getCurrentDoctorId(): string {
+  return localStorage.getItem('doctorId') || '';
+}
+
 
 }

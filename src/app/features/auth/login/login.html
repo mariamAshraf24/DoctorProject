@@ -12,7 +12,7 @@
 
         <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="p-2">
             <!-- اسم المستخدم -->
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="name" class="form-label">الاسم</label>
                 <input type="text" id="name" formControlName="userName" [ngClass]="{'is-valid': !loginForm.get('userName')?.errors && loginForm.get('userName')?.touched,
                         'is-invalid': loginForm.get('userName')?.errors && loginForm.get('userName')?.touched}"
@@ -22,6 +22,28 @@
                     @if (loginForm.get('userName')?.errors?.['required']) { <span>الاسم مطلوب</span> }
                     @if (loginForm.get('userName')?.errors?.['pattern']) { <span>الاسم يجب أن يحتوي على حروف فقط</span>
                     }
+                </div>
+                }
+            </div> -->
+            <div class="mb-3">
+                <label for="userName" class="form-label">اسم المستخدم</label>
+                <input type="text" id="userName" formControlName="userName" class="form-control form-input"
+                    [class.is-invalid]="usernameError" />
+
+                @if (loginForm.get('userName')?.touched &&
+                loginForm.get('userName')?.invalid) {
+                <div class="invalid-feedback">
+                    @if (loginForm.get('userName')?.errors?.['required']) {
+                    <div>اسم المستخدم مطلوب</div>
+                    } @if (loginForm.get('userName')?.errors?.['pattern']) {
+                    <div>
+                        يجب أن يحتوي على حروف أو أرقام فقط (بدون مسافات أو رموز)
+                    </div>
+                    }
+                </div>
+                } @if (usernameError) {
+                <div class="invalid-feedback">
+                    {{ usernameError }}
                 </div>
                 }
             </div>
