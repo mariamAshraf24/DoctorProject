@@ -11,8 +11,6 @@ $success: #2ecc71;
 $warning: #f39c12;
 
 .calendar-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa;
   min-height: 100vh;
   padding: 20px;
   direction: rtl;
@@ -26,7 +24,7 @@ $warning: #f39c12;
       width: 320px;
       
       .calendar-card {
-        background: white;
+        // background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         overflow: hidden;
@@ -48,7 +46,7 @@ $warning: #f39c12;
 
     .main-calendar-view {
       flex: 1;
-      background: white;
+      // background: white;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;
@@ -109,6 +107,7 @@ $warning: #f39c12;
             }
             
             .week-title {
+              direction: ltr;
               margin: 0;
               font-size: 1.2rem;
               font-weight: 500;
@@ -142,7 +141,7 @@ $warning: #f39c12;
             }
             
             .day-header {
-              padding: 12px;
+              padding: 10px;
               background: $primary;
               color: white;
               display: flex;
@@ -150,7 +149,7 @@ $warning: #f39c12;
               align-items: center;
               
               .day-title {
-                h3 {
+                h4 {
                   margin: 0;
                   font-size: 1rem;
                   font-weight: 500;

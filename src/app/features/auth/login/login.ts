@@ -58,7 +58,7 @@ export class Login implements OnInit {
           if (this._authService.isAdmin()) {
             this._Router.navigate(['/admin/Specializations']);
           } else {
-            this._Router.navigate(['/doctor/today-appointments']);
+            this._Router.navigate(['/doctor/home']);
           }
           // setTimeout(() => {
           //   this._Router.navigate(['/home']);

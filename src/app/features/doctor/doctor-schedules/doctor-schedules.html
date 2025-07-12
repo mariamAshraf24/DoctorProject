@@ -15,16 +15,16 @@
           <button type="button" class="btn-close" aria-label="إغلاق" (click)="closeAddForm()">✕</button>
         </div>
         <div class="mb-3">
-          <label class="form-label">من</label>
-          <input type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
+          <label for="startTime" class="form-label">من</label>
+          <input id="startTime" type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
         </div>
         <div class="mb-3">
-          <label class="form-label">إلى</label>
-          <input type="time" class="form-control" [(ngModel)]="addForm.endTime" name="endTime" required step="60" />
+          <label for="endTime" class="form-label">إلى</label>
+          <input id="endTime" type="time" class="form-control" [(ngModel)]="addForm.endTime" name="endTime" required step="60" />
         </div>
         <div class="mb-3">
-          <label class="form-label">مدة الكشف (دقائق)</label>
-          <input type="number" class="form-control" [(ngModel)]="addForm.slotDurationMinutes" name="slotDurationMinutes" required min="1" max="60" placeholder="مثال: 30" />
+          <label for="slotDurationMinutes" class="form-label">مدة الكشف (دقائق)</label>
+          <input id="slotDurationMinutes" type="number" class="form-control" [(ngModel)]="addForm.slotDurationMinutes" name="slotDurationMinutes" required min="1" max="60" placeholder="مثال: 30" />
         </div>
         <div class="mb-3">
           <label class="form-label">الأيام</label>
@@ -37,8 +37,8 @@
               <div class="days-list">
                 <div class="day-item" *ngFor="let i of [0,1,2,3,4,5,6]">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" [id]="'day' + i" [value]="i" (change)="onDayChange($event, i)" [checked]="addForm.daysOfWeek.includes(i)">
-                    <label class="form-check-label" [for]="'day' + i">{{ getDayName(i) }}</label>
+                    <input id="day" class="form-check-input" type="checkbox" [id]="'day' + i" [value]="i" (change)="onDayChange($event, i)" [checked]="addForm.daysOfWeek.includes(i)">
+                    <label for="day" class="form-check-label" [for]="'day' + i">{{ getDayName(i) }}</label>
                   </div>
                 </div>
               </div>
@@ -78,10 +78,10 @@
           <td>{{ schedule.endTime }}</td>
           <td>{{ schedule.slotDuration }}</td>
           <td>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/doctor-schedules-details', getDoctorId(schedule), getNextDateForDay(schedule.dayOfWeek)]">
+            <button class="btn btn-secondary btn-sm" title="عرض التفاصيل" [routerLink]="['/doctor/doctor-schedules-details', getDoctorId(schedule), getNextDateForDay(schedule.dayOfWeek)]">
               <i class="fa fa-eye"></i> 
             </button>
-            <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+            <button class="btn btn-danger btn-sm" title="حذف" (click)="deleteSchedule(schedule.id)">
               <i class="fa fa-trash"></i> 
             </button>
           </td>

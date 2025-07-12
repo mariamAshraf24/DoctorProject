@@ -1,17 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Doctor } from './../../app/core/models/Doctor';
-import { IDoctorSchedules } from '../../app/core/models/doctor-schedules.';
-import { DoctorSchedulesService } from '../../app/core/services/doctor-schedules';
+import { Doctor } from '../../../core/models/IDoctor';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Auth } from '../../app/core/services/auth';
-
-
-
-
+import { Auth } from '../../../core/services/auth';
+import { DoctorSchedulesService } from '../../../core/services/doctor-schedules';
+import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
 
 
 @Component({

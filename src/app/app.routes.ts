@@ -18,10 +18,8 @@ import { UpdateProfile } from './features/doctor/update-profile/update-profile';
 import { AppointmentCalendar } from './features/doctor/appointment-calendar/appointment-calendar';
 import { Home } from './features/doctor/home/home';
 import { DoctorReport } from './features/doctor/doctor-report/doctor-report';
-import { DoctorSchedules } from '../components/doctor-schedules/doctor-schedules';
-import { DoctorSchedulesDetails } from '../components/doctor-schedules-details/doctor-schedules-details';
-
-
+import { DoctorSchedulesDetails } from './features/doctor/doctor-schedules-details/doctor-schedules-details';
+import { DoctorSchedules } from './features/doctor/doctor-schedules/doctor-schedules';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,28 +27,30 @@ export const routes: Routes = [
   { path: 'Register', component: Register },
   { path: 'forgotPassword', component: ForgotPassword },
 
-    {
-        path: 'doctor',
-        component: DoctorLayout,
-        canActivate: [RoleGuard],
-        data: { role: 'Doctor' },
-        children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: Home },
-            { path: 'today-appointments', component: TodayAppointments },
-            { path: 'calendar', component: Calendar },
-            { path: 'AppointmentsByDate/:date', component: AppointmentsByDate },
-            { path: 'profile', component: Profile },
-            { path: 'update-profile', component: UpdateProfile },
-            { path: 'cancel-appointment', component: CancalAppointment },
-            { path: 'delay-appointment', component: DelayAppointment },
-            { path: 'appointment-calendar', component: AppointmentCalendar },
-             { path: 'doctor-report', component: DoctorReport },
+  {
+    path: 'doctor',
+    component: DoctorLayout,
+    canActivate: [RoleGuard],
+    data: { role: 'Doctor' },
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: Home },
+      { path: 'today-appointments', component: TodayAppointments },
+      { path: 'calendar', component: Calendar },
+      { path: 'AppointmentsByDate/:date', component: AppointmentsByDate },
+      { path: 'profile', component: Profile },
+      { path: 'update-profile', component: UpdateProfile },
+      { path: 'cancel-appointment', component: CancalAppointment },
+      { path: 'delay-appointment', component: DelayAppointment },
+      { path: 'appointment-calendar', component: AppointmentCalendar },
+      { path: 'doctor-report', component: DoctorReport },
       { path: 'doctor-schedules', component: DoctorSchedules },
-      { path: 'doctor-schedules-details/:doctorId/:date', component: DoctorSchedulesDetails },
-
-        ],
-    },
+      {
+        path: 'doctor-schedules-details/:doctorId/:date',
+        component: DoctorSchedulesDetails,
+      },
+    ],
+  },
   {
     path: 'admin',
     component: AdminLayout,
