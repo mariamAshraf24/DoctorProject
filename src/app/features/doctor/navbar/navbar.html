@@ -1,40 +1,121 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
-  <div class="container-fluid">
+<!-- Vertical right sidebar navbar -->
+<!-- <nav class="vertical-navbar"> -->
+<!-- Logo at the top -->
+<!-- <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/">
+        <img src="images/logo-removebg.png" alt="الشعار" width="120" height="40" />
+      </a>
+    </div> -->
 
-    <!-- Logo on the right -->
-    <a class="navbar-brand d-flex align-items-center" routerLink="/">
-      <img src="images/logo.jpg" alt="الشعار" width="120" height="40" class="ms-2" />
+<!-- Navigation links -->
+<!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/doctor/today-appointments">
+          <i class="bi bi-calendar-day"></i>
+          <span>مواعيد اليوم</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/doctor/calendar">
+          <i class="bi bi-calendar-week"></i>
+          <span>مواعيدي</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/doctor/cancel-appointment">
+          <i class="bi bi-calendar-x"></i>
+          <span>الغاء الحجز</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/doctor/delay-appointment">
+          <i class="bi bi-calendar-plus"></i>
+          <span>تأجيل الحجز</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/doctor/appointment-calendar">
+          <i class="bi bi-calendar-plus"></i>
+          <span>تقويم المواعيد</span>
+        </a>
+      </li>
+    </ul> -->
+
+<!-- theme-toggle.component.html -->
+<!-- <button (click)="toggleTheme()" title="تغيير السمة" class="theme-toggle-btn">
+  <i class="bi" [ngClass]="_themeService.isDarkTheme() ? 'bi-sun' : 'bi-moon'"></i>
+</button> -->
+
+<!-- User section at the bottom -->
+<!-- <div class="user-section">
+      <div class="user-info" (click)="goToProfile()">
+        <i class="bi bi-person-circle"></i>
+        <span class="username">المستخدم</span>
+      </div>
+      <button class="logout-btn" (click)="logout()">
+        <i class="bi bi-box-arrow-left"></i>
+        <span>تسجيل الخروج</span>
+      </button>
+    </div>
+  </nav> -->
+
+<!-- Right Vertical Mini Navbar -->
+<nav class="mini-navbar" dir="rtl">
+  <!-- Centered Navigation Icons -->
+  <div class="nav-icons">
+    <!-- Home -->
+    <a
+      class="nav-icon"
+      routerLink="/doctor/home"
+      matTooltip="الصفحة الرئيسية"
+      matTooltipPosition="left"
+    >
+      <i class="bi bi-house-door"></i>
+      <span class="icon-label">الرئيسية</span>
     </a>
 
-    <!-- Center links and left user info -->
-    <div class="collapse navbar-collapse justify-content-between" id="navbarMain">
+    <!-- Dashboard -->
+    <a
+      class="nav-icon"
+      routerLink="/doctor/doctor-report"
+      matTooltip="لوحة التحكم"
+      matTooltipPosition="left"
+    >
+      <i class="bi bi-speedometer2"></i>
+      <span class="icon-label">اللوحة</span>
+    </a>
 
-      <!-- Center Links -->
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/doctor/today-appointments" >مواعيد اليوم</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/doctor/calendar" >مواعيدي</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/doctor/cancel-appointment" >الغاء الحجز</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/doctor/delay-appointment" >تأجيل الحجز</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" routerLink="/doctor/doctor-report">لوحة القيادة</a>
-        </li>
-      </ul>
+    <!-- Calendar -->
+    <a
+      class="nav-icon"
+      routerLink="/doctor/appointment-calendar"
+      matTooltip="التقويم"
+      matTooltipPosition="left"
+    >
+      <i class="bi bi-calendar-check"></i>
+      <span class="icon-label">التقويم</span>
+    </a>
+      
+    <!-- Profile -->
+    <a
+      class="nav-icon"
+      routerLink="/doctor/profile"
+      matTooltip="الملف الشخصي"
+      matTooltipPosition="left"
+    >
+      <i class="bi bi-person"></i>
+      <span class="icon-label">الملف</span>
+    </a>
 
-      <!-- Left User Info -->
-      <div class="d-flex align-items-center gap-2">
-        <span class="fw-semibold">المستخدم</span>
-        <i class="bi bi-person-circle fs-4" style="cursor:pointer" (click)="goToProfile()"></i>
-        <button class="btn btn-outline-danger btn-sm" (click)="logout()">تسجيل الخروج</button>
-      </div>
-
-    </div>
+    <!-- Logout -->
+    <button
+      class="nav-icon"
+      (click)="logout()"
+      matTooltip="تسجيل الخروج"
+      matTooltipPosition="left"
+    >
+      <i class="bi bi-box-arrow-left"></i>
+      <span class="icon-label">خروج</span>
+    </button>
   </div>
 </nav>

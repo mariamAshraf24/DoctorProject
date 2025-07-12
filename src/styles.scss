@@ -3,8 +3,30 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
-body{
-    background-color: hsl(40 40% 98%)
+body {
+  background-color: hsl(40 40% 98%);
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+:root {
+  --bg-color: hsl(40 40% 98%);
+  --text-color: #000000;
+  --primary-color: hsl(217, 91%, 60%);
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

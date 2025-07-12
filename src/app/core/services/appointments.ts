@@ -15,10 +15,10 @@ export class Appointments {
     );
   }
 
-  getAppointmentsByDate(date: Date): Observable<Appointment[]> {
+  getAppointmentsByDate(date: string): Observable<Appointment[]> {
     // Format date as YYYY-M-D
-    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    return this._HttpClient.get<Appointment[]>(`${environment.apiBaseUrl}/Doctor/AppointmentsByDate?date=${dateString}`);
+    // const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    return this._HttpClient.get<Appointment[]>(`${environment.apiBaseUrl}/Doctor/AppointmentsByDate?date=${date}`);
   }
 
   cancelAppointmentsByDate(date: string) {

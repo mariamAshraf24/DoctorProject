@@ -1,0 +1,195 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+          <h4 class="mb-0 text-center">تحديث بيانات الطبيب</h4>
+        </div>
+        
+        <div class="card-body p-4">
+          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <!-- Personal Information Section -->
+            <div class="mb-4">
+              <h5 class="text-primary mb-3 border-bottom pb-2">المعلومات الشخصية</h5>
+              
+              <div class="row g-3">
+                <!-- First Name -->
+                <div class="col-md-6">
+                  <label for="fName" class="form-label">الاسم الأول</label>
+                  <input
+                    type="text"
+                    id="fName"
+                    formControlName="fName"
+                    class="form-control"
+                    [class.is-invalid]="editForm.get('fName')?.invalid && editForm.get('fName')?.touched"
+                  >
+                  @if (editForm.get('fName')?.touched && editForm.get('fName')?.invalid) {
+                    <div class="invalid-feedback">
+                      @if (editForm.get('fName')?.errors?.['required']) {
+                        <span>الاسم الأول مطلوب</span>
+                      }
+                      @if (editForm.get('fName')?.errors?.['pattern']) {
+                        <span>يجب أن يحتوي على حروف فقط</span>
+                      }
+                    </div>
+                  }
+                </div>
+                
+                <!-- Last Name -->
+                <div class="col-md-6">
+                  <label for="lName" class="form-label">الاسم الأخير</label>
+                  <input
+                    type="text"
+                    id="lName"
+                    formControlName="lName"
+                    class="form-control"
+                    [class.is-invalid]="editForm.get('lName')?.invalid && editForm.get('lName')?.touched"
+                  >
+                  @if (editForm.get('lName')?.touched && editForm.get('lName')?.invalid) {
+                    <div class="invalid-feedback">
+                      @if (editForm.get('lName')?.errors?.['required']) {
+                        <span>الاسم الأخير مطلوب</span>
+                      }
+                      @if (editForm.get('lName')?.errors?.['pattern']) {
+                        <span>يجب أن يحتوي على حروف فقط</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="mb-4">
+              <h5 class="text-primary mb-3 border-bottom pb-2">العنوان</h5>
+              
+              <div class="row g-3">
+                <!-- City -->
+                <div class="col-md-6">
+                  <label for="city" class="form-label">المدينة</label>
+                  <input
+                    type="text"
+                    id="city"
+                    formControlName="city"
+                    class="form-control"
+                    [class.is-invalid]="editForm.get('city')?.invalid && editForm.get('city')?.touched"
+                  >
+                  @if (editForm.get('city')?.touched && editForm.get('city')?.invalid) {
+                    <div class="invalid-feedback">
+                      المدينة مطلوبة
+                    </div>
+                  }
+                </div>
+                
+                <!-- Country -->
+                <div class="col-md-6">
+                  <label for="country" class="form-label">الدولة</label>
+                  <input
+                    type="text"
+                    id="country"
+                    formControlName="country"
+                    class="form-control"
+                    readonly
+                  >
+                </div>
+                
+                <!-- Street -->
+                <div class="col-12">
+                  <label for="street" class="form-label">عنوان الشارع</label>
+                  <input
+                    type="text"
+                    id="street"
+                    formControlName="street"
+                    class="form-control"
+                    placeholder="اسم المنطقة ورقم العمارة"
+                    [class.is-invalid]="editForm.get('street')?.invalid && editForm.get('street')?.touched"
+                  >
+                  @if (editForm.get('street')?.touched && editForm.get('street')?.invalid) {
+                    <div class="invalid-feedback">
+                      @if (editForm.get('street')?.errors?.['required']) {
+                        <span>عنوان الشارع مطلوب</span>
+                      }
+                      @if (editForm.get('street')?.errors?.['pattern']) {
+                        <span>يجب أن يحتوي على اسم المنطقة ورقم العمارة</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Professional Information -->
+            <div class="mb-4">
+              <h5 class="text-primary mb-3 border-bottom pb-2">المعلومات المهنية</h5>
+              
+              <div class="row g-3">
+                <!-- Specialization -->
+                <div class="col-md-6">
+                  <label for="specializationId" class="form-label">التخصص</label>
+                  <select
+                    id="specializationId"
+                    formControlName="specializationId"
+                    class="form-select"
+                    [class.is-invalid]="editForm.get('specializationId')?.invalid && editForm.get('specializationId')?.touched"
+                  >
+                    <option value="" disabled selected>اختر التخصص</option>
+                    @for (spec of specializations; track spec.id) {
+                      <option [value]="spec.id">{{ spec.name }}</option>
+                    }
+                  </select>
+                  @if (editForm.get('specializationId')?.touched && editForm.get('specializationId')?.invalid) {
+                    <div class="invalid-feedback">
+                      التخصص مطلوب
+                    </div>
+                  }
+                </div>
+                
+                <!-- Booking Price -->
+                <div class="col-md-6">
+                  <label for="bookingPrice" class="form-label">سعر الكشف (ج.م)</label>
+                  <input
+                    type="number"
+                    id="bookingPrice"
+                    formControlName="bookingPrice"
+                    class="form-control"
+                    [class.is-invalid]="editForm.get('bookingPrice')?.invalid && editForm.get('bookingPrice')?.touched"
+                  >
+                  @if (editForm.get('bookingPrice')?.touched && editForm.get('bookingPrice')?.invalid) {
+                    <div class="invalid-feedback">
+                      سعر الكشف مطلوب
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="d-flex justify-content-between mt-4">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="_Router.navigate(['/doctor/profile'])"
+              >
+                <i class="fas fa-arrow-right me-2"></i> رجوع
+              </button>
+              
+              <button
+                type="submit"
+                class="btn btn-primary px-4"
+                [disabled]="editForm.invalid"
+              >
+                <i class="fas fa-save me-2"></i> حفظ التغييرات
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      @if (error) {
+        <div class="alert alert-danger mt-3">
+          <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+        </div>
+      }
+    </div>
+  </div>
+</div>

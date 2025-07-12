@@ -43,17 +43,17 @@ export class AppointmentsByDate implements OnInit {
       parseInt(dateParts[1]) - 1,
       parseInt(dateParts[2])
     );
-    this._appointmentService.getAppointmentsByDate(date).subscribe({
-      next: (appointments) => {
-        this.appointments = appointments;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to load appointments. Please try again later.';
-        this.isLoading = false;
-        console.error(err);
-      },
-    });
+    // this._appointmentService.getAppointmentsByDate(date).subscribe({
+    //   next: (appointments) => {
+    //     this.appointments = appointments;
+    //     this.isLoading = false;
+    //   },
+    //   error: (err) => {
+    //     this.error = 'Failed to load appointments. Please try again later.';
+    //     this.isLoading = false;
+    //     console.error(err);
+    //   },
+    // });
   }
 
   getFormattedDate(): string {

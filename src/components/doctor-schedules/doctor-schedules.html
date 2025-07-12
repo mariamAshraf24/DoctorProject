@@ -1,0 +1,93 @@
+<div class="container py-4">
+
+  <h2 class="mb-4 text-center title-gradient">جدول مواعيد الطبيب</h2>
+
+  <div class="mb-3 text-end">
+    <button class="btn btn-success" (click)="openAddForm()">
+      <i class="fa fa-plus me-2"></i> إضافة موعد جديد
+    </button>
+  </div>
+
+  <div *ngIf="showAddForm" class="add-form-overlay">
+    <div class="add-form-card">
+      <form (ngSubmit)="addSchedule()" #addFormRef="ngForm">
+        <div class="col-12 text-end mb-2">
+          <button type="button" class="btn-close" aria-label="إغلاق" (click)="closeAddForm()">✕</button>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">من</label>
+          <input type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">إلى</label>
+          <input type="time" class="form-control" [(ngModel)]="addForm.endTime" name="endTime" required step="60" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">مدة الكشف (دقائق)</label>
+          <input type="number" class="form-control" [(ngModel)]="addForm.slotDurationMinutes" name="slotDurationMinutes" required min="1" max="60" placeholder="مثال: 30" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">الأيام</label>
+          <div class="position-relative">
+            <button class="btn btn-outline-secondary w-100" type="button" (click)="toggleDaysDropdown()">
+              {{ getSelectedDaysText() }}
+              <i class="fas fa-chevron-down ms-2"></i>
+            </button>
+            <div class="days-dropdown" *ngIf="showDaysDropdown">
+              <div class="days-list">
+                <div class="day-item" *ngFor="let i of [0,1,2,3,4,5,6]">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="'day' + i" [value]="i" (change)="onDayChange($event, i)" [checked]="addForm.daysOfWeek.includes(i)">
+                    <label class="form-check-label" [for]="'day' + i">{{ getDayName(i) }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2">
+          <button class="btn btn-success w-100" type="submit" [disabled]="addFormRef.invalid || addForm.daysOfWeek.length === 0">إضافة</button>
+        </div>
+        <div *ngIf="addError" class="col-12">
+          <div class="alert alert-danger py-1 my-2">{{ addError }}</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- عرض جدول المواعيد -->
+  <div *ngIf="DoctorScheduleslist.length === 0" class="alert alert-info text-center">
+    <i class="fa fa-info-circle me-2"></i> لا يوجد مواعيد متاحة حالياً.
+  </div>
+
+  <div *ngIf="DoctorScheduleslist.length > 0" class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center">
+      <thead class="table-primary">
+        <tr>
+          <th>اليوم</th>
+          <th>من</th>
+          <th>إلى</th>
+          <th>مدة الكشف (دقيقة)</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of DoctorScheduleslist; let i = index">
+          <td>{{ getDayName(schedule.dayOfWeek) }}</td>
+          <td>{{ schedule.startTime }}</td>
+          <td>{{ schedule.endTime }}</td>
+          <td>{{ schedule.slotDuration }}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/doctor-schedules-details', getDoctorId(schedule), getNextDateForDay(schedule.dayOfWeek)]">
+              <i class="fa fa-eye"></i> 
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+              <i class="fa fa-trash"></i> 
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

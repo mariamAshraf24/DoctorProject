@@ -1,0 +1,178 @@
+.doctor-welcome-page {
+//   color: #2c3e50;
+    max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+
+  .logo-container {
+    padding: 0.5rem;
+    top: 0;
+
+    .clinic-logo {
+      height: 70px;
+      width: auto;
+    }
+  }
+  .doctor-welcome-header {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(
+      135deg,
+      hsl(272, 87%, 67%) 0%,
+      hsl(217, 91%, 60%) 100%
+    );
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-align: center;
+
+    .welcome-title {
+      font-size: 2.2rem;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0;
+      opacity: 0.9;
+    }
+  }
+
+  .doctor-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+
+    .doctor-feature-card {
+      background: white;
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      text-align: center;
+      border-top: 4px solid #8f94fb;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon-container {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          hsl(272, 87%, 67%) 0%,
+          hsl(217, 91%, 60%) 100%
+        );
+        border-radius: 50%;
+        color: white;
+        font-size: 1.8rem;
+      }
+
+      .feature-title {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .feature-description {
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .quick-actions {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+
+    .section-title {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+
+      .action-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: linear-gradient(
+          135deg,
+          hsl(272, 87%, 67%) 0%,
+          hsl(217, 91%, 60%) 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: "Tajawal", sans-serif;
+
+        i {
+          font-size: 1.2rem;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(142, 148, 251, 0.4);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-welcome-page {
+    padding: 1rem;
+
+    .doctor-welcome-header {
+      padding: 1.5rem;
+
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+
+        .clinic-logo {
+          height: 60px;
+        }
+
+        .welcome-text {
+          .welcome-title {
+            font-size: 1.8rem;
+          }
+
+          .welcome-subtitle {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    .doctor-features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

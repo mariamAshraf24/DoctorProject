@@ -24,7 +24,7 @@ export class Login implements OnInit {
       userName: [null, [Validators.required, Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)]],
       password: [null, [
         Validators.required,
-        Validators.minLength(8),
+        // Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
       ]],
 
@@ -45,6 +45,14 @@ export class Login implements OnInit {
           this._authService.saveToken(res.token);
           alert('تم التسجيل بنجاح!');
           this.loginForm.reset();
+
+
+          //  استخراج doctorId من التوكن وتخزينه
+          const doctorId = this._authService.getDoctorIdFromToken();
+          localStorage.setItem('doctorId', doctorId);
+
+        
+
 
           localStorage.setItem('roles', res.roles);
           if (this._authService.isAdmin()) {

@@ -34,7 +34,14 @@ export class DoctorService {
         })
       );
   }
- getMonthlyReport(year: number, month: number): Observable<any> {
+
+  updateDoctorProfile(data: any): Observable<any> {
+    return this._HttpClient.put(
+      `${environment.apiBaseUrl}/Doctor/edit-doctor-profile`,
+      data
+    );
+  }
+  getMonthlyReport(year: number, month: number): Observable<any> {
     const params = new HttpParams()
       .set('year', year.toString())
       .set('month', month.toString());
@@ -44,5 +51,5 @@ export class DoctorService {
   getReportHistory(): Observable<any> {
     return this._HttpClient.get(`${environment.apiBaseUrl}/Doctor/reports/history`);
   }
-
+  
 }
