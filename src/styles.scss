@@ -1,32 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global imports */
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
-body {
-  background-color: hsl(40 40% 98%);
-  background-image: url('/images/background.png');
-  background-size: cover;
-  background-repeat: repeat-x;
-  background-position: center;
-}
-
+/* Theme variables */
 :root {
   --bg-color: hsl(40 40% 98%);
   --text-color: #000000;
   --primary-color: hsl(217, 91%, 60%);
 }
 
-body {
-  font-family: 'Cairo', sans-serif;
+/* Base styles */
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
+  font-family: 'Cairo', Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-repeat: repeat-x;
+  background-position: center;
   box-sizing: border-box;
 }
-
-
-
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
