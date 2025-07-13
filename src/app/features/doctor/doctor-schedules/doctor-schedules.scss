@@ -1,539 +1,7 @@
-// // @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
-
-// // .days-dropdown {
-// //   position: absolute;
-// //   top: 100%;
-// //   left: 0;
-// //   right: 0;
-// //   z-index: 1000;
-// //   background: white;
-// //   border: 1px solid #dee2e6;
-// //   border-radius: 0.375rem;
-// //   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-// //   max-height: 200px;
-// //   overflow-y: auto;
-// // }
-
-// // .days-list {
-// //   padding: 0.5rem 0;
-// // }
-
-// // .day-item {
-// //   padding: 0.5rem 1rem;
-// //   cursor: pointer;
-  
-// //   &:hover {
-// //     background-color: #f8f9fa;
-// //   }
-// // }
-
-// // .form-check {
-// //   margin: 0;
-// // }
-
-// // .form-check-label {
-// //   cursor: pointer;
-// //   margin-left: 0.5rem;
-// // }
-
-// // // تحسينات للجدول والأزرار
-// // .table {
-// //   border-radius: 1.5rem;
-// //   overflow: hidden;
-// //   background: #fff;
-// //   box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
-// // }
-
-// // .table thead th {
-// //   background: #7b2ff2;
-// //   color: #fff;
-// //   font-weight: 700;
-// //   font-size: 1.08em;
-// //   border: none;
-// //   box-shadow: 0 2px 8px 0 rgba(123,47,242,0.07);
-// // }
-
-// // .table tbody tr {
-// //   transition: box-shadow 0.18s, background 0.18s;
-// //   border: none;
-// // }
-
-// // .table tbody tr:nth-child(even) {
-// //   background: linear-gradient(90deg, #f8fafc 60%, #e0c3fc 100%);
-// // }
-
-// // .table tbody tr:nth-child(odd) {
-// //   background: #fff;
-// // }
-
-// // .table tbody tr:hover {
-// //   background: linear-gradient(90deg, #e0c3fc 40%, #f357a8 100%);
-// //   box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
-// //   transform: scale(1.01);
-// // }
-
-// // .table tbody td {
-// //   border: none;
-// //   padding: 1rem 0.75rem;
-// //   vertical-align: middle;
-// // }
-
-// // .title-gradient {
-// //   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-// //   -webkit-background-clip: text;
-// //   -webkit-text-fill-color: transparent;
-// //   background-clip: text;
-// //   font-weight: 700;
-// //   font-size: 2.5rem;
-// //   text-shadow: 0 2px 4px rgba(123,47,242,0.1);
-// // }
-
-// // .btn-secondary {
-// //   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-// //   border: 1.5px solid rgba(123,47,242,0.13);
-// //   color: #fff;
-// //   font-weight: 600;
-// //   box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-// //   transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-// // }
-
-// // .btn-secondary:hover {
-// //   box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-// //   transform: scale(1.045);
-// //   border: 1.5px solid #f357a8;
-// // }
-
-// // .btn-danger {
-// //   background: #fff;
-// //   color: #dc3545;
-// //   border: 1px solid #f1d5db;
-// //   font-weight: 700;
-// //   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-// //   box-shadow: 0 2px 8px 0 rgba(220, 53, 69, 0.08);
-// // }
-
-// // .btn-danger:hover {
-// //   background: #f8d7da;
-// //   color: #dc3545;
-// //   box-shadow: 0 4px 16px 0 rgba(220, 53, 69, 0.15);
-// // }
-
-// // .btn-success {
-// //   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-// //   border: 1.5px solid rgba(123,47,242,0.13);
-// //   color: #fff;
-// //   font-weight: 600;
-// //   box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-// //   transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-// // }
-
-// // .btn-success:hover {
-// //   box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-// //   transform: scale(1.045);
-// //   border: 1.5px solid #f357a8;
-// // }
-
-// // .alert-info {
-// //   background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-// //   border: 1.5px solid #e0c3fc;
-// //   color: #7b2ff2;
-// //   box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-// //   border-radius: 1rem;
-// // }
-
-// // .add-form-overlay {
-// //   position: fixed;
-// //   top: 0;
-// //   left: 0;
-// //   width: 100vw;
-// //   height: 100vh;
-// //   background: rgba(0,0,0,0.25);
-// //   z-index: 2000;
-// //   display: flex;
-// //   align-items: center;
-// //   justify-content: center;
-// // }
-
-// // .add-form-card {
-// //   background: #fff;
-// //   border-radius: 2.5rem;
-// //   box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
-// //   padding: 2.5rem 2rem 2rem 2rem;
-// //   min-width: 350px;
-// //   max-width: 520px;
-// //   width: 100%;
-// //   position: relative;
-// //   border: none;
-// //   animation: fadeInScale 0.3s;
-// //   overflow: hidden;
-// // }
-
-// // @keyframes fadeInScale {
-// //   from { opacity: 0; transform: scale(0.95); }
-// //   to { opacity: 1; transform: scale(1); }
-// // }
-
-// // .add-form-card form {
-// //   margin: 0;
-// // }
-
-// // .add-form-card .form-label {
-// //   font-weight: 700;
-// //   color: #7b2ff2;
-// //   margin-bottom: 0.25rem;
-// // }
-
-// // .add-form-card .form-control,
-// // .add-form-card .form-select {
-// //   border-radius: 1rem;
-// //   border: 1.5px solid #e0c3fc;
-// //   font-size: 1rem;
-// //   padding: 0.5rem 0.75rem;
-// //   background: #f8fafc;
-// //   transition: all 0.3s ease;
-// //   box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-// // }
-
-// // .add-form-card .form-control:focus,
-// // .add-form-card .form-select:focus {
-// //   border-color: #7b2ff2;
-// //   box-shadow: 0 0 0 3px #e0c3fc;
-// //   background: #fff;
-// // }
-
-// // .add-form-card .btn-success {
-// //   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-// //   border: 1.5px solid rgba(123,47,242,0.13);
-// //   font-weight: 600;
-// //   letter-spacing: 0.5px;
-// //   border-radius: 1rem;
-// //   transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-// //   box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-// // }
-
-// // .add-form-card .btn-success:hover {
-// //   box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-// //   transform: scale(1.045);
-// //   border: 1.5px solid #f357a8;
-// // }
-
-// // .add-form-card .btn-close {
-// //   position: absolute;
-// //   top: 1rem;
-// //   left: 1rem;
-// //   font-size: 1.5rem;
-// //   font-weight: bold;
-// //   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-// //   border-radius: 50%;
-// //   border: 2px solid #fff;
-// //   color: #fff;
-// //   width: 35px;
-// //   height: 35px;
-// //   display: flex;
-// //   align-items: center;
-// //   justify-content: center;
-// //   box-shadow: 0 4px 12px 0 rgba(123,47,242,0.2);
-// //   transition: all 0.3s ease;
-// //   z-index: 10;
-// //   text-decoration: none;
-// // }
-
-// // .add-form-card .btn-close:hover {
-// //   background: linear-gradient(135deg, #f357a8 0%, #7b2ff2 100%);
-// //   color: #fff;
-// //   border: 2px solid #fff;
-// //   transform: scale(1.15) rotate(90deg);
-// //   box-shadow: 0 6px 20px 0 rgba(123,47,242,0.3);
-// // }
-
-// // .add-form-card .alert-danger {
-// //   border-radius: 1rem;
-// //   font-size: 0.97rem;
-// //   margin-top: 0.5rem;
-// //   background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-// //   border: 1.5px solid #e0c3fc;
-// //   color: #7b2ff2;
-// //   box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-// // }
-
-// // .add-form-card .days-dropdown {
-// //   border-radius: 1rem;
-// //   border: 1.5px solid #e0c3fc;
-// //   box-shadow: 0 2px 8px 0 rgba(123,47,242,0.08);
-// //   background: #fff;
-// // }
-
-// // .add-form-card .days-list {
-// //   padding: 0.5rem 0.25rem;
-// // }
-
-// // .add-form-card .day-item {
-// //   padding: 0.25rem 0.5rem;
-// //   border-radius: 6px;
-// //   transition: background 0.2s;
-// // }
-
-// // .add-form-card .day-item:hover {
-// //   background: linear-gradient(90deg, #f8fafc 80%, #e0c3fc 100%);
-// // }
-
-// // .add-form-card .form-check-input:checked {
-// //   background-color: #7b2ff2;
-// //   border-color: #7b2ff2;
-// // }
-
-// // .add-form-card .form-check-label {
-// //   color: #7b2ff2;
-// //   font-size: 1rem;
-// //   font-weight: 600;
-// //   margin-left: 0.5rem;
-// // }
-
-// // /* ******************************************************/
-
-// // :host {
-// //   /* الخط الأساسي */
-// //   * {
-// //     font-family: 'Cairo', sans-serif !important;
-// //   }
-
-// //   .title-gradient {
-// //     background: linear-gradient(135deg, rgb(99,60,132) 0%, #f357a8 100%);
-// //     -webkit-background-clip: text;
-// //     -webkit-text-fill-color: transparent;
-// //     background-clip: text;
-// //     font-weight: 700;
-// //     font-size: 2.5rem;
-// //     text-shadow: 0 2px 4px rgba(99,60,132,0.15);
-// //   }
-
-// //   .table thead th,
-// //   .add-form-card .form-label,
-// //   .add-form-card .form-check-label,
-// //   .alert-info {
-// //     color: rgb(99,60,132);
-// //   }
-
-// //   .table thead th {
-// //     background: rgb(99,60,132);
-// //   }
-
-// //   .table tbody tr:nth-child(even) {
-// //     background: linear-gradient(90deg, #f8fafc 60%, #e0c3fc 100%);
-// //   }
-
-// //   .table tbody tr:nth-child(odd) {
-// //     background: #fff;
-// //   }
-
-// //   .table tbody tr:hover {
-// //     background: linear-gradient(90deg, #e0c3fc 40%, #f357a8 100%);
-// //     box-shadow: 0 2px 12px 0 rgba(99,60,132,0.12);
-// //     transform: scale(1.01);
-// //   }
-
-// //   .btn-success,
-// //   .btn-secondary {
-// //     background: linear-gradient(135deg, rgb(99,60,132) 0%, #f357a8 100%);
-// //     border: 1.5px solid rgba(99,60,132,0.13);
-// //     color: #fff;
-// //     font-weight: 600;
-// //     box-shadow: 0 2px 12px 0 rgba(99,60,132,0.1), 0 1.5px 8px 0 rgba(243,87,168,0.08);
-// //   }
-
-// //   .btn-success:hover,
-// //   .btn-secondary:hover {
-// //     box-shadow: 0 6px 24px 0 rgba(99,60,132,0.18), 0 2.5px 16px 0 rgba(243,87,168,0.13);
-// //     transform: scale(1.045);
-// //     border: 1.5px solid #f357a8;
-// //   }
-
-// //   .btn-close {
-// //     background: linear-gradient(135deg, rgb(99,60,132) 0%, #f357a8 100%);
-// //     box-shadow: 0 4px 12px 0 rgba(99,60,132,0.2);
-// //   }
-
-// //   .btn-close:hover {
-// //     background: linear-gradient(135deg, #f357a8 0%, rgb(99,60,132) 100%);
-// //     box-shadow: 0 6px 20px 0 rgba(99,60,132,0.3);
-// //   }
-
-// //   .add-form-card .form-control,
-// //   .add-form-card .form-select {
-// //     border: 1.5px solid #e0c3fc;
-// //     box-shadow: 0 1.5px 8px 0 rgba(99,60,132,0.08);
-// //   }
-
-// //   .add-form-card .form-control:focus,
-// //   .add-form-card .form-select:focus {
-// //     border-color: rgb(99,60,132);
-// //     box-shadow: 0 0 0 3px #e0c3fc;
-// //   }
-
-// //   .alert-info,
-// //   .add-form-card .alert-danger {
-// //     background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-// //     border: 1.5px solid #e0c3fc;
-// //     color: rgb(99,60,132);
-// //     box-shadow: 0 1.5px 8px 0 rgba(99,60,132,0.08);
-// //     border-radius: 1rem;
-// //   }
-// // }
-// // /*************************************************************************************/
-
-
-// /* Import Cairo font */
-// @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-// /* Apply Cairo font globally */
-// body, html, *, input, button, select, textarea {
-//   font-family: 'Cairo', sans-serif !important;
-// }
-
-// /* Main container */
-// .container {
-//   max-width: 1000px;
-//   margin: 0 auto;
-//   padding: 2rem;
-// }
-
-// /* Title styling */
-// .title-gradient {
-//   color: rgb(99,60,132);
-//   font-weight: 700;
-//   font-size: 1.8rem;
-//   text-align: center;
-//   margin-bottom: 1.5rem;
-//   text-shadow: 0 2px 4px rgba(99,60,132,0.1);
-// }
-
-// /* Add button - updated with exact rgb(99,60,132) color */
-// .btn-add {
-//   background: rgb(99,60,132); /* Solid color as requested */
-//   color: white;
-//   border: none;
-//   padding: 0.6rem 1.2rem;
-//   border-radius: 8px;
-//   font-weight: 600;
-//   font-size: 0.95rem;
-//   transition: all 0.2s ease;
-//   box-shadow: 0 2px 6px rgba(99,60,132,0.2);
-//   display: inline-flex;
-//   align-items: center;
-// }
-
-// .btn-add:hover {
-//   background: rgba(99,60,132, 0.9); /* Slightly darker on hover */
-//   transform: translateY(-1px);
-//   box-shadow: 0 3px 8px rgba(99,60,132,0.3);
-// }
-
-// .btn-add i {
-//   margin-left: 0.5rem;
-// }
-
-// /* Table styling */
-// .table {
-//   width: 100%;
-//   border-collapse: collapse;
-//   margin-top: 1.5rem;
-//   background: white;
-//   border-radius: 10px;
-//   overflow: hidden;
-//   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-// }
-
-// .table thead th {
-//   background-color: rgb(99,60,132);
-//   color: white;
-//   padding: 1rem;
-//   font-weight: 600;
-//   text-align: center;
-//   font-size: 0.95rem;
-// }
-
-// .table tbody td {
-//   padding: 1rem;
-//   text-align: center;
-//   border-bottom: 1px solid #f0f0f0;
-//   font-size: 0.9rem;
-// }
-
-// /* Alternate row colors */
-// .table tbody tr:nth-child(even) {
-//   background-color: #fafafa;
-// }
-
-// /* Hover effect */
-// .table tbody tr:hover {
-//   background-color: #f5f0ff;
-// }
-
-// /* Delete button styling - ensuring it's not a square */
-// .btn-delete {
-//   background: transparent !important; /* Ensure no background */
-//   border: none !important; /* Ensure no border */
-//   color: rgb(99,60,132);
-//   font-size: 1.3rem;
-//   cursor: pointer;
-//   transition: all 0.2s ease;
-//   padding: 0;
-//   margin: 0;
-//   width: auto; /* Allow width to be determined by content (the icon) */
-//   height: auto; /* Allow height to be determined by content (the icon) */
-//   display: inline-block;
-//   line-height: 1;
-//   box-shadow: none !important; /* Remove any potential box shadow */
-//   outline: none !important; /* Remove outline on focus */
-// }
-
-// .btn-delete:hover {
-//   color: rgba(99,60,132,0.6);
-//   transform: scale(1.15);
-//   background: transparent !important;
-// }
-
-
-
-
-// /* Form styling */
-// .add-form-overlay {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(0,0,0,0.5);
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 1000;
-// }
-
-// .add-form-card {
-//   background-color: white;
-//   border-radius: 12px;
-//   padding: 1.5rem;
-//   width: 90%;
-//   max-width: 500px;
-//   box-shadow: 0 8px 24px rgba(99,60,132,0.15);
-// }
-
-// /* Alert styling */
-// .alert-info {
-//   background-color: #f5f0ff;
-//   color: rgb(99,60,132);
-//   padding: 1rem;
-//   border-radius: 8px;
-//   text-align: center;
-//   margin: 1.5rem 0;
-//   border: 1px solid #e9e0ff;
-// }
-
-/* Import Cairo font */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 @import '@fortawesome/fontawesome-free/css/all.css';
+
 /* Apply Cairo font to all elements */
 body, html, *, input, button, select, textarea {
   font-family: 'Cairo', sans-serif !important;
@@ -582,28 +50,38 @@ body, html, *, input, button, select, textarea {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
   overflow: hidden;
-}
 
-.table thead th {
-  background-color: rgb(99,60,132);
-  color: white;
-  padding: 12px;
-  font-weight: 600;
-  text-align: center;
-}
+  thead th {
+    background-color: rgb(99,60,132);
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
 
-.table tbody td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-}
+  tbody tr {
+    /* Alternating row colors */
+    &:nth-child(odd) {
+      background-color: #f7f3ff; /* Lighter shade for odd rows */
+    }
 
-.table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+    &:nth-child(even) {
+      background-color: #e9e1fc; /* Slightly darker shade for even rows */
+    }
 
-.table tbody tr:hover {
-  background-color: #f0e6ff;
+    &:hover {
+      background-color: #d9c8fa; /* Hover color */
+      transform: scale(1.01);
+      transition: all 0.2s ease;
+    }
+
+    td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #e0d6f5;
+      transition: all 0.2s ease;
+    }
+  }
 }
 
 /* Delete button */
@@ -611,7 +89,7 @@ body, html, *, input, button, select, textarea {
   background: none;
   border: none;
   color: #dc3545;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 5px;
@@ -667,7 +145,7 @@ body, html, *, input, button, select, textarea {
   box-shadow: 0 0 0 2px rgba(99,60,132,0.2);
 }
 
-.btn-submit {
+.btn-success { /* Changed from .btn-submit to match your HTML */
   background-color: rgb(99,60,132);
   color: white;
   border: none;
@@ -679,20 +157,25 @@ body, html, *, input, button, select, textarea {
   transition: all 0.3s ease;
 }
 
-.btn-submit:hover {
+.btn-success:hover {
   background-color: rgba(99,60,132,0.9);
 }
 
 .btn-close {
+  /* Position absolute is relative to the nearest positioned ancestor, which should be .add-form-card. */
+  /* Your current HTML places it in a col-12 text-end mb-2 div, so adjusting as needed. */
+  /* For absolute positioning to work relative to .add-form-card, you need position: relative on .add-form-card */
+  /* If you want it on the very top-left of the card, you can modify its parent div or the button itself. */
   position: absolute;
   top: 15px;
-  left: 15px;
+  right: 15px; /* Changed from left to right for Arabic layout */
   background: none;
   border: none;
   font-size: 1.5rem;
   color: #666;
   cursor: pointer;
 }
+
 
 /* Days dropdown */
 .days-dropdown {
@@ -737,4 +220,57 @@ body, html, *, input, button, select, textarea {
   border-radius: 8px;
   margin-top: 10px;
   text-align: center;
+}
+
+/* Add button */
+.btn-add {
+  background-color: rgb(99,60,132);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: rgba(99,60,132,0.9);
+  transform: translateY(-2px);
+}
+
+/* Cancel button */
+.btn-cancel {
+  background-color: #7c2222; /* A neutral gray color */
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268; /* Slightly darker on hover */
+}
+
+// ... rest of your SCSS code ...
+
+/* In the .add-form-card section, ensure btn-success is styled */
+.btn-success {
+  background-color: rgb(99,60,132);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%; /* Remove this if you're using flex-grow-1 */
+  font-weight: 600;
+  margin-top: 10px; /* Adjust or remove if using flexbox spacing */
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: rgba(99,60,132,0.9);
 }

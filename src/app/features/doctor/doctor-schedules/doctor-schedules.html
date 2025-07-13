@@ -12,8 +12,8 @@
     <div class="add-form-card">
       <form (ngSubmit)="addSchedule()" #addFormRef="ngForm">
         <div class="col-12 text-end mb-2">
-          <button type="button" class="btn-close" aria-label="إغلاق" (click)="closeAddForm()">✕</button>
-        </div>
+        <button type="button" class="btn-close" aria-label="إغلاق" (click)="closeAddForm()">✕</button>
+      </div>
         <div class="mb-3">
           <label for="startTime" class="form-label">من</label>
           <input id="startTime" type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
@@ -45,9 +45,14 @@
             </div>
           </div>
         </div>
-        <div class="mb-2">
+        <!-- <div class="mb-2">
           <button class="btn btn-success w-100" type="submit" [disabled]="addFormRef.invalid || addForm.daysOfWeek.length === 0">إضافة</button>
-        </div>
+        </div> -->
+
+        <div class="mb-2 d-flex justify-content-between">
+        <button class="btn btn-success flex-grow-1 me-2" type="submit" [disabled]="addFormRef.invalid || addForm.daysOfWeek.length === 0">إضافة</button>
+        <button class="btn btn-cancel flex-grow-1 ms-2" type="button" (click)="closeAddForm()">إلغاء</button>
+      </div>
         <div *ngIf="addError" class="col-12">
           <div class="alert alert-danger py-1 my-2">{{ addError }}</div>
         </div>
@@ -61,7 +66,7 @@
   </div>
 
   <div *ngIf="DoctorScheduleslist.length > 0" class="table-responsive">
-    <table class="table table-bordered table-hover align-middle text-center">
+    <table class="table">
       <thead class="table-primary">
         <tr>
           <th>اليوم</th>
@@ -79,8 +84,8 @@
           <td>{{ schedule.slotDuration }}</td>
           <td>
            
-            <button class="btn btn-delete" title="حذف" (click)="deleteSchedule(schedule.id)">
-             <i class="fa fa-trash"></i> 
+            <button class="btn btn-delete"  (click)="deleteSchedule(schedule.id)">
+             حذف
             </button>
           </td>
         </tr>
