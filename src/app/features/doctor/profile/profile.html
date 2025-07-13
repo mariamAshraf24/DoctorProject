@@ -1,80 +1,70 @@
 <div class="profile-container">
   <div class="profile-header">
-    <h2>Doctor Profile</h2>
+    
   </div>
 
   @if (isLoading) {
-  <div class="loading-spinner">
-    <div class="spinner"></div>
-    <p>Loading profile...</p>
-  </div>
-  } @if (error) {
-  <div class="error-message">
-    <span style="color: #e53935; font-size: 2rem">&#9888;</span>
-    <p>{{ error }}</p>
-    <button class="retry-btn" (click)="loadDoctorProfile()">Retry</button>
-  </div>
-  } @if (doctorProfile && !isLoading) {
-  <div class="profile-content">
-    <div class="profile-image-section">
-      <img
-        [src]="doctorProfile.imageUrl"
-        alt="Doctor's Profile Picture"
-        class="profile-image"
-      />
-      <div class="profile-badge">
-        <span style="color: #1976d2; font-size: 1.2rem">&#9877;</span>
-        <span>{{ doctorProfile.username }}</span>
-        <span>{{ doctorProfile.specializationName }}</span>
-      </div>
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>جاري تحميل الملف الشخصي...</p>
     </div>
+  }
 
-    <div class="profile-details-section">
-      <div class="profile-name">
-        <h1>Dr. {{ doctorProfile.fName }} {{ doctorProfile.lName }}</h1>
-        <div class="profile-meta">
-          <span class="meta-item">
-            <span style="font-size: 1.1rem">&#128100;</span>
-            {{ getGenderText(doctorProfile.gender) }}
-          </span>
-          <!-- <span class="meta-item">
-              <span style="font-size: 1.1rem;">&#127874;</span>
-              {{ formatDate(doctorProfile.dateOfBirth) }}
-            </span> -->
-          <span class="meta-item">
-            العمر: {{ getAge(doctorProfile.dateOfBirth) }} سنة
-          </span>
+  @if (error) {
+    <div class="error-message">
+      <span style="font-size: 2rem;">&#9888;</span>
+      <p>{{ error }}</p>
+      <button class="edit-btn" (click)="loadDoctorProfile()">إعادة المحاولة</button>
+    </div>
+  }
+
+  @if (doctorProfile && !isLoading) {
+    <div class="profile-layout">
+      <!-- Right Side: Doctor Image with background -->
+      <div class="image-section">
+        <div class="image-blob">
+          <img
+            [src]="doctorProfile.imageUrl"
+            alt="Doctor Image"
+            class="doctor-image"
+          />
         </div>
       </div>
 
-      <hr />
+      <!-- Left Side: Info -->
+      <div class="info-section">
+        <h2 class="title">د. {{ doctorProfile.fName }} {{ doctorProfile.lName }}</h2>
+        <p class="username">{{ doctorProfile.username }}</p>
 
-      <div class="profile-info">
-        <div class="info-row">
-          <span style="font-size: 1.1rem">&#128205;</span>
-          <div>
-            <p class="info-label">Address</p>
-            <p class="info-value">
-              {{ doctorProfile.street }}, {{ doctorProfile.city }},
-              {{ doctorProfile.country }}
-            </p>
-          </div>
+        <div class="info-item">
+          <span class="icon"><i class="fa-solid fa-user-doctor"></i></span>
+          <span>{{ doctorProfile.specializationName }}</span>
         </div>
 
-        <div class="info-row">
-          <span style="font-size: 1.1rem">&#128181;</span>
-          <div>
-            <p class="info-label">Booking Price</p>
-            <p class="info-value">{{ doctorProfile.bookingPrice }} EGP</p>
-          </div>
+        <div class="info-item">
+          <span class="icon"><i class="fa-regular fa-heart"></i></span>
+          <span>{{ getAge(doctorProfile.dateOfBirth) }} سنة</span>
         </div>
-      </div>
 
-      <div class="profile-actions">
+        <div class="info-item">
+          <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+          <span>
+            {{ doctorProfile.street }}، {{ doctorProfile.city }}، {{ doctorProfile.country }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="icon"><i class="fa-solid fa-sack-dollar"></i></span>
+          <span>{{ doctorProfile.bookingPrice }} جنيه مصرى</span>
+        </div>
+
         <button
-          class="action-button primary"
+          class="edit-btn"
           routerLink="/doctor/update-profile"
         >
+<<<<<<< HEAD
+          تعديل البيانات
+=======
           &#9998; Edit Profile
         </button>
         <button
@@ -82,9 +72,9 @@
           routerLink="/doctor/appointment-calendar"
         >
           &#9200; View Schedule
+>>>>>>> fb3ef7f1397ef85aca71788646cf274822f03011
         </button>
       </div>
     </div>
-  </div>
   }
 </div>
