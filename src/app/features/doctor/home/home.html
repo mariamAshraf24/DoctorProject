@@ -1,57 +1,102 @@
 <div class="doctor-welcome-page">
   <!-- Header Section with Logo and Welcome -->
-   <!-- Logo Section (Top Left) -->
+  <!-- Logo Section (Top Left) -->
   <div class="logo-container" dir="ltr">
     <img src="/images/nazzemLogo.png" alt="Clinic Logo" class="clinic-logo">
   </div>
-   <!-- Main Content Below Logo -->
+  <!-- Main Content Below Logo -->
   <div class="main-content">
     <!-- Welcome Section -->
     <div class="doctor-welcome-header">
       <div class="welcome-text">
-         <h1 class="welcome-title">
-      مرحباً دكتور {{ doctor?.fName }} {{ doctor?.lName }}
-    </h1>
-        <p class="welcome-subtitle">نظام إدارة العيادة الخاص بك</p>
+        <h1 class="welcome-title">
+          مرحباً دكتور {{ doctor?.fName }} {{ doctor?.lName }}
+        </h1>
+        <p class="welcome-subtitle">تنظيم عيادتك يبدأ هنا...</p>
       </div>
     </div>
 
-  <!-- Features Grid -->
-  <div class="doctor-features-grid">
-    <!-- Feature 1 -->
-    <div class="doctor-feature-card">
-      <div class="feature-icon-container">
-        <i class="bi bi-calendar-check"></i>
-      </div>
-      <h3 class="feature-title">تأجيل أو إلغاء المواعيد</h3>
-      <p class="feature-description">وجدولة جميع المواعيد بسهولة</p>
-    </div>
+    <!-- Features Grid -->
+    <div class="doctor-features-grid">
+      <!-- Feature 1 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="bi bi-calendar-range"></i>
+        </div>
+        <h3 class="feature-title"> إدارة المواعيد بسهولة</h3>
+        <p class="feature-description">أدخل مواعيد العيادة اليومية أو الأسبوعية
+          بكل مرونة وتنظيم.
 
-    <!-- Feature 2 -->
-    <div class="doctor-feature-card">
-      <div class="feature-icon-container">
-        <i class="bi bi-file-earmark-medical"></i>
+        </p>
       </div>
-      <h3 class="feature-title">السجلات الطبية</h3>
-      <p class="feature-description">الوصول إلى سجلات المرضى والتقارير الطبية</p>
-    </div>
 
-    <!-- Feature 3 -->
-    <div class="doctor-feature-card">
-      <div class="feature-icon-container">
-        <i class="bi bi-graph-up"></i>
+      <!-- Feature 2 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="bi bi-calendar-check"></i>
+        </div>
+        <h3 class="feature-title">تأجيل أو إلغاء ذكي</h3>
+        <p class="feature-description">أجل أو ألغِ أي موعد بضغطة زر، والسيستم
+          يتصرف تلقائياً</p>
       </div>
-      <h3 class="feature-title">إحصائيات العيادة</h3>
-      <p class="feature-description">متابعة أداء العيادة وإحصائيات الحضور</p>
-    </div>
 
-    <!-- Feature 4 -->
-    <div class="doctor-feature-card">
-      <div class="feature-icon-container">
-        <i class="bi bi-person-circle"></i>
+      <!-- Feature 3 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-regular fa-clock"></i>
+        </div>
+        <h3 class="feature-title">إعادة جدولة تلقائية</h3>
+        <p class="feature-description">يتم إعادة تنظيم باقي المواعيد
+          أوتوماتيكياً بدون تدخل يدوي</p>
       </div>
-      <h3 class="feature-title">الملف الشخصي</h3>
-      <p class="feature-description">إدارة معلوماتك الشخصية والمهنية</p>
+
+      <!-- Feature 4 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-solid fa-bell"></i> </div>
+        <h3 class="feature-title">إشعارات فورية للمرضى</h3>
+        <p class="feature-description"> المرضى يحصلون على إشعارات لحظية عند أي
+          تعديل أو إلغاءأو التذكير بمواعيدهم</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-solid fa-chart-simple"></i>
+        </div>
+        <h3 class="feature-title">تقارير شهرية دقيقة</h3>
+        <p class="feature-description">اطلع على تقرير مفصل لكل شهر يشمل عدد
+          الحجوزات، الحضور، التأجيل و الإلغاء</p>
+      </div>
+
+       <!-- Feature 7 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-solid fa-chart-pie"></i>
+        </div>
+        <h3 class="feature-title">مقارنة أداء الشهور</h3>
+        <p class="feature-description">تعرف على الفرق بين الشهور من حيث عدد
+          المرضى ونسبة الحضور</p>
+      </div>
+      <!-- Feature 6 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-solid fa-list-check"></i>
+        </div>
+
+        <h3 class="feature-title">تقليل الزحام وتحسين التنظيم</h3>
+        <p class="feature-description">كل مريض يعرف دوره وكم مريض أمامه، مما
+          يقلل الانتظار والازدحام</p>
+      </div>
+     
+      <!-- Feature 8 -->
+      <div class="doctor-feature-card">
+        <div class="feature-icon-container">
+          <i class="fa-solid fa-arrow-trend-down"></i>
+        </div>
+        <h3 class="feature-title">تحسين تجربة المريض والطبيب</h3>
+        <p class="feature-description">نظام ذكي يساعدك تركز على المريض، مش على
+          المواعيد</p>
+      </div>
     </div>
   </div>
-</div>

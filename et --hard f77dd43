@@ -1,0 +1,15 @@
+[33md096ec1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: commit (merge): design
+[33mf77dd43[m HEAD@{1}: commit: design
+[33m95fcfe0[m HEAD@{2}: commit (merge): doctorschedule
+[33m4b78063[m HEAD@{3}: rebase (abort): returning to refs/heads/main
+[33mcfe7745[m HEAD@{4}: pull origin main --rebase (start): checkout cfe77454dc94a9389abdc4cdeceec95fd256f798
+[33m4b78063[m HEAD@{5}: commit: doctorschedules
+[33mb245328[m HEAD@{6}: pull origin main: Fast-forward
+[33mb2aa3c4[m HEAD@{7}: commit (merge): specialization
+[33m96f32d8[m HEAD@{8}: commit: specialization
+[33m0d23b51[m HEAD@{9}: commit (merge): حل تعارض login.html (حذف الملف كما في main)
+[33m7b9ffaa[m HEAD@{10}: commit: admind
+[33me07015d[m[33m ([m[1;31morigin/noran[m[33m, [m[1;32mnoran[m[33m)[m HEAD@{11}: checkout: moving from noran to main
+[33me07015d[m[33m ([m[1;31morigin/noran[m[33m, [m[1;32mnoran[m[33m)[m HEAD@{12}: checkout: moving from noran to noran
+[33me07015d[m[33m ([m[1;31morigin/noran[m[33m, [m[1;32mnoran[m[33m)[m HEAD@{13}: checkout: moving from main to noran
+[33me07015d[m[33m ([m[1;31morigin/noran[m[33m, [m[1;32mnoran[m[33m)[m HEAD@{14}: clone: from https://github.com/mariamAshraf24/DoctorProject

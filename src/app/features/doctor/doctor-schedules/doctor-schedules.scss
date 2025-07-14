@@ -1,288 +1,276 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+/* Apply Cairo font to all elements */
+body, html, *, input, button, select, textarea {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+/* Main container */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Title styling */
+.title-gradient {
+  background: linear-gradient(135deg, rgb(99,60,132) 0%, #8a2be2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Add button */
+.btn-add {
+  background-color: rgb(99,60,132);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: rgba(99,60,132,0.9);
+  transform: translateY(-2px);
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+
+  thead th {
+    background-color: rgb(99,60,132);
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  tbody tr {
+    /* Alternating row colors */
+    &:nth-child(odd) {
+      background-color: #f7f3ff; /* Lighter shade for odd rows */
+    }
+
+    &:nth-child(even) {
+      background-color: #e9e1fc; /* Slightly darker shade for even rows */
+    }
+
+    &:hover {
+      background-color: #d9c8fa; /* Hover color */
+      transform: scale(1.01);
+      transition: all 0.2s ease;
+    }
+
+    td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #e0d6f5;
+      transition: all 0.2s ease;
+    }
+  }
+}
+
+/* Delete button */
+.btn-delete {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 5px;
+}
+
+.btn-delete:hover {
+  color: #a71d2a;
+  transform: scale(1.1);
+}
+
+/* Add form styles */
+.add-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-form-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.form-label {
+  font-weight: 600;
+  color: rgb(99,60,132);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: border 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: rgb(99,60,132);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99,60,132,0.2);
+}
+
+.btn-success { /* Changed from .btn-submit to match your HTML */
+  background-color: rgb(99,60,132);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: rgba(99,60,132,0.9);
+}
+
+.btn-close {
+  /* Position absolute is relative to the nearest positioned ancestor, which should be .add-form-card. */
+  /* Your current HTML places it in a col-12 text-end mb-2 div, so adjusting as needed. */
+  /* For absolute positioning to work relative to .add-form-card, you need position: relative on .add-form-card */
+  /* If you want it on the very top-left of the card, you can modify its parent div or the button itself. */
+  position: absolute;
+  top: 15px;
+  right: 15px; /* Changed from left to right for Arabic layout */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+
+/* Days dropdown */
 .days-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: white;
-  border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 100;
   max-height: 200px;
   overflow-y: auto;
 }
 
 .days-list {
-  padding: 0.5rem 0;
+  padding: 10px;
 }
 
 .day-item {
-  padding: 0.5rem 1rem;
+  padding: 8px;
   cursor: pointer;
-  
-  &:hover {
-    background-color: #f8f9fa;
-  }
 }
 
-.form-check {
-  margin: 0;
+.day-item:hover {
+  background-color: #f5f5f5;
 }
 
-.form-check-label {
-  cursor: pointer;
-  margin-left: 0.5rem;
+/* Alert styles */
+.alert-info {
+  background-color: #f0e6ff;
+  color: rgb(99,60,132);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
 }
 
-// تحسينات للجدول والأزرار
-.table {
-  border-radius: 1.5rem;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
+.alert-danger {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
 }
 
-.table thead th {
-  background: #7b2ff2;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.08em;
+/* Add button */
+.btn-add {
+  background-color: rgb(99,60,132);
+  color: white;
   border: none;
-  box-shadow: 0 2px 8px 0 rgba(123,47,242,0.07);
-}
-
-.table tbody tr {
-  transition: box-shadow 0.18s, background 0.18s;
-  border: none;
-}
-
-.table tbody tr:nth-child(even) {
-  background: linear-gradient(90deg, #f8fafc 60%, #e0c3fc 100%);
-}
-
-.table tbody tr:nth-child(odd) {
-  background: #fff;
-}
-
-.table tbody tr:hover {
-  background: linear-gradient(90deg, #e0c3fc 40%, #f357a8 100%);
-  box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
-  transform: scale(1.01);
-}
-
-.table tbody td {
-  border: none;
-  padding: 1rem 0.75rem;
-  vertical-align: middle;
-}
-
-.title-gradient {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-  font-size: 2.5rem;
-  text-shadow: 0 2px 4px rgba(123,47,242,0.1);
-}
-
-.btn-secondary {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  border: 1.5px solid rgba(123,47,242,0.13);
-  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-weight: 600;
-  box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-  transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
+  transition: all 0.3s ease;
 }
 
-.btn-secondary:hover {
-  box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-  transform: scale(1.045);
-  border: 1.5px solid #f357a8;
+.btn-add:hover {
+  background-color: rgba(99,60,132,0.9);
+  transform: translateY(-2px);
 }
 
-.btn-danger {
-  background: #fff;
-  color: #dc3545;
-  border: 1px solid #f1d5db;
-  font-weight: 700;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(220, 53, 69, 0.08);
+/* Cancel button */
+.btn-cancel {
+  background-color: #7c2222; /* A neutral gray color */
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  height: 50px;
+  margin-top: 10px;
 }
 
-.btn-danger:hover {
-  background: #f8d7da;
-  color: #dc3545;
-  box-shadow: 0 4px 16px 0 rgba(220, 53, 69, 0.15);
+.btn-cancel:hover {
+  background-color: #5a6268; /* Slightly darker on hover */
 }
 
+// ... rest of your SCSS code ...
+
+/* In the .add-form-card section, ensure btn-success is styled */
 .btn-success {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  border: 1.5px solid rgba(123,47,242,0.13);
-  color: #fff;
+  background-color: rgb(99,60,132);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%; /* Remove this if you're using flex-grow-1 */
   font-weight: 600;
-  box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-  transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
+  margin-top: 10px; /* Adjust or remove if using flexbox spacing */
+  transition: all 0.3s ease;
 }
 
 .btn-success:hover {
-  box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-  transform: scale(1.045);
-  border: 1.5px solid #f357a8;
-}
-
-.alert-info {
-  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-  border: 1.5px solid #e0c3fc;
-  color: #7b2ff2;
-  box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-  border-radius: 1rem;
-}
-
-.add-form-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.25);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.add-form-card {
-  background: #fff;
-  border-radius: 2.5rem;
-  box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
-  padding: 2.5rem 2rem 2rem 2rem;
-  min-width: 350px;
-  max-width: 520px;
-  width: 100%;
-  position: relative;
-  border: none;
-  animation: fadeInScale 0.3s;
-  overflow: hidden;
-}
-
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.add-form-card form {
-  margin: 0;
-}
-
-.add-form-card .form-label {
-  font-weight: 700;
-  color: #7b2ff2;
-  margin-bottom: 0.25rem;
-}
-
-.add-form-card .form-control,
-.add-form-card .form-select {
-  border-radius: 1rem;
-  border: 1.5px solid #e0c3fc;
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-  background: #f8fafc;
-  transition: all 0.3s ease;
-  box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-}
-
-.add-form-card .form-control:focus,
-.add-form-card .form-select:focus {
-  border-color: #7b2ff2;
-  box-shadow: 0 0 0 3px #e0c3fc;
-  background: #fff;
-}
-
-.add-form-card .btn-success {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  border: 1.5px solid rgba(123,47,242,0.13);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 1rem;
-  transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-  box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-}
-
-.add-form-card .btn-success:hover {
-  box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-  transform: scale(1.045);
-  border: 1.5px solid #f357a8;
-}
-
-.add-form-card .btn-close {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  color: #fff;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px 0 rgba(123,47,242,0.2);
-  transition: all 0.3s ease;
-  z-index: 10;
-  text-decoration: none;
-}
-
-.add-form-card .btn-close:hover {
-  background: linear-gradient(135deg, #f357a8 0%, #7b2ff2 100%);
-  color: #fff;
-  border: 2px solid #fff;
-  transform: scale(1.15) rotate(90deg);
-  box-shadow: 0 6px 20px 0 rgba(123,47,242,0.3);
-}
-
-.add-form-card .alert-danger {
-  border-radius: 1rem;
-  font-size: 0.97rem;
-  margin-top: 0.5rem;
-  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-  border: 1.5px solid #e0c3fc;
-  color: #7b2ff2;
-  box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-}
-
-.add-form-card .days-dropdown {
-  border-radius: 1rem;
-  border: 1.5px solid #e0c3fc;
-  box-shadow: 0 2px 8px 0 rgba(123,47,242,0.08);
-  background: #fff;
-}
-
-.add-form-card .days-list {
-  padding: 0.5rem 0.25rem;
-}
-
-.add-form-card .day-item {
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.add-form-card .day-item:hover {
-  background: linear-gradient(90deg, #f8fafc 80%, #e0c3fc 100%);
-}
-
-.add-form-card .form-check-input:checked {
-  background-color: #7b2ff2;
-  border-color: #7b2ff2;
-}
-
-.add-form-card .form-check-label {
-  color: #7b2ff2;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
+  background-color: rgba(99,60,132,0.9);
 }
