@@ -1,33 +1,97 @@
-<div class="container py-4">
+<div class="doctor-schedules-page container py-4">
+  <h2 class="mb-4 text-center title-gradient">
+    <i class="fa fa-calendar-alt"></i> مواعيد الطبيب
+  </h2>
+  <hr class="divider mb-5" />
 
-  <h2 class="mb-4 text-center title-gradient">جدول مواعيد الطبيب</h2>
+  <!-- تقسيم المواعيد حسب الفترات -->
+  <div class="appointments-section">
+    <h3 class="section-title"><i class="fa fa-sun"></i> المواعيد الصباحية</h3>
+    <div *ngIf="morningSchedules.length === 0" class="alert alert-info text-center">
+      لا يوجد مواعيد صباحية متاحة حالياً.
+    </div>
+    <div class="appointments-list">
+      <div *ngFor="let schedule of morningSchedules" class="appointment-card">
+        <div class="appointment-header">
+          <span class="icon-box"><i class="fa fa-calendar-day"></i></span>
+          <span class="appointment-day">{{ getDayName(schedule.dayOfWeek) }}</span>
+        </div>
+        <div class="appointment-time">
+          <span class="icon-box"><i class="far fa-clock"></i></span>
+          <span>{{ schedule.startTime }} - {{ schedule.endTime }}</span>
+        </div>
+        <div class="appointment-duration">
+          <span class="icon-box"><i class="fas fa-stopwatch"></i></span>
+          <span>مدة الكشف: {{ schedule.slotDuration }} دقيقة</span>
+        </div>
+        <div class="appointment-actions-corner">
+          <button class="delete-btn" (click)="deleteSchedule(schedule.id)" title="حذف الموعد">
+            <i class="fa fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <hr class="divider my-4" />
+
+  <div class="appointments-section">
+    <h3 class="section-title"><i class="fa fa-moon"></i> المواعيد المسائية</h3>
+    <div *ngIf="eveningSchedules.length === 0" class="alert alert-info text-center">
+      لا يوجد مواعيد مسائية متاحة حالياً.
+    </div>
+    <div class="appointments-list">
+      <div *ngFor="let schedule of eveningSchedules" class="appointment-card">
+        <div class="appointment-header">
+          <span class="icon-box"><i class="fa fa-calendar-day"></i></span>
+          <span class="appointment-day">{{ getDayName(schedule.dayOfWeek) }}</span>
+        </div>
+        <div class="appointment-time">
+          <span class="icon-box"><i class="far fa-clock"></i></span>
+          <span>{{ schedule.startTime }} - {{ schedule.endTime }}</span>
+        </div>
+        <div class="appointment-duration">
+          <span class="icon-box"><i class="fas fa-stopwatch"></i></span>
+          <span>مدة الكشف: {{ schedule.slotDuration }} دقيقة</span>
+        </div>
+        <div class="appointment-actions-corner">
+          <button class="delete-btn" (click)="deleteSchedule(schedule.id)" title="حذف الموعد">
+            <i class="fa fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- زر إضافة موعد جديد -->
   <div class="mb-3 text-end">
-    <button class="btn btn-add" (click)="openAddForm()">
+    <button class="btn btn-success" (click)="openAddForm()">
       <i class="fa fa-plus me-2"></i> إضافة موعد جديد
     </button>
   </div>
 
+  <!-- فورم الإضافة -->
   <div *ngIf="showAddForm" class="add-form-overlay">
     <div class="add-form-card">
+      <h4 class="form-title mb-3 text-center"><i class="fa fa-calendar-plus"></i> إضافة موعد جديد</h4>
       <form (ngSubmit)="addSchedule()" #addFormRef="ngForm">
         <div class="col-12 text-end mb-2">
         <button type="button" class="btn-close" aria-label="إغلاق" (click)="closeAddForm()">✕</button>
       </div>
         <div class="mb-3">
-          <label for="startTime" class="form-label">من</label>
-          <input id="startTime" type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
+          <label class="form-label">من</label>
+          <input type="time" class="form-control" [(ngModel)]="addForm.startTime" name="startTime" required step="60" />
         </div>
         <div class="mb-3">
-          <label for="endTime" class="form-label">إلى</label>
-          <input id="endTime" type="time" class="form-control" [(ngModel)]="addForm.endTime" name="endTime" required step="60" />
+          <label class="form-label">إلى</label>
+          <input type="time" class="form-control" [(ngModel)]="addForm.endTime" name="endTime" required step="60" />
         </div>
         <div class="mb-3">
-          <label for="slotDurationMinutes" class="form-label">مدة الكشف (دقائق)</label>
-          <input id="slotDurationMinutes" type="number" class="form-control" [(ngModel)]="addForm.slotDurationMinutes" name="slotDurationMinutes" required min="1" max="60" placeholder="مثال: 30" />
+          <label class="form-label">مدة الكشف (دقائق)</label>
+          <input type="number" class="form-control" [(ngModel)]="addForm.slotDurationMinutes" name="slotDurationMinutes" required min="1" max="60" placeholder="مثال: 30" />
         </div>
         <div class="mb-3">
-          <label class="form-label">الأيام</label>
+          <label class="form-label"><i class="fa fa-calendar-day"></i> الأيام</label>
           <div class="position-relative">
             <button class="btn btn-outline-secondary w-100" type="button" (click)="toggleDaysDropdown()">
               {{ getSelectedDaysText() }}
@@ -60,13 +124,13 @@
     </div>
   </div>
 
-  
+  <!-- عرض جدول المواعيد -->
   <div *ngIf="DoctorScheduleslist.length === 0" class="alert alert-info text-center">
     <i class="fa fa-info-circle me-2"></i> لا يوجد مواعيد متاحة حالياً.
   </div>
 
   <div *ngIf="DoctorScheduleslist.length > 0" class="table-responsive">
-    <table class="table">
+    <table class="table table-bordered table-hover align-middle text-center">
       <thead class="table-primary">
         <tr>
           <th>اليوم</th>
@@ -83,9 +147,11 @@
           <td>{{ schedule.endTime }}</td>
           <td>{{ schedule.slotDuration }}</td>
           <td>
-           
-            <button class="btn btn-delete"  (click)="deleteSchedule(schedule.id)">
-             حذف
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/doctor-schedules-details', getDoctorId(schedule), getNextDateForDay(schedule.dayOfWeek)]">
+              <i class="fa fa-eye"></i> 
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+              <i class="fa fa-trash"></i> 
             </button>
           </td>
         </tr>

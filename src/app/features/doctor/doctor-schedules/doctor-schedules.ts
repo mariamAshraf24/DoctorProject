@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Doctor } from '../../../core/models/IDoctor';
+// import { Doctor } from './../../app/core/models/Doctor';
+// import { IDoctorSchedules } from '../../app/core/models/doctor-schedules.';
+// import { DoctorSchedulesService } from '../../app/core/services/doctor-schedules';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { inject } from '@angular/core';
@@ -24,6 +26,9 @@ export class DoctorSchedules implements OnInit {
 // const doctorId = this._authService.getCurrentDoctorId();
 
   DoctorScheduleslist: IDoctorSchedules[] = [];
+  morningSchedules: IDoctorSchedules[] = [];
+  eveningSchedules: IDoctorSchedules[] = [];
+  private dayOrder = [0,1,2,3,4,5,6]; // ترتيب الأيام من الأحد للسبت
   
   // doctorId للطبيب الحالي - يمكن تغييره حسب الطبيب المطلوب
   currentDoctorId: string = this._authService.getCurrentDoctorId();
@@ -92,6 +97,19 @@ export class DoctorSchedules implements OnInit {
     return days[day] ?? day;
   }
 
+  // دالة تتحقق إذا كان هناك تداخل بين فترتين زمنيتين
+  isOverlapping(start1: string, end1: string, start2: string, end2: string): boolean {
+    const toMinutes = (t: string) => {
+      const [h, m] = t.split(":").map(Number);
+      return h * 60 + m;
+    };
+    const s1 = toMinutes(start1);
+    const e1 = toMinutes(end1);
+    const s2 = toMinutes(start2);
+    const e2 = toMinutes(end2);
+    return s1 < e2 && s2 < e1;
+  }
+
   // دالة إضافة جديدة
   addSchedule(): void {
     this.addError = null;
@@ -99,6 +117,17 @@ export class DoctorSchedules implements OnInit {
     // تحقق من صحة البيانات بشكل بسيط
     if (!this.addForm.startTime || !this.addForm.endTime || !this.addForm.slotDurationMinutes || this.addForm.daysOfWeek.length === 0) {
       this.addError = 'يجب ملء جميع الحقول واختيار يوم واحد على الأقل';
+      return;
+    }
+
+    // تحقق أن وقت الانتهاء بعد وقت البدء
+    const start = this.addForm.startTime.split(":").map(Number);
+    const end = this.addForm.endTime.split(":").map(Number);
+    // تحويل الوقت إلى دقائق منذ منتصف الليل
+    const startMinutes = start[0] * 60 + start[1];
+    const endMinutes = end[0] * 60 + end[1];
+    if (endMinutes <= startMinutes) {
+      this.addError = 'يجب أن يكون وقت الانتهاء بعد وقت البدء';
       return;
     }
 
@@ -124,6 +153,17 @@ export class DoctorSchedules implements OnInit {
     // تأكد أن daysOfWeek أرقام
     const daysOfWeek = this.addForm.daysOfWeek.map(day => Number(day));
 
+    // تحقق من عدم وجود تداخل في نفس اليوم
+    for (const day of this.addForm.daysOfWeek) {
+      const sameDaySchedules = this.DoctorScheduleslist.filter((s: IDoctorSchedules) => s.dayOfWeek === day);
+      for (let s of sameDaySchedules) {
+        if (this.isOverlapping(this.addForm.startTime, this.addForm.endTime, s.startTime, s.endTime)) {
+          this.addError = 'يوجد موعد آخر يتقاطع مع هذا الوقت في نفس اليوم!';
+          return;
+        }
+      }
+    }
+
     const payload = {
       startTime: startTime,
       endTime: endTime,
@@ -137,9 +177,7 @@ export class DoctorSchedules implements OnInit {
       next: (res) => {
         console.log('Success response:', res);
         if (res.success) {
-          // الريسبونس فيه data عبارة عن array
-          // نعيد تحميل الجدول من الريسبونس مباشرة
-          this.DoctorScheduleslist = res.data;
+          this.loadSchedules(); // إعادة تحميل المواعيد من السيرفر
           // إعادة تعيين الفورم
           this.addForm = { startTime: '', endTime: '', slotDurationMinutes: 30, daysOfWeek: [] };
         } else {
@@ -169,17 +207,27 @@ export class DoctorSchedules implements OnInit {
   loadSchedules(): void {
     this._doctorSchedulesService.getAllSchedules().subscribe({
       next: (res) => {
-        console.log('Schedules from API:', res.data);
-        if (res.data && res.data.length > 0) {
-          console.log('First schedule structure:', res.data[0]);
-          console.log('Available properties:', Object.keys(res.data[0]));
-        }
+        // ترتيب المواعيد حسب اليوم
+        let sorted = (res.data || []).slice().sort((a: IDoctorSchedules, b: IDoctorSchedules) => {
+          return this.dayOrder.indexOf(a.dayOfWeek) - this.dayOrder.indexOf(b.dayOfWeek);
+        });
+        // تقسيم المواعيد إلى صباحية ومسائية
+        this.morningSchedules = sorted.filter((s: IDoctorSchedules) => this.isMorning(s.startTime));
+        this.eveningSchedules = sorted.filter((s: IDoctorSchedules) => !this.isMorning(s.startTime));
         this.DoctorScheduleslist = res.data;
       },
       error: (err) => {
         console.error('Error fetching doctor schedules:', err);
       }
     });
+  }
+
+  // دالة تحديد إذا كان الموعد صباحي
+  isMorning(time: string): boolean {
+    // يعتبر صباحي إذا كان قبل 12:00
+    if (!time) return true;
+    const hour = +time.split(":")[0];
+    return hour < 12;
   }
 
   // Helper to get date for a schedule (replace with real logic if available)
@@ -221,7 +269,7 @@ export class DoctorSchedules implements OnInit {
       next: (res) => {
         console.log('Schedule deleted successfully:', res);
         // إزالة العنصر من القائمة
-        this.DoctorScheduleslist = this.DoctorScheduleslist.filter(s => s.id !== id);
+        this.loadSchedules(); // إعادة تحميل المواعيد من السيرفر
       },
       error: (err) => {
         console.error('Error deleting schedule:', err);
