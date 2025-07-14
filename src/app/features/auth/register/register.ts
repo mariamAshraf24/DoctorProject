@@ -137,11 +137,12 @@ export class Register implements OnInit {
         if (res.isSuccess && res.token) {
           this._authService.saveToken(res.token);
           this.registerForm.reset();
-          alert('succesful');
-          this._router.navigate(['/doctor/today-appointments']);
-        } else {
-          alert('حدث خطأ أثناء التسجيل');
+          // alert('succesful');
+          this._router.navigate(['/doctor/home']);
         }
+        //  else {
+        //   alert('حدث خطأ أثناء التسجيل');
+        // }
       },
       error: (err: HttpErrorResponse) => {
         console.error(err);
