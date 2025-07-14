@@ -1,323 +1,211 @@
-.zebra-table tbody tr:nth-child(even) {
-  background: #f3eaff;
-}
 
-.zebra-table thead th {
-  background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.1em;
-  border: none;
-}
 
-.doctor-avatar {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 0.25em;
-}
-
-.doctor-circle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2em;
-  height: 2em;
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  color: #fff;
-  border-radius: 50%;
-  font-weight: bold;
-  font-size: 1.1em;
-  box-shadow: 0 2px 8px #e0c3fc55;
-}
-
-.btn-action-table.btn-circle {
-  width: 2.2em;
-  height: 2.2em;
-  padding: 0;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  border: 2px solid #a18cd1;
-  color: #7b2ff2;
-  transition: box-shadow 0.2s, transform 0.2s, background 0.2s, color 0.2s;
-  font-size: 1.1em;
-}
-.btn-action-table.btn-circle:hover {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  color: #fff;
-  box-shadow: 0 4px 16px #a18cd155;
-  transform: scale(1.08) rotate(-6deg);
-}
-.btn-action-table.btn-circle:active {
-  transform: scale(0.98) rotate(0deg);
-}
-
-.btn-delete-custom {
-  border-color: #f357a8 !important;
-  color: #f357a8 !important;
-}
-.btn-delete-custom:hover {
-  background: linear-gradient(135deg, #f357a8 0%, #7b2ff2 100%) !important;
-  color: #fff !important;
-  border-color: #7b2ff2 !important;
-}
-
-.text-purple {
-  color: #7b2ff2 !important;
-}
-.simple-td:last-child, th.simple-th:last-child {
-  min-width: 110px;
-  max-width: 130px;
-  width: 10%;
-  text-align: center;
-}
-// تحسينات احترافية للجدول والبطاقة والعناصر
-.main-bg {
-  background: linear-gradient(120deg, #f8fafc 60%, #e0c3fc 100%);
-}
-.card {
-  box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
-  border-radius: 2.5rem;
-  border: none;
-  position: relative;
-}
-.section-title-bar {
-  height: 5px;
-  width: 100%;
-  background: linear-gradient(90deg, #7b2ff2 0%, #f357a8 100%);
-  border-radius: 2px;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 2px 8px 0 rgba(123,47,242,0.10);
-}
-.simple-table-container {
-  border-radius: 1.5rem;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
-}
-.simple-table thead th, .simple-th {
-  background: #7b2ff2;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.08em;
-  border: none;
-  box-shadow: 0 2px 8px 0 rgba(123,47,242,0.07);
-}
-.simple-table tbody tr.simple-row {
-  transition: box-shadow 0.18s, background 0.18s;
-}
-.simple-table tbody tr.simple-row:hover {
-  background: linear-gradient(90deg, #f8fafc 80%, #e0c3fc 100%);
-  box-shadow: 0 2px 12px 0 rgba(123,47,242,0.07);
-}
-.simple-table .simple-td {
-  background: transparent;
-  border: none;
-}
-.badge-simple {
-  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-  color: #7b2ff2;
-  font-weight: 600;
-  font-size: 1em;
-  box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-  border: 1.5px solid #e0c3fc;
-}
-.input-group:focus-within {
-  box-shadow: 0 0 0 3px #e0c3fc;
-  border-radius: 2rem;
-}
-.btn-action-table {
-  transition: box-shadow 0.18s, transform 0.18s;
-}
-.btn-action-table:hover, .btn-action-table:focus {
-  box-shadow: 0 4px 16px 0 rgba(123,47,242,0.13);
-  transform: scale(1.09);
-}
-// زر إضافة تخصص - تأثير هوفر مميز
-.btn-gradient:hover, .btn-gradient:focus {
-  box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-  transform: scale(1.045);
-  border: 1.5px solid #f357a8;
-}
-.btn-gradient i {
-  transition: transform 0.3s cubic-bezier(.4,2,.6,1.2);
-}
-.btn-gradient:hover i, .btn-gradient:focus i {
-  transform: scale(1.18);
-}
-// زر مسح الفلاتر المميز
-.btn-clear-filters {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  color: #fff;
-  border: 1.5px solid rgba(123,47,242,0.13);
-  font-weight: 600;
-  font-size: 1.1em;
-  box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-  transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-  position: relative;
+/* Table Styling */
+.table {
+  border-radius: 8px;
   overflow: hidden;
 }
-.btn-clear-filters:hover, .btn-clear-filters:focus {
-  box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-  transform: scale(1.045);
-  border: 1.5px solid #f357a8;
+
+.table thead th {
+  background-color: #633c84;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #633c84;
 }
-.btn-clear-filters i {
-  transition: transform 0.3s cubic-bezier(.4,2,.6,1.2);
+
+.table tbody tr {
+  transition: #633c84 0.2s ease;
 }
-.btn-clear-filters:hover i, .btn-clear-filters:focus i {
-  transform: scale(1.18);
+
+.table tbody tr:hover {
+  background-color:#633c84;
 }
-.btn-delete-custom {
+
+/* Badge Styling */
+.badge {
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+  background-color: #eee;
+  color: #633c84 ;
+  border: 1px solid #633c84;
+}
+
+/* Buttons */
+.btn-outline-primary {
+  border-color: #633c84;
+  color:#633c84;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color:#633c84;
+  color: white;
+}
+
+.btn-outline-secondary {
+  border-color:#633c84;
+  color:#633c84;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: #633c84;
+  color:white;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #633c84;
+  border-color: #633c84;
+}
+.btn-primary:hover {
+  background-color: white;
+  color: #633c84;
+  border-color: #633c84;
+}
+
+// .btn-primary:hover,
+// .btn-primary:focus {
+//   background-color: var(--primary-hover);
+//   border-color: var(--primary-hover);
+// }
+
+/* Modal Styling */
+.modal-header,
+.modal-footer {
+  border-color: #633c84;
+}
+
+.modal-title {
+  color: #633c84;
+  font-weight: 300;
+}
+
+/* Toast Notification */
+.toast-body {
+  font-weight: 500;
+}
+
+.toast.text-bg-success {
+  background: linear-gradient(45deg, #633c84, #8c59a9) !important;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(99, 60, 132, 0.3);
+}
+
+
+/* Input Styling */
+input.form-control:focus {
+  border-color: #633c84;
+  box-shadow: 0 0 0 0.2rem rgba(99, 60, 132, 0.25);
+  width: 500px;
+}
+input.form-control {
+  border-color: #633c84;
+  
+}
+
+
+/* Empty State */
+.text-muted a.text-primary {
+  color: #633c84 !important;
+  text-decoration: underline;
+}
+.btn-close.custom-close {
+  filter: invert(25%) sepia(43%) saturate(717%) hue-rotate(234deg) brightness(94%) contrast(92%);
+}
+/* مودال */
+.modal-content {
+  border: 2px solid #633c84;
+  border-radius: 16px;
   background: #fff;
-  color: #dc3545;
-  border: 1px solid #f1d5db;
-  font-weight: 700;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 rgba(220, 53, 69, 0.08);
+  box-shadow: 0 6px 24px rgba(99, 60, 132, 0.25);
+  direction: rtl;
 }
-.btn-delete-custom:hover, .btn-delete-custom:focus {
-  background: #f8d7da;
-  color: #dc3545;
-  box-shadow: 0 4px 16px 0 rgba(220, 53, 69, 0.15);
+
+/* الهيدر */
+.modal-header {
+  background-color: #633c84 ;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+  color: white;
 }
-.btn-delete-custom i {
-  color: #dc3545 !important;
-  font-weight: bold;
+
+.modal-title {
+  font-weight: 600;
+  color:white;
+  font-size: 1.25rem;
 }
-.simple-td.doctors-cell {
-  min-width: 260px;
-  max-width: 340px;
-  width: 28%;
-  white-space: normal;
+
+/* زر X */
+.btn-close.custom-close {
+  filter: invert(25%) sepia(43%) saturate(717%) hue-rotate(234deg) brightness(94%) contrast(92%);
+  margin-left: 1rem;
 }
-.doctors-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 0.7rem;
+
+/* البودي */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* الإدخال */
+input.form-control {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+input.form-control:focus {
+  border-color: #633c84;
+  box-shadow: 0 0 0 0.15rem rgba(99, 60, 132, 0.25);
+}
+
+/* الفوتر */
+.modal-footer {
+  border-top: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+  background-color: #fafafa;
   justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-}
-.doctor-list-name {
-  display: inline-flex;
-  align-items: center;
-  color: #7b2ff2;
-  font-weight: 700;
-  font-size: 1em;
-  margin-bottom: 4px;
-  margin-inline-end: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.simple-td.name-cell {
-  color: #7b2ff2;
-  font-weight: 700;
-}
-// --- Simple Table Styles ---
-.simple-table-container {
-  background: none;
-  display: flex;
-  justify-content: center;
-}
-.simple-table {
-  min-width: 800px;
-  max-width: 98vw;
-  width: 100%;
-  border-radius: 1.2rem;
-  overflow: hidden;
-  background: #fff;
-  border-collapse: separate;
-  border-spacing: 0;
-  box-shadow: 0 2px 10px 0 rgba(80, 80, 120, 0.06);
-  margin: 0 auto;
-  transition: width 0.2s;
 }
 
-@media (max-width: 900px) {
-  .simple-table {
-    min-width: 400px;
-    font-size: 0.97em;
-  }
-  .simple-th, .simple-td {
-    padding-left: 0.3rem;
-    padding-right: 0.3rem;
-    font-size: 0.97em;
-  }
+.modal-footer .btn {
+  min-width: 100px;
 }
 
-@media (max-width: 600px) {
-  .simple-table {
-    min-width: 320px;
-    font-size: 0.93em;
-  }
-  .simple-th, .simple-td {
-    padding-left: 0.15rem;
-    padding-right: 0.15rem;
-    font-size: 0.93em;
-  }
-  .doctors-list {
+.modal-footer .btn-primary {
+  background-color: #633c84;
+  border-color: #633c84;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #fff;
+  color: #633c84;
+  border: 1px solid #633c84;
+}
+
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .d-flex.justify-content-between.align-items-center.mb-4 {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
   }
-  .doctor-list-name {
-    margin-inline-end: 0;
-    margin-bottom: 2px;
+
+  .d-flex.gap-2 {
+    width: 100%;
+    flex-wrap: wrap;
   }
+
+  // .input-group {
+  //   width: 100% !important;
+  // }
 }
-.simple-th {
-  background: #f5f6fa;
-  color: #7b2ff2;
-  font-weight: 700;
-  font-size: 1.05rem;
-  padding: 0.85rem 0.5rem;
-  border: none;
-  text-align: center;
-  letter-spacing: 0.5px;
-}
-.simple-row {
-  border-radius: 0.7rem;
-  transition: background 0.18s;
-}
-.simple-row:nth-child(even) {
-  background: #f8f9fb;
-}
-.simple-row:hover {
-  background: #e9f0fa;
-}
-.simple-td {
-  padding: 0.7rem 0.5rem;
-  border: none;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 1.01em;
-  color: #2d2d2d;
-}
-.doctor-badge-simple {
-  background: #f0f4fa;
-  color: #2b4c6f;
-  border-radius: 1.2rem;
-  padding: 0.3em 0.9em;
-  font-weight: 500;
-  font-size: 0.97em;
-  display: flex;
-  align-items: center;
-  gap: 0.3em;
-  border: 1px solid #e0e7ef;
-}
-.doctor-badge-simple .doctor-name {
-  font-weight: 600;
-  color: #2b4c6f;
-}
-.badge-simple {
-  background: #f5f6fa;
-  color: #7b2ff2;
-  font-weight: 700;
-  font-size: 1em;
-  border: 1px solid #e0e7ef;
-}
-// --- End Simple Table Styles ---

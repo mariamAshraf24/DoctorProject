@@ -55,7 +55,9 @@
 
     &.today {
       position: relative;
+      
 
+      
       &::after {
         content: "اليوم";
         position: absolute;

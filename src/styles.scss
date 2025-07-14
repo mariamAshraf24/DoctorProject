@@ -16,7 +16,9 @@ body {
   --text-color: #000000;
   --primary-color: hsl(217, 91%, 60%);
 }
-
+* {
+  font-family: 'Cairo', sans-serif;
+}
 body {
   font-family: 'Cairo', sans-serif;
   margin: 0;

@@ -14,10 +14,10 @@
 
           <div class="col-md-6 register-form-section p-4" style="background-color: #f9fafb;">
             <h3 class="text-center mb-3"
-              style="color: hsl(272 87% 67%); text-shadow: 0 2px 4px rgba(147, 51, 234, 0.1);">
+              style="color:#633c84; text-shadow: 0 2px 4px rgba(147, 51, 234, 0.1);">
               تسجيل دكتور جديد
             </h3>
-            <p class="text-center mb-4" style="color: #6b7280; font-size: 0.9rem;">
+            <p class="text-center mb-4" style="color:black; font-size: 0.9rem;">
               انضم إلينا اليوم وابدأ رحلتك في تقديم الرعاية الصحية
             </p>
 
@@ -237,7 +237,7 @@
                       <button type="button" class="btn male-button flex-grow-1 align-items-center py-2"
                         [class.active]="registerForm.get('gender')?.value === 0"
                         (click)="registerForm.get('gender')?.setValue(0)">
-                        <i class="fa-solid fa-person m-1 fa-xl" style="color: #3b82f6"></i>
+                        <i class="fa-solid fa-person m-1 fa-xl" style="color: black"></i>
                         <span>ذكر</span>
                       </button>
 
@@ -245,7 +245,7 @@
                       <button type="button" class="btn female-button flex-grow-1 align-items-center py-2"
                         [class.active]="registerForm.get('gender')?.value === 1"
                         (click)="registerForm.get('gender')?.setValue(1)">
-                        <i class="fa-solid fa-person-dress m-1 fa-xl" style="color: #b197fc"></i>
+                        <i class="fa-solid fa-person-dress m-1 fa-xl" style="color: #633c84"></i>
                         <span class="mb-2">أنثى</span>
                       </button>
                     </div>
@@ -270,7 +270,7 @@
             <p class="text-center mt-4">
               <span style="color: #6b7280;">هل لديك حساب بالفعل؟</span>
               <a class="text-decoration-none ms-1 fw-bold" routerLink="/login"
-                style="color: hsl(272 87% 67%); transition: all 0.3s ease;"
+                style="color: #633c84; transition: all 0.3s ease;"
                 onmouseover="this.style.textShadow='0 0 8px rgba(147, 51, 234, 0.4)'"
                 onmouseout="this.style.textShadow='none'">
                 تسجيل الدخول
