@@ -15,16 +15,32 @@
   </div>
 </div>
 
+<!-- Admin Header -->
+<nav class="admin-header py-2 px-4 sticky-top">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <div class="logo-wrapper">
+          <img src="/images/nazzemLogo.png" alt="logo" height="55" class="logo-image">
+        </div>
+      </div>
+      <button class="btn btn-outline-danger custom-logout-btn d-flex align-items-center gap-2" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>تسجيل الخروج</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
 <!-- Main Dashboard -->
-<div class="main-bg" style="min-height:100vh; background: #f8f9fa;">
+<div class="main-bg" style="min-height:calc(100vh - 72px); background: #f8f9fa;">
   <div class="container-fluid py-4">
     <div class="card shadow-sm border-0 rounded-3 bg-white">
       <div class="card-body p-4">
         <!-- Header Section -->
         <div class="d-flex justify-content-between align-items-center mb-4">
           <div>
-            <h2 class="fw-bold mb-0" style="color: #633c84;">التخصصات
-              الطبيه</h2>
+            <h2 class="fw-bold mb-0" style="color: #633c84;">التخصصات الطبيه</h2>
           </div>
           <div class="d-flex gap-5">
             <div class="input-group" style="width: 600px;">
@@ -61,10 +77,8 @@
                 </td>
                 <td>
                   <div class="d-flex flex-wrap gap-2">
-                    <ng-container
-                      *ngIf="specialization.doctors && specialization.doctors.length; else noDoctors">
-                      <span *ngFor="let doctor of specialization.doctors"
-                        class="badge bg-light text-dark">
+                    <ng-container *ngIf="specialization.doctors && specialization.doctors.length; else noDoctors">
+                      <span *ngFor="let doctor of specialization.doctors" class="badge bg-light text-dark">
                         {{ doctor.name }}
                       </span>
                     </ng-container>

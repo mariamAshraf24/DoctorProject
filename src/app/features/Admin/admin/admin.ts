@@ -3,7 +3,8 @@ import { Admin } from '../../../core/services/admin';
 import { IAdmin } from '../../../core/models/IAdmin';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { Auth } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './admin.scss'
 })
 export class AdminComponent implements OnInit {
+  private readonly _authService = inject(Auth);
+  private readonly _router = inject(Router);
+
+  // دالة تسجيل الخروج
+  logout(): void {
+    this._authService.logout();
+    this._router.navigate(['/login']);
+  }
+
   // فتح مودال التعديل مع تعبئة البيانات
   openEditModal(s: IAdmin): void {
     this.editSpecializationData = { ...s };

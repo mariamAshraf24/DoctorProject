@@ -18,6 +18,11 @@ export class Auth {
     return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/login`, data);
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+  }
+  
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
