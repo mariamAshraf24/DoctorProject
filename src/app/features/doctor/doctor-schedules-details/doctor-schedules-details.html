@@ -1,4 +1,4 @@
-@if(loading){
+<!-- @if(loading){
 <div class="d-flex align-items-center justify-content-center" style="min-height: 90vh;">
     <div class="text-center">
         <div class="spinner-border text-primary" role="status">
@@ -27,7 +27,7 @@
                     </div>
                     <div>
                         <h2 class="fw-bold mb-1 text-white" style="font-size:1.35rem;">مواعيد اليوم</h2>
-                        <!-- <span class="badge bg-white text-primary-emphasis fs-6 px-3 py-2 shadow-sm">تفاصيل المواعيد</span> -->
+                        <span class="badge bg-white text-primary-emphasis fs-6 px-3 py-2 shadow-sm">تفاصيل المواعيد</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,6 @@
                 <h5 class="mb-3 text-secondary fw-semibold"><i class="fa fa-clock text-info me-2"></i>المواعيد المتاحة
                 </h5>
 
-                <!-- عرض التاريخ -->
                 <div class="mb-4 text-center">
                     <div class="date-display">
                         <span class="badge doctor-badge-simple px-4 py-3 rounded-pill d-flex align-items-center gap-3 mb-3">
@@ -46,7 +45,6 @@
                     <p class="text-muted mb-4">عدد المواعيد المتاحة: {{ schedulesList.length }}</p>
                 </div>
 
-                                <!-- قائمة المواعيد -->
                 <div class="row g-3">
                     @for (schedule of schedulesList; track schedule.slotTime) {
                         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -56,11 +54,11 @@
                                         <i class="fa fa-clock fa-3x"></i>
                                     </div>
                                     <h5 class="card-title fw-bold mb-2">{{ schedule.slotTime }}</h5>
-                                    <!-- <div class="schedule-status">
+                                    <div class="schedule-status">
                                         <span class="badge px-3 py-2 rounded-pill">
                                             <i class="fa fa-check-circle me-1"></i>متاح
                                         </span>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,4 +87,4 @@
             </button>
         </div>
     </div>
-}
+} -->

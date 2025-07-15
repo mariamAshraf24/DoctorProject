@@ -1,7 +1,5 @@
 <div class="calendar-container" dir="rtl">
-  <!-- Main Content -->
   <div class="calendar-content">
-    <!-- Side Calendar -->
     <div class="side-calendar">
       <div class="calendar-card">
         <mat-calendar
@@ -15,7 +13,6 @@
       </div>
     </div>
 
-    <!-- Main Calendar View -->
     <div class="main-calendar-view">
       @if (loading) {
       <div class="loading-overlay">
@@ -40,7 +37,6 @@
       </div>
       } @else {
       <div class="week-view-container">
-        <!-- Header -->
         <div class="week-header">
           <div class="header-content">
             <button mat-icon-button class="nav-button" (click)="previousWeek()">
@@ -53,27 +49,13 @@
           </div>
         </div>
 
-        <!-- Week Days -->
         <div class="week-days-grid">
           @for (day of weekDays; track day.date) {
           <div class="day-column" [class.today]="isToday(day.date)">
             <div class="day-header">
               <div class="day-title">
                 <h4>{{ day.date | date : "d" }} {{ day.dayName }}</h4>
-                <!-- <p class="date-number">{{ day.date | date : "d" }}</p> -->
               </div>
-              <!-- <div class="day-actions">
-                <button mat-icon-button class="action-button cancel" 
-                      (click)="cancelAppointments(formatDateToApiString(day.date))"
-                      matTooltip="إلغاء مواعيد اليوم">
-                      <mat-icon>cancel</mat-icon>
-                </button>
-                <button mat-icon-button class="action-button delay"
-                      (click)="openDelayInput(formatDateToApiString(day.date))"
-                      matTooltip="تأجيل مواعيد اليوم">
-                      <mat-icon>schedule</mat-icon>
-                </button>
-              </div> -->
               <div class="day-actions">
                 <button
                   mat-icon-button
@@ -86,16 +68,14 @@
                 <mat-menu #dayMenu="matMenu">
                   <button
                     mat-menu-item
-                    (click)="openDelayInput(formatDateToApiString(day.date))"
+                    (click)="openDelayInput(day.dateString)"
                   >
                     <mat-icon>schedule</mat-icon>
                     <span>تأجيل المواعيد</span>
                   </button>
                   <button
                     mat-menu-item
-                    (click)="
-                      cancelAppointments(formatDateToApiString(day.date))
-                    "
+                    (click)="openCancelModal(day.dateString)"
                   >
                     <mat-icon>cancel</mat-icon>
                     <span>إلغاء المواعيد</span>
@@ -104,7 +84,6 @@
               </div>
             </div>
 
-            <!-- Appointments -->
             <div class="appointments-container">
               @if (day.appointments.length > 0) { @for (appointment of
               day.appointments; track appointment.id) {
@@ -112,25 +91,15 @@
                 class="appointment-card"
                 [class]="'status-' + appointment.status"
               >
-                <div class="appointment-time-badge mb-2">
+                <div class="appointment-time-badge">
                   {{ appointment.startTime | slice : 0 : 5 }}
                 </div>
                 <div class="appointment-details">
-                  <h4 class="patient-name mb-2 mt-4">
+                  <h4 class="patient-name">
                     {{ appointment.patientFullName }}
                   </h4>
-                  <!-- @if (appointment.phone) {
-                    <p class="patient-phone mb-2 mt-4">
-                      <mat-icon class="detail-icon">phone</mat-icon>
-                      {{ appointment.phone }}
-                    </p>
-                    } -->
-                  <!-- <p class="patient-id">
-                      <mat-icon class="detail-icon">badge</mat-icon>
-                      {{ appointment.patientId.slice(0, 6) }}...
-                    </p> -->
                 </div>
-                <div class="appointment-status mb-2 mt-4">
+                <div class="appointment-status">
                   {{ getStatusText(appointment.status) }}
                 </div>
               </div>
@@ -149,36 +118,80 @@
     </div>
   </div>
 
-  <!-- Delay Modal -->
-  @if (delayInputVisible) {
-  <div class="modal-overlay" (click)="delayInputVisible = false">
+  <!-- Modal Overlay -->
+  <div
+    class="modal-overlay"
+    [class.visible]="delayInputVisible || cancelConfirmVisible"
+  >
+    @if (delayInputVisible) {
     <div class="modal-container" (click)="$event.stopPropagation()">
       <button class="modal-close" (click)="delayInputVisible = false">
         <mat-icon>close</mat-icon>
       </button>
-      <div class="modal-header">
-        <h3>تأجيل المواعيد</h3>
-        <p>لليوم: {{ selectedDayForDelay | date : "fullDate" : "" : "ar" }}</p>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="delayMinutes">مدة التأخير (دقائق)</label>
-          <input
-            id="delayMinutes"
-            type="number"
-            class="form-control"
-            [(ngModel)]="delayDuration"
-            placeholder="أدخل عدد الدقائق"
-          />
-          <div class="input-icon">
-            <mat-icon>timer</mat-icon>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button mat-button (click)="delayInputVisible = false">إلغاء</button>
+      <h3>تأجيل المواعيد</h3>
+      <p>لليوم: {{ selectedDayForDelay | date : "fullDate" : "" : "ar" }}</p>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>مدة التأخير (دقائق)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="delayDuration"
+          placeholder="أدخل عدد الدقائق"
+        />
+      </mat-form-field>
+
+      <div class="modal-actions">
+        <button mat-stroked-button (click)="delayInputVisible = false">
+          إلغاء
+        </button>
         <button mat-flat-button color="primary" (click)="submitDelayDuration()">
-          تأكيد التأجيل
+          تأكيد
+        </button>
+      </div>
+    </div>
+    } @if (cancelConfirmVisible) {
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="cancelConfirmVisible = false">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h3>تأكيد الإلغاء</h3>
+      <p>
+        هل تريد إلغاء مواعيد يوم
+        {{ selectedDayForCancel | date : "fullDate" : "" : "ar" }}؟
+      </p>
+
+      <div class="modal-actions">
+        <button mat-stroked-button (click)="cancelConfirmVisible = false">
+          تراجع
+        </button>
+        <button mat-flat-button color="warn" (click)="confirmCancel()">
+          تأكيد الإلغاء
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+  <!-- Message Modal -->
+  @if (showModal) {
+  <div class="modal-overlay visible">
+    <div
+      class="modal-container message-modal"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-icon">
+        @if (modalType === 'success') {
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        } @else if (modalType === 'error') {
+        <mat-icon class="error-icon">error</mat-icon>
+        } @else {
+        <mat-icon class="info-icon">info</mat-icon>
+        }
+      </div>
+      <h3>{{ modalMessage }}</h3>
+      <div class="modal-actions">
+        <button mat-flat-button color="primary" (click)="closeMessageModal()">
+          موافق
         </button>
       </div>
     </div>

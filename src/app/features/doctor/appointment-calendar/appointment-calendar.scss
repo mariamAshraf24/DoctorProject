@@ -1,4 +1,3 @@
-// Color Variables
 $primary: #6b3ec9;
 $secondary: #9c7cf0;
 $accent: #8b5cf6;
@@ -41,6 +40,17 @@ $warning: #f39c12;
           .mat-calendar-body-cell-content {
             border-radius: 50%;
           }
+
+          .mat-calendar-body-today {
+        background-color: rgb(99, 60, 132);
+        // color: rgb(99, 60, 132);
+        // font-weight: bold;
+      }
+
+      .mat-calendar-body-selected {
+        background-color: #f39c12 !important;
+        color: white !important;
+      }
         }
       }
     }
@@ -127,6 +137,7 @@ $warning: #f39c12;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             transition: all 0.3s ease;
+            height: 750px;
             
             &:hover {
               transform: translateY(-3px);
@@ -179,7 +190,8 @@ $warning: #f39c12;
             
             .appointments-container {
               padding: 10px;
-              height: calc(100% - 60px);
+              // height: calc(100% - 60px);
+               max-height: 750px;
               overflow-y: auto;
               
               .no-appointments {
@@ -202,7 +214,7 @@ $warning: #f39c12;
               }
               
               .appointment-card {
-                background: white;
+                background: #f0e1fbeb;
                 border-radius: 8px;
                 padding: 12px;
                 margin-bottom: 10px;
@@ -220,7 +232,7 @@ $warning: #f39c12;
                   color: $primary;
                   padding: 2px 8px;
                   border-radius: 12px;
-                  font-size: 0.8rem;
+                  font-size: 1rem;
                   font-weight: 500;
                   display: inline-block;
                 }
@@ -235,7 +247,7 @@ $warning: #f39c12;
                 }
                 
                 .appointment-status {
-                  font-size: 0.7rem;
+                  font-size: 0.9rem;
                   padding: 2px 8px;
                   border-radius: 12px;
                   display: inline-block;
@@ -267,93 +279,110 @@ $warning: #f39c12;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
     
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
     .modal-container {
       background: white;
       border-radius: 12px;
-      width: 100%;
+      width: 90%;
       max-width: 400px;
-      overflow: hidden;
+      padding: 24px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      position: relative;
+      
+      .modal-overlay.visible & {
+        transform: translateY(0);
+      }
       
       .modal-close {
         position: absolute;
-        top: 10px;
-        left: 10px;
+        top: 15px;
+        left: 15px;
         background: transparent;
         border: none;
         color: #999;
         cursor: pointer;
+        font-size: 1.5rem;
         
         &:hover {
           color: $danger;
         }
       }
       
-      .modal-header {
-        padding: 20px;
-        background: $primary;
-        color: white;
-        
-        h3 {
-          margin: 0;
-          font-size: 1.2rem;
-        }
-        
-        p {
-          margin: 5px 0 0;
-          font-size: 0.9rem;
-          opacity: 0.9;
-        }
+      h3 {
+        margin-top: 0;
+        color: $primary;
+        font-size: 1.3rem;
+        text-align: center;
       }
       
-      .modal-body {
-        padding: 20px;
-        
-        .form-group {
-          position: relative;
-          margin-bottom: 20px;
-          
-          label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: $dark-text;
-          }
-          
-          .form-control {
-            width: 100%;
-            padding: 12px 40px 12px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-            
-            &:focus {
-              outline: none;
-              border-color: $primary;
-              box-shadow: 0 0 0 2px rgba($primary, 0.2);
-            }
-          }
-          
-          .input-icon {
-            position: absolute;
-            left: 12px;
-            top: 40px;
-            color: #999;
-          }
-        }
+      p {
+        color: $muted-text;
+        text-align: center;
+        margin-bottom: 20px;
       }
       
-      .modal-footer {
-        padding: 15px 20px;
+      .full-width {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      .modal-actions {
         display: flex;
         justify-content: flex-end;
         gap: 10px;
-        border-top: 1px solid #eee;
+        margin-top: 20px;
+        
+        button {
+          min-width: 100px;
+        }
       }
     }
   }
+  .message-modal {
+  text-align: center;
+  padding: 30px;
+  max-width: 350px;
+
+  .modal-icon {
+    font-size: 60px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+
+    .success-icon {
+      color: $success;
+    }
+
+    .error-icon {
+      color: $danger;
+    }
+
+    .info-icon {
+      color: $primary;
+    }
+  }
+
+  h3 {
+    white-space: pre-line;
+    margin-bottom: 25px;
+    color: $dark-text;
+    font-size: 1.1rem;
+  }
+
+  .modal-actions {
+    justify-content: center;
+  }
+}
 }
 
 // Responsive Adjustments
@@ -362,7 +391,7 @@ $warning: #f39c12;
     flex-direction: column;
     
     .side-calendar {
-      width: 100% !important;
+      width: 100%;
       margin-bottom: 20px;
     }
   }
@@ -370,7 +399,7 @@ $warning: #f39c12;
 
 @media (max-width: 768px) {
   .week-days-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
     
     .day-column {
       margin-bottom: 20px;
@@ -378,6 +407,6 @@ $warning: #f39c12;
   }
   
   .calendar-container {
-    padding: 10px !important;
+    padding: 10px;
   }
 }

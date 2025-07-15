@@ -3,12 +3,11 @@ import { Auth } from './../../../core/services/auth';
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -43,7 +42,7 @@ export class Login implements OnInit {
 
         if (res.isSuccess && res.token) {
           this._authService.saveToken(res.token);
-          alert('تم التسجيل بنجاح!');
+          // alert('تم التسجيل بنجاح!');
           this.loginForm.reset();
 
 
@@ -63,13 +62,14 @@ export class Login implements OnInit {
           // setTimeout(() => {
           //   this._Router.navigate(['/home']);
           // }, 1000)
-        } else {
-          alert('حدث خطأ أثناء التسجيل');
-        }
+        } 
+        // else {
+        //   alert('حدث خطأ أثناء التسجيل');
+        // }
       },
       error: (err: HttpErrorResponse) => {
         console.error(err);
-        alert('حدث خطأ أثناء التسجيل');
+        // alert('حدث خطأ أثناء التسجيل');
       }
     });
   }

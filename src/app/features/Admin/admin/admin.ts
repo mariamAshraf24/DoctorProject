@@ -3,12 +3,11 @@ import { Admin } from '../../../core/services/admin';
 import { IAdmin } from '../../../core/models/IAdmin';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule],
   templateUrl: './admin.html',
   styleUrl: './admin.scss'
 })

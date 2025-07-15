@@ -13,7 +13,6 @@ import { UpdateProfile } from './features/doctor/update-profile/update-profile';
 import { AppointmentCalendar } from './features/doctor/appointment-calendar/appointment-calendar';
 import { Home } from './features/doctor/home/home';
 import { DoctorReport } from './features/doctor/doctor-report/doctor-report';
-import { DoctorSchedulesDetails } from './features/doctor/doctor-schedules-details/doctor-schedules-details';
 import { DoctorSchedules } from './features/doctor/doctor-schedules/doctor-schedules';
 
 import { NotFound } from './features/not-found/not-found';
@@ -38,10 +37,6 @@ export const routes: Routes = [
       { path: 'appointment-calendar', component: AppointmentCalendar },
       { path: 'doctor-report', component: DoctorReport },
       { path: 'doctor-schedules', component: DoctorSchedules },
-      {
-        path: 'doctor-schedules-details/:doctorId/:date',
-        component: DoctorSchedulesDetails,
-      },
     ],
   },
   {

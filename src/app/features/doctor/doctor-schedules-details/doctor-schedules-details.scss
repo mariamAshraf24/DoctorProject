@@ -1,244 +1,244 @@
-.schedule-card {
-  transition: all 0.3s ease;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
+// .schedule-card {
+//   transition: all 0.3s ease;
+//   border-radius: 15px;
+//   overflow: hidden;
+//   box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
   
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(123,47,242,0.15) !important;
-  }
+//   &:hover {
+//     transform: translateY(-5px);
+//     box-shadow: 0 10px 25px rgba(123,47,242,0.15) !important;
+//   }
   
-  .card-body {
-    background: #fff;
-  }
+//   .card-body {
+//     background: #fff;
+//   }
   
-  .time-icon {
-    position: relative;
+//   .time-icon {
+//     position: relative;
     
-    i {
-      color: #7b2ff2;
-      transition: all 0.3s ease;
-    }
+//     i {
+//       color: #7b2ff2;
+//       transition: all 0.3s ease;
+//     }
     
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: rgba(123, 47, 242, 0.1);
-      border-radius: 50%;
-      z-index: -1;
-    }
+//     &::after {
+//       content: '';
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       width: 60px;
+//       height: 60px;
+//       background: rgba(123, 47, 242, 0.1);
+//       border-radius: 50%;
+//       z-index: -1;
+//     }
     
-    &:hover i {
-      transform: scale(1.1);
-      color: #f357a8;
-    }
-  }
+//     &:hover i {
+//       transform: scale(1.1);
+//       color: #f357a8;
+//     }
+//   }
   
-  .card-title {
-    color: #7b2ff2 !important;
-    font-weight: 700;
-  }
+//   .card-title {
+//     color: #7b2ff2 !important;
+//     font-weight: 700;
+//   }
   
-  .schedule-status {
-    .badge {
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-      background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-      color: #7b2ff2;
-      box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-      border: 1.5px solid #e0c3fc;
+//   .schedule-status {
+//     .badge {
+//       font-size: 0.85rem;
+//       font-weight: 600;
+//       border: 2px solid transparent;
+//       transition: all 0.3s ease;
+//       background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
+//       color: #7b2ff2;
+//       box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
+//       border: 1.5px solid #e0c3fc;
       
-      &:hover {
-        border-color: #7b2ff2;
-        transform: scale(1.05);
-        box-shadow: 0 4px 16px 0 rgba(123,47,242,0.13);
-      }
+//       &:hover {
+//         border-color: #7b2ff2;
+//         transform: scale(1.05);
+//         box-shadow: 0 4px 16px 0 rgba(123,47,242,0.13);
+//       }
       
-      i {
-        color: #f357a8;
-      }
-    }
-  }
+//       i {
+//         color: #f357a8;
+//       }
+//     }
+//   }
   
 
-}
+// }
 
-// تحسين تصميم العنوان
-.card {
-  box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
-  border-radius: 2.5rem;
-  border: none;
-  position: relative;
+// // تحسين تصميم العنوان
+// .card {
+//   box-shadow: 0 8px 32px 0 rgba(123,47,242,0.10), 0 1.5px 8px 0 rgba(243,87,168,0.08);
+//   border-radius: 2.5rem;
+//   border: none;
+//   position: relative;
   
-  .p-2 {
-    background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-    position: relative;
-    overflow: hidden;
+//   .p-2 {
+//     background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+//     position: relative;
+//     overflow: hidden;
     
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
-      animation: shimmer 2s infinite;
-    }
-  }
-}
+//     &::before {
+//       content: '';
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       right: 0;
+//       bottom: 0;
+//       background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+//       animation: shimmer 2s infinite;
+//     }
+//   }
+// }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
+// @keyframes shimmer {
+//   0% { transform: translateX(-100%); }
+//   100% { transform: translateX(100%); }
+// }
 
-// تحسين تصميم التاريخ
-.badge.doctor-badge-simple {
-  background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
-  color: #7b2ff2;
-  font-weight: 600;
-  font-size: 1em;
-  box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
-  border: 1.5px solid #e0c3fc;
+// // تحسين تصميم التاريخ
+// .badge.doctor-badge-simple {
+//   background: linear-gradient(90deg, #e0c3fc 0%, #f8fafc 100%);
+//   color: #7b2ff2;
+//   font-weight: 600;
+//   font-size: 1em;
+//   box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
+//   border: 1.5px solid #e0c3fc;
   
-  i {
-    color: #7b2ff2;
-  }
-}
+//   i {
+//     color: #7b2ff2;
+//   }
+// }
 
-// تحسين تصميم زر العودة
-.btn-gradient {
-  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-  color: #fff;
-  border: 1.5px solid rgba(123,47,242,0.13);
-  font-weight: 600;
-  font-size: 1.1em;
-  box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
-  transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
-  position: relative;
-  overflow: hidden;
+// // تحسين تصميم زر العودة
+// .btn-gradient {
+//   background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+//   color: #fff;
+//   border: 1.5px solid rgba(123,47,242,0.13);
+//   font-weight: 600;
+//   font-size: 1.1em;
+//   box-shadow: 0 2px 12px 0 rgba(123, 47, 242, 0.10), 0 1.5px 8px 0 rgba(243, 87, 168, 0.08);
+//   transition: box-shadow 0.25s, transform 0.18s, border 0.18s;
+//   position: relative;
+//   overflow: hidden;
   
-  &:hover, &:focus {
-    box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
-    transform: scale(1.045);
-    border: 1.5px solid #f357a8;
-  }
+//   &:hover, &:focus {
+//     box-shadow: 0 6px 24px 0 rgba(123, 47, 242, 0.18), 0 2.5px 16px 0 rgba(243, 87, 168, 0.13);
+//     transform: scale(1.045);
+//     border: 1.5px solid #f357a8;
+//   }
   
-  i {
-    transition: transform 0.3s cubic-bezier(.4,2,.6,1.2);
-  }
+//   i {
+//     transition: transform 0.3s cubic-bezier(.4,2,.6,1.2);
+//   }
   
-  &:hover i, &:focus i {
-    transform: scale(1.18);
-  }
+//   &:hover i, &:focus i {
+//     transform: scale(1.18);
+//   }
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-  }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: -100%;
+//     width: 100%;
+//     height: 100%;
+//     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+//     transition: left 0.5s;
+//   }
   
-  &:hover::before {
-    left: 100%;
-  }
-}
+//   &:hover::before {
+//     left: 100%;
+//   }
+// }
 
-// تحسين تصميم العناوين
-h5.text-secondary {
-  color: #7b2ff2 !important;
-  font-weight: 700;
+// // تحسين تصميم العناوين
+// h5.text-secondary {
+//   color: #7b2ff2 !important;
+//   font-weight: 700;
   
-  i {
-    color: #f357a8;
-  }
-}
+//   i {
+//     color: #f357a8;
+//   }
+// }
 
-// تحسين ألوان جميع الأيقونات
-.fa-calendar-check {
-  color: #7b2ff2 !important;
-}
+// // تحسين ألوان جميع الأيقونات
+// .fa-calendar-check {
+//   color: #7b2ff2 !important;
+// }
 
-.fa-calendar {
-  color: #7b2ff2 !important;
-}
+// .fa-calendar {
+//   color: #7b2ff2 !important;
+// }
 
-.fa-clock {
-  color: #7b2ff2 !important;
-}
+// .fa-clock {
+//   color: #7b2ff2 !important;
+// }
 
-.fa-arrow-right {
-  color: #fff !important;
-}
+// .fa-arrow-right {
+//   color: #fff !important;
+// }
 
-.fa-exclamation-triangle {
-  color: #dc3545 !important;
-}
+// .fa-exclamation-triangle {
+//   color: #dc3545 !important;
+// }
 
-.fa-calendar-times {
-  color: #6c757d !important;
-}
+// .fa-calendar-times {
+//   color: #6c757d !important;
+// }
 
-.fa-check-circle {
-  color: #f357a8 !important;
-}
+// .fa-check-circle {
+//   color: #f357a8 !important;
+// }
 
-.fa-info-circle {
-  color: #7b2ff2 !important;
-}
+// .fa-info-circle {
+//   color: #7b2ff2 !important;
+// }
 
-// تحسين لون نص عدد المواعيد
-.text-muted {
-  color: #7b2ff2 !important;
-  font-weight: 600;
-}
+// // تحسين لون نص عدد المواعيد
+// .text-muted {
+//   color: #7b2ff2 !important;
+//   font-weight: 600;
+// }
 
-// تأثيرات hover للأيقونات
-.fa-calendar-check:hover,
-.fa-calendar:hover,
-.fa-clock:hover,
-.fa-info-circle:hover {
-  color: #f357a8 !important;
-  transition: color 0.3s ease;
-}
+// // تأثيرات hover للأيقونات
+// .fa-calendar-check:hover,
+// .fa-calendar:hover,
+// .fa-clock:hover,
+// .fa-info-circle:hover {
+//   color: #f357a8 !important;
+//   transition: color 0.3s ease;
+// }
 
-.fa-exclamation-triangle:hover {
-  color: #c82333 !important;
-  transition: color 0.3s ease;
-}
+// .fa-exclamation-triangle:hover {
+//   color: #c82333 !important;
+//   transition: color 0.3s ease;
+// }
 
-.fa-calendar-times:hover {
-  color: #5a6268 !important;
-  transition: color 0.3s ease;
-}
-
-
-.spinner-border {
-  width: 3rem;
-  height: 3rem;
-  color: #7b2ff2;
-}
+// .fa-calendar-times:hover {
+//   color: #5a6268 !important;
+//   transition: color 0.3s ease;
+// }
 
 
-.fa-exclamation-triangle {
-  color: #dc3545;
-  animation: pulse 2s infinite;
-}
+// .spinner-border {
+//   width: 3rem;
+//   height: 3rem;
+//   color: #7b2ff2;
+// }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
+
+// .fa-exclamation-triangle {
+//   color: #dc3545;
+//   animation: pulse 2s infinite;
+// }
+
+// @keyframes pulse {
+//   0%, 100% { opacity: 1; }
+//   50% { opacity: 0.7; }
+// }
