@@ -32,14 +32,14 @@ export class Auth {
   }
 
   forgotPassword(email: string) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email });
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/forgot-password`, { email },{ responseType: 'text' as 'json' });
   
   }
 
   resetPassword(data: { token: string; newPassword: string }) {
-    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data);
+    return this._HttpClient.post(`${environment.apiBaseUrl}/Auth/reset-password`, data,{ responseType: 'text' as 'json' });
   }
-//,{ responseType: 'text' as 'json' }
+
   isAdmin(): boolean {
     return localStorage.getItem('roles') === 'Admin';
   }
