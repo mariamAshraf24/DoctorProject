@@ -23,3 +23,14 @@ html, body {
   background-position: center;
   box-sizing: border-box;
 }
+
+button.add-btn, .add-btn, .add-btn[_ngcontent-ng-c3675662402] {
+  background: #633c84 !important;
+  color: #fff !important;
+  border: 2px solid #7b61ff !important;
+}
+button.add-btn:hover, .add-btn:hover, .add-btn[_ngcontent-ng-c3675662402]:hover {
+  background: linear-gradient(135deg, #7b2ff2 0%, #6c47ff 100%) !important;
+  color: #fff !important;
+  transform: scale(1.07);
+}

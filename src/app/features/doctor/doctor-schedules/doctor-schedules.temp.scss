@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+body, html {
+  font-family: 'Cairo', sans-serif;
+  background: #f5f0ff;
+}
+
+.doctor-schedules-page {
+  min-height: 100vh;
+  padding: 2rem;
+
+  .schedules-container {
+    background: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px 0 rgba(123,97,255,0.10);
+    padding: 2rem;
+    margin-top: 1.5rem;
+
+    .schedule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      h2 {
+        background: linear-gradient(135deg, #2d2350 0%, #7b61ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(123,97,255,0.10);
+      }
+
+      .add-btn {
+        background: linear-gradient(135deg, #7b61ff 0%, #6c47ff 100%);
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 12px 0 rgba(123,97,255,0.13);
+        transition: all 0.25s ease;
+
+        i {
+          font-size: 1.2rem;
+        }
+
+        &:hover {
+          box-shadow: 0 6px 24px 0 rgba(123,97,255,0.18);
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .schedules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+
+      .schedule-card {
+        background: linear-gradient(135deg, #f5f0ff 0%, #fff 100%);
+        border-radius: 1.5rem;
+        box-shadow: 0 2px 12px 0 rgba(123,97,255,0.10);
+        padding: 1.5rem;
+        border: 1.5px solid #e0c3fc;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 24px 0 rgba(123,97,255,0.15);
+          border-color: #7b61ff;
+        }
+
+        .schedule-info {
+          margin-bottom: 1.2rem;
+
+          .day {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #7b61ff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            i {
+              font-size: 1.1rem;
+              color: #6c47ff;
+            }
+          }
+
+          .time {
+            font-size: 1.1rem;
+            color: #2d2350;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+
+            i {
+              color: #7b61ff;
+            }
+          }
+
+          .duration {
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+
+            i {
+              color: #7b61ff;
+            }
+          }
+        }
+
+        .card-actions {
+          display: flex;
+          gap: 1rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid #e0c3fc;
+
+          button {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+
+            i {
+              font-size: 1.1rem;
+            }
+
+            &.edit-btn {
+              background: linear-gradient(135deg, #7b61ff 0%, #6c47ff 100%);
+              color: white;
+              
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(123,97,255,0.2);
+              }
+            }
+
+            &.delete-btn {
+              background: #fff;
+              color: #dc3545;
+              border: 1px solid #ffcdd2;
+              
+              &:hover {
+                background: #ffebee;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(220,53,69,0.1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-schedules {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #7b61ff;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #f5f0ff 0%, #fff 100%);
+    border: 1.5px solid #e0c3fc;
+    border-radius: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 12px 0 rgba(123,97,255,0.10);
+
+    i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #6c47ff;
+    }
+
+    .message {
+      font-weight: 600;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .schedules-container {
+      padding: 1rem;
+
+      .schedule-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .schedules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+
+// Form Styles
+.add-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.25);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-form-card {
+  background: #fff;
+  box-shadow: 0 8px 32px 0 rgba(123,97,255,0.13);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  min-width: 350px;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+
+  .form-title {
+    color: #633c84;
+    font-weight: 800;
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    font-weight: 700;
+    color: #633c84;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    border-radius: 1rem;
+    border: 1.5px solid #e0c3fc;
+    padding: 0.75rem;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+    box-shadow: 0 1.5px 8px 0 rgba(123,47,242,0.08);
+    margin-bottom: 1rem;
+    width: 100%;
+
+    &:focus {
+      border-color: #7b2ff2;
+      box-shadow: 0 0 0 3px #e0c3fc;
+      background: #fff;
+    }
+  }
+
+  .btn-success {
+    background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px 0 rgba(123,47,242,0.18);
+    }
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #e0c3fc;
+    border: 2px solid #fff;
+    color: #7b61ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #7b61ff 0%, #6c47ff 100%);
+      color: #fff;
+      transform: rotate(90deg);
+      box-shadow: 0 6px 20px 0 rgba(123,97,255,0.25);
+    }
+  }
+
+  .days-dropdown {
+    border-radius: 0.75rem;
+    border: 1.5px solid #e0c3fc;
+    background: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 16px 0 rgba(123,47,242,0.10);
+
+    .day-item {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover, &.selected {
+        background: #e0c3fc;
+        color: #633c84;
+      }
+    }
+  }
+}
