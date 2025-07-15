@@ -16,7 +16,7 @@ import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
   selector: 'app-doctor-schedules',
   imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './doctor-schedules.html',
-  styleUrl: './doctor-schedules.scss'
+  styleUrls: ['./doctor-schedules.scss','./doctor-schedules.temp.scss'],
 })
 export class DoctorSchedules implements OnInit {
   private _doctorSchedulesService = inject(DoctorSchedulesService);
