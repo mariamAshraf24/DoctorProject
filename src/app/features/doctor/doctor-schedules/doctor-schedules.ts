@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 import { DoctorSchedulesService } from '../../../core/services/doctor-schedules';
 import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
@@ -14,7 +14,7 @@ import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
 
 @Component({
   selector: 'app-doctor-schedules',
-  imports: [CommonModule, FormsModule,RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './doctor-schedules.html',
   styleUrls: ['./doctor-schedules.scss','./doctor-schedules.temp.scss'],
 })
