@@ -1,17 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
 .register-bg {
   background-image: url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
-  height: 100%;
+  height: auto;
   display: flex;
-  align-items: center;
+  align-items: start; /* تبدأ من فوق */
   justify-content: center;
-  padding: 2rem;
+  padding: 4rem 1rem;
   position: relative;
-
+  overflow-y: auto;
 }
 
 .register-overlay {
@@ -27,6 +34,9 @@
 .container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  font-family: 'Cairo';
 }
 
 .register-card {
@@ -35,8 +45,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  min-height: 600px;
-  height: 90vh;
+  height: auto;
+  width: 100%;
+  min-height: auto;
 }
 
 .register-image {
@@ -45,11 +56,7 @@
   min-width: 300px;
   display: flex;
   align-items: center;
-  /* توسيط عمودي */
   justify-content: center;
-  /* توسيط أفقي */
-  padding: 0;
-  margin: 0;
   overflow: hidden;
   position: relative;
 
@@ -60,34 +67,20 @@
     object-position: center;
     display: block;
     border-radius: 3px;
-    border: 3px solid rgba(255, 255, 255, 0.6);
-    animation: none;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-10px);
-    }
-
-    100% {
-      transform: translateY(0);
-    }
   }
 }
 
 .register-form-section {
   flex: 2;
   background-color: #f9fafb;
+  padding: 2rem;
 }
 
-/* تحسين شكل الـ inputs */
+/* Inputs */
 .form-input {
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid #e0e0e0;
+  border: 1px solid #643c8458;
   padding: 0.6rem 0.9rem;
   border-radius: 10px;
   transition: all 0.3s ease;
@@ -95,127 +88,52 @@
 }
 
 .form-input:focus {
-  border-color: #a78bfa;
+  border-color: #633c84;
   box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
   background-color: #fff;
 }
 
-.gradient-button {
-  background: #6b3ec9;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-}
-
-.gradient-button:hover {
-  background: #9575cd;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(142, 36, 170, 0.3);
-}
-
-
-.form-label {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 0.25rem;
-  display: block;
-  transition: all 0.3s ease;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.6rem 0.75rem;
-  border: 1px solid rgb(233 213 255);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: hsl(272 87% 67%);
-  box-shadow: 0 0 0 3px rgba(156, 136, 255, 0.3);
-  background-color: white;
-}
-
-/* Placeholder styling */
 .placeholder-sm::placeholder {
   font-size: 0.8rem;
   color: #6c757d;
   opacity: 0.8;
 }
 
-/* Error Styling */
-.form-error {
+.form-label {
+  font-size: 0.875rem;
+  color: #633c84;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+/* Error Handling */
+.form-error,
+.invalid-feedback {
   font-size: 0.75rem;
   color: #ef4444;
   margin-top: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
 }
 
 .is-invalid {
   border-color: #dc3545;
 }
 
-.invalid-feedback {
-  color: #dc3545;
-  font-size: 0.875em;
-  margin-top: 0.25rem;
-  display: block;
-}
-
-/* Gender Buttons */
-.female-button {
-  border: 2px solid rgb(229 231 235);
-  background-color: rgb(249 250 251);
-  color: rgb(192 132 252);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border-radius: 8px;
-}
-
-.female-button.active,
-.female-button:hover {
-  border: 2px solid rgb(192 132 252);
-  background-color: rgba(192, 132, 252, 0.1);
-}
-
-.male-button {
-  border: 2px solid rgb(229 231 235);
-  background-color: rgb(249 250 251);
-  color: rgb(59 130 246);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  border-radius: 8px;
-}
-
-.male-button.active,
-.male-button:hover {
-  border: 2px solid rgb(96 165 250);
-  background-color: rgba(59, 130, 246, 0.1);
-}
-
-.female-button:hover:not(.active),
-.male-button:hover:not(.active) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Submit Button */
+/* Buttons */
 .gradient-button {
-  background: linear-gradient(135deg,
-      hsl(272 87% 67%) 0%);
-  transition: all 0.3s ease;
+  background-color:  #633c84;
   border-radius: 8px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border: none;
 }
 
 .gradient-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(149, 68, 224, 0.3);
 }
 
 .gradient-button::after {
@@ -225,10 +143,12 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(to bottom right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.4) 50%,
-      rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   transform: rotate(30deg);
   animation: shimmer 3s infinite;
 }
@@ -243,15 +163,52 @@
   }
 }
 
-/* Specialization select with custom arrow */
+/* Gender Buttons */
+.female-button,
+.male-button {
+  border: 2px solid rgb(229 231 235);
+  background-color: rgb(249 250 251);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.female-button {
+  color: rgb(192 132 252);
+}
+
+.female-button.active,
+.female-button:hover {
+  border-color: rgb(192 132 252);
+  background-color: rgba(192, 132, 252, 0.1);
+}
+
+.male-button {
+  color: black;
+}
+
+.male-button.active,
+.male-button:hover {
+  border-color: rgb(96 165 250);
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.female-button:hover:not(.active),
+.male-button:hover:not(.active) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Select */
 .custom-city-select {
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239C88FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1em;
+  padding-right: 2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .custom-city-select:hover {
@@ -259,31 +216,12 @@
   box-shadow: 0 0 0 2px rgba(156, 136, 255, 0.2);
 }
 
-
-/* Card hover effect */
-.card {
-  border-radius: 15px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-}
-
-.card-header {
-  border-bottom: none;
-}
-
-/* Animation effects */
+/* Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -298,7 +236,25 @@
   animation-name: fadeInUp;
 }
 
-/* Form group spacing */
 .form-group {
   margin-bottom: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-card {
+    flex-direction: column;
+  }
+
+  .register-image {
+    height: 200px;
+  }
+
+  .register-form-section {
+    padding: 1.5rem;
+  }
+
+  .gradient-button {
+    width: 100%;
+  }
 }

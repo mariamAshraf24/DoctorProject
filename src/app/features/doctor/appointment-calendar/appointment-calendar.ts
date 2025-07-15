@@ -97,30 +97,61 @@ export class AppointmentCalendar implements OnInit {
     this.generateWeekDays();
   }
 
+  // generateWeekDays(): void {
+  //   this.weekDays = [];
+  //   const daysOfWeek = [
+  //      'السبت',
+  //   'الأحد',
+  //   'الإثنين',
+  //   'الثلاثاء',
+  //   'الأربعاء',
+  //   'الخميس',
+  //   'الجمعة',
+  //   ];
+
+  //   for (let i = 0; i < 7; i++) {
+  //     const date = new Date(this.currentWeekStart);
+  //     date.setDate(date.getDate() + i);
+
+  //     this.weekDays.push({
+  //       date: date,
+  //       dayName: daysOfWeek[i],
+  //       dateString: this.formatDateToApiString(date),
+  //       appointments: [],
+  //     });
+  //   }
+  // }
   generateWeekDays(): void {
-    this.weekDays = [];
-    const daysOfWeek = [
-       'السبت',
+  this.weekDays = [];
+
+  const daysOfWeek = [
+    'السبت',
     'الأحد',
     'الإثنين',
     'الثلاثاء',
     'الأربعاء',
     'الخميس',
-    'الجمعة',
-    ];
+    'الجمعة'
+  ];
 
-    for (let i = 0; i < 7; i++) {
-      const date = new Date(this.currentWeekStart);
-      date.setDate(date.getDate() + i);
+  const startDate = new Date(this.currentWeekStart);
+  const day = startDate.getDay(); 
 
-      this.weekDays.push({
-        date: date,
-        dayName: daysOfWeek[i],
-        dateString: this.formatDateToApiString(date),
-        appointments: [],
-      });
-    }
+  const diffToSaturday = (day + 1) % 7; 
+  startDate.setDate(startDate.getDate() - diffToSaturday);
+
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + i);
+
+    this.weekDays.push({
+      date: date,
+      dayName: daysOfWeek[i],
+      dateString: this.formatDateToApiString(date),
+      appointments: [],
+    });
   }
+}
   loadAppointmentsForWeek(): void {
     this.loading = true;
     this.error = null;

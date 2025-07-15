@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Doctor } from '../../../core/models/IDoctor';
 import { DoctorService } from '../../../core/services/doctor-service';
+import { Footer } from "../footer/footer";
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Footer],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

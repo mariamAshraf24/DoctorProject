@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
   background-color: #f3e8ff;
 }
 
@@ -40,8 +40,9 @@ body {
 }
 
 .register-card {
+  font-family: 'Cairo';
   width: 100%;
-  height: 65vh; /* تم تصغير الارتفاع هنا */
+  height: 89vh; /* تم تصغير الارتفاع هنا */
   background-color: white;
   border-radius: 20px;
   display: flex;
@@ -120,14 +121,14 @@ body {
 }
 
 .form-input:focus {
-  border-color: #a78bfa;
+  border-color: #633c84;
   box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.3);
   background-color: #fff;
   outline: none;
 }
 
 .gradient-button {
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background-color: #633c84;
   color: white;
   border-radius: 8px;
   font-weight: bold;
@@ -140,7 +141,7 @@ body {
 }
 
 .gradient-button:hover {
-  background: linear-gradient(to right, #a78bfa, #9575cd);
+  background: linear-gradient(to right, #633c84, #9575cd);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(142, 36, 170, 0.3);
 }

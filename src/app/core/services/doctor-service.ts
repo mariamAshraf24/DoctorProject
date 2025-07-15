@@ -37,7 +37,7 @@ export class DoctorService {
 
   updateDoctorProfile(data: any): Observable<any> {
     return this._HttpClient.put(
-      `${environment.apiBaseUrl}/Doctor/edit-doctor-profile`,
+      `${environment.apiBaseUrl}/Doctor/doctor-profile`,
       data
     );
   }
