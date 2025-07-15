@@ -15,11 +15,15 @@ export class Appointments {
     );
   }
 
-  getAppointmentsByDate(date: string): Observable<Appointment[]> {
-    // Format date as YYYY-M-D
-    // const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    return this._HttpClient.get<Appointment[]>(`${environment.apiBaseUrl}/Doctor/AppointmentsByDate?date=${date}`);
+ getAppointmentsByDate(date: string, status?: number): Observable<Appointment[]> {
+  let url = `${environment.apiBaseUrl}/Doctor/AppointmentsByDate?date=${date}`;
+  
+  if (status !== undefined && status !== null) {
+    url += `&appointmentState=${status}`;
   }
+
+  return this._HttpClient.get<Appointment[]>(url);
+}
 
   cancelAppointmentsByDate(date: string) {
   return this._HttpClient.post(

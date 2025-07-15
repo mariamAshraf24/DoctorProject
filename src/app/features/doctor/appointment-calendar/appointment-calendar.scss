@@ -9,6 +9,59 @@ $danger: #e74c3c;
 $success: #2ecc71;
 $warning: #f39c12;
 
+.status-icon {
+  font-size: 18px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.status-dropdown {
+  width: 100%;
+  margin-top: -5px;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+  }
+
+  .mat-form-field-flex {
+    height: 36px; 
+    font-size: 13px;
+    align-items: center;
+  }
+
+  .mat-select {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    height: 36px;
+    line-height: 36px;
+  }
+
+  .mat-option {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+
+  .status-icon {
+    margin-left: 6px;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .status-label {
+    font-size: 13px;
+    color: #333;
+  }
+}
+
+.day-header {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
 .calendar-container {
   min-height: 100vh;
   padding: 20px;
@@ -384,6 +437,34 @@ $warning: #f39c12;
   }
 }
 }
+.calendar-toggle-button {
+  background-color: rgba(99, 60, 132, 0.1);
+  color: #633c84;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 16px;
+
+  mat-icon {
+    color: #633c84;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    background-color: rgba(99, 60, 132, 0.2);
+  }
+}
+::ng-deep .mat-calendar-body-selected {
+  background-color: rgba(100, 60, 132, 0.826) !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border: 1px solid #633c84;
+  background-color: rgba(99, 60, 132, 0.1);
+  color: #633c84;
+}
+
+
 
 // Responsive Adjustments
 @media (max-width: 1200px) {
@@ -397,6 +478,7 @@ $warning: #f39c12;
   }
 }
 
+
 @media (max-width: 768px) {
   .week-days-grid {
     grid-template-columns: 1fr;
@@ -409,4 +491,5 @@ $warning: #f39c12;
   .calendar-container {
     padding: 10px;
   }
+
 }

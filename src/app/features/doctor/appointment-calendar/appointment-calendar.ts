@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject , ViewEncapsulation }from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,13 +15,16 @@ import { Appointments } from '../../../core/services/appointments';
 import { Appointment } from '../../../core/models/IAppointment';
 import { forkJoin } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 interface WeekDay {
   date: Date;
   dayName: string;
   dateString: string;
   appointments: Appointment[];
+  selectedStatus?: number | null; 
 }
+
 
 @Component({
   selector: 'app-appointment-calendar',
@@ -40,10 +43,16 @@ interface WeekDay {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+
+      
+  MatSelectModule
+
   ],
   providers: [DatePipe],
   templateUrl: './appointment-calendar.html',
   styleUrls: ['./appointment-calendar.scss'],
+  encapsulation: ViewEncapsulation.None
+  
 })
 export class AppointmentCalendar implements OnInit {
   private appointmentsService = inject(Appointments);
@@ -56,6 +65,7 @@ export class AppointmentCalendar implements OnInit {
   currentWeekStart = new Date();
   loading = false;
   error: string | null = null;
+isHovering = false;
 
   // Modal states
   delayInputVisible = false;
@@ -63,7 +73,7 @@ export class AppointmentCalendar implements OnInit {
   selectedDayForDelay: string | null = null;
   delayDuration = '';
   selectedDayForCancel = '';
-
+calendarVisible = false 
   // Add these near your other state variables
 modalMessage = '';
 modalType: 'success' | 'error' | 'info' = 'info';
@@ -87,6 +97,8 @@ showModal = false;
 
   generateWeekDays(): void {
     this.weekDays = [];
+    
+
     const daysOfWeek = [
       'السبت',
       'الأحد',
@@ -96,7 +108,7 @@ showModal = false;
       'الخميس',
       'الجمعة',
     ];
-
+     selectedStatus: null;
     const startDate = new Date(this.currentWeekStart);
     const day = startDate.getDay();
     const diffToSaturday = (day + 1) % 7;
@@ -114,6 +126,14 @@ showModal = false;
       });
     }
   }
+statusList = [
+  { value: null, label: 'الكل', icon: 'list', color: '#666' },
+  { value: 0, label: 'حجز قادم', icon: 'event', color: '#3498db' },
+  { value: 1, label: 'مؤجل', icon: 'schedule', color: '#f39c12' },
+  { value: 2, label: 'مكتمل', icon: 'check_circle', color: '#27ae60' },
+  { value: 3, label: 'ملغي', icon: 'cancel', color: '#e74c3c' },
+  { value: 4, label: 'لم يحضر', icon: 'highlight_off', color: '#c0392b' },
+];
 
   loadAppointmentsForWeek(): void {
     this.loading = true;
@@ -188,16 +208,46 @@ showModal = false;
     )} - ${this.datePipe.transform(end, 'd MMM y')}`;
   }
 
-  getStatusText(status: number): string {
-    switch (status) {
-      case 0: return 'مُؤكَّد';
-      case 1: return 'مُؤجَّل';
-      case 2: return 'مُكتمل';
-      case 3: return 'ملغى';
-      case 4: return 'لم يحضر';
-      default: return '';
-    }
+ getStatusText(status: number): string {
+  switch (status) {
+    case 0: return 'حجز قادم';
+    case 1: return 'مُؤجَّل';
+    case 2: return 'تمت الزيارة';
+    case 3: return 'ملغى';
+    case 4: return 'لم يحضر';
+    default: return '';
   }
+}
+getStatusIcon(status: number): string {
+  switch (status) {
+    case 0: return 'event'; 
+    case 1: return 'schedule'; 
+    case 2: return 'check_circle'; 
+    case 3: return 'cancel'; 
+    case 4: return 'do_not_disturb'; 
+    default: return 'info';
+  }
+}
+getStatusColor(status: number): string {
+  switch (status) {
+    case 0: return '#633c84';
+    case 1: return '#f39c12';
+    case 2: return '#2ecc71';
+    case 3: return '#e74c3c';
+    case 4: return '#7f8c8d';
+    default: return '#999';
+  }
+}
+onStatusChange(day: WeekDay): void {
+  this.appointmentsService
+    .getAppointmentsByDate(day.dateString, day.selectedStatus ?? undefined)
+    .subscribe((appointments) => {
+      day.appointments = appointments.sort((a, b) =>
+        a.startTime.localeCompare(b.startTime)
+      );
+    });
+}
+
 
   private showMessageModal(message: string, type: 'success' | 'error' | 'info' = 'info') {
   this.modalMessage = message;
@@ -330,5 +380,14 @@ showModal = false;
       this.showMessageModal('فشل الإلغاء', 'error');
     },
   });
+ 
+
+
+
 }
+onCalendarDateSelected(date: Date): void {
+  this.calendarVisible = false;
+  this.onDateSelected(date); 
+}
+
 }
