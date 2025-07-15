@@ -36,10 +36,10 @@ body {
   color: #fff;
 }
 .hero-title {
-  font-size: 2.7rem;
+  font-size: 1.9rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: #633c84;
   letter-spacing: 0.5px;
 }
 .hero-title i {
@@ -90,14 +90,14 @@ body {
 
 // تحسينات للجدول والأزرار
 .table {
-  border-radius: 1.5rem;
+  border-radius: .6rem;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 2px 12px 0 rgba(123,97,255,0.10);
 }
 
 .table thead th {
-  background: #7b61ff;
+  background: #633c84;
   color: #fff;
   font-weight: 700;
   font-size: 1.08em;
@@ -210,20 +210,21 @@ body {
   margin-left: 0.5rem;
   box-shadow: 0 2px 8px 0 rgba(123,97,255,0.07);
 }
-
 .add-btn {
   background: #633c84 !important;
   color: #fff !important;
   border: 2px solid #7b61ff !important;
   font-weight: 700 !important;
-  border-radius: 1.5rem !important;
+  border-radius: .7rem !important;
   padding: 0.7rem 2.2rem !important;
   font-size: 1.15rem !important;
   box-shadow: 0 2px 12px 0 rgba(123,97,255,0.13) !important;
-  transition: box-shadow 0.22s, transform 0.18,cubic-bezier(.4,2,.6,1), background 0.18s, color 0.18s !important;
-  display: block !important;
-  margin: 2.5rem auto 0 auto !important;
+  transition: box-shadow 0.22s, transform 0.18s, background 0.18s, color 0.18s !important;
+  display: inline-flex !important; /* بدلاً من block */
+  align-items: center;
+  gap: 0.5rem;
 }
+
 .add-btn:hover {
   background: linear-gradient(135deg, #7b2ff2 0%, #6c47ff 100%) !important;
   color: #fff !important;
