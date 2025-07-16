@@ -1,78 +1,82 @@
 <div class="doctor-schedules-page">
   <!-- Page Header -->
-  <div class="hero-header">
-    <h2 class="hero-title">
-      <i class="fa fa-calendar-alt"></i> مواعيد الطبيب
-    </h2>
-    <p class="hero-subtitle">
-      إدارة وتنظيم مواعيد العيادة
-    </p>
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+  <div>
+    <h5 class="hero-title m-0">
+      <i class="fa fa-calendar-alt"></i> جدول مواعيد الطبيب 
+    </h5>
+    
   </div>
 
-  <!-- Morning Appointments Section -->
-  <h3 class="section-title">
-    <i class="fa fa-sun"></i> المواعيد الصباحية
-  </h3>
-  <div *ngIf="morningSchedules.length === 0" class="alert alert-info">
-    لا يوجد مواعيد صباحية متاحة حالياً.
-  </div>
-  <div class="appointments-list">
-    <div *ngFor="let schedule of morningSchedules" class="appointment-card">
-      <div class="appointment-header">
-        <div class="icon-box">
-          <i class="fa fa-calendar-day"></i>
-        </div>
-        <span class="appointment-day">{{ getDayName(schedule.dayOfWeek) }}</span>
-      </div>
-      <div class="appointment-time">
-        <i class="far fa-clock"></i>
-        <span>{{ schedule.startTime }} - {{ schedule.endTime }}</span>
-      </div>
-      <div class="appointment-duration">
-        <i class="fas fa-stopwatch"></i>
-        <span>مدة الكشف: {{ schedule.slotDuration }} دقيقة</span>
-      </div>
-      <!-- زر الحذف في الأسفل يسار الكارد -->
-      <button class="delete-btn" (click)="deleteSchedule(schedule.id)" title="حذف الموعد">
-        <i class="fa fa-trash-alt"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Evening Appointments Section -->
-  <h3 class="section-title">
-    <i class="fa fa-moon"></i> المواعيد المسائية
-  </h3>
-  <div *ngIf="eveningSchedules.length === 0" class="alert alert-info">
-    لا يوجد مواعيد مسائية متاحة حالياً.
-  </div>
-  <div class="appointments-list">
-    <div *ngFor="let schedule of eveningSchedules" class="appointment-card">
-      <div class="appointment-header">
-        <div class="icon-box">
-          <i class="fa fa-calendar-day"></i>
-        </div>
-        <span class="appointment-day">{{ getDayName(schedule.dayOfWeek) }}</span>
-      </div>
-      <div class="appointment-time">
-        <i class="far fa-clock"></i>
-        <span>{{ schedule.startTime }} - {{ schedule.endTime }}</span>
-      </div>
-      <div class="appointment-duration">
-        <i class="fas fa-stopwatch"></i>
-        <span>مدة الكشف: {{ schedule.slotDuration }} دقيقة</span>
-      </div>
-      <!-- زر الحذف في الأسفل يسار الكارد -->
-      <button class="delete-btn" (click)="deleteSchedule(schedule.id)" title="حذف الموعد">
-        <i class="fa fa-trash-alt"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Add New Appointment Button -->
-  <button class="add-btn" (click)="openAddForm()" style="background:#633c84 !important; color:#fff !important;">
+  <button class="add-btn margin-left: 12px;" (click)="openAddForm()" style="background:#633c84 !important; color:#fff !important;">
     <i class="fa fa-plus"></i> إضافة موعد جديد
   </button>
+</div>
+
+  <!-- Morning Appointments Section -->
+<h3 class="section-title">
+  <i class="fa fa-sun"></i> المواعيد الصباحية
+</h3>
+<div *ngIf="morningSchedules.length === 0" class="alert alert-info">
+  لا يوجد مواعيد صباحية متاحة حالياً.
+</div>
+
+<table *ngIf="morningSchedules.length > 0" class="table table-bordered text-center">
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>من</th>
+      <th>إلى</th>
+      <th>مدة الكشف (دقائق)</th>
+      <th>إجراء</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let schedule of morningSchedules">
+      <td>{{ getDayName(schedule.dayOfWeek) }}</td>
+      <td>{{ schedule.startTime }}</td>
+      <td>{{ schedule.endTime }}</td>
+      <td>{{ schedule.slotDuration }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+          <i class="fa fa-trash-alt"></i> حذف
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3 class="section-title">
+  <i class="fa fa-moon"></i> المواعيد المسائية
+</h3>
+<div *ngIf="eveningSchedules.length === 0" class="alert alert-info">
+  لا يوجد مواعيد مسائية متاحة حالياً.
+</div>
+
+<table *ngIf="eveningSchedules.length > 0" class="table table-bordered text-center">
+  <thead>
+    <tr>
+      <th>اليوم</th>
+      <th>من</th>
+      <th>إلى</th>
+      <th>مدة الكشف (دقائق)</th>
+      <th>إجراء</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let schedule of eveningSchedules">
+      <td>{{ getDayName(schedule.dayOfWeek) }}</td>
+      <td>{{ schedule.startTime }}</td>
+      <td>{{ schedule.endTime }}</td>
+      <td>{{ schedule.slotDuration }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+          <i class="fa fa-trash-alt"></i> حذف
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
   <!-- Add Form Modal -->
   <div *ngIf="showAddForm" class="add-form-overlay">

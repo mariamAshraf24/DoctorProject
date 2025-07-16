@@ -1,17 +1,106 @@
 <div class="calendar-container" dir="rtl">
+  <div class="d-flex justify-content-center mb-4">
+
+  <button
+    mat-flat-button
+    (click)="calendarVisible = true"
+    (mouseenter)="isHovering = true"
+    (mouseleave)="isHovering = false"
+    [ngStyle]="{
+      backgroundColor: isHovering ? '#512e73' : '#633c84',
+      color: 'white',
+      fontWeight: '700',
+      borderRadius: '10px',
+      padding: '12px 24px',
+      fontSize: '1rem',
+      boxShadow: isHovering 
+        ? '0 6px 15px rgba(99, 60, 132, 0.3)' 
+        : '0 4px 10px rgba(99, 60, 132, 0.2)',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center'
+    }"
+  >
+    <mat-icon
+      [ngStyle]="{
+        color: 'white',
+        marginLeft: '8px',
+        fontSize: '20px'
+      }"
+    >
+      calendar_today
+    </mat-icon>
+    عرض التقويم
+  </button>
+
+
+</div>
+
+
+
   <div class="calendar-content">
-    <div class="side-calendar">
-      <div class="calendar-card">
-        <mat-calendar
-          [(selected)]="selectedDate"
-          (selectedChange)="onDateSelected($event)"
-          [minDate]="minDate"
-          [maxDate]="maxDate"
-          class="custom-calendar"
-        >
-        </mat-calendar>
-      </div>
-    </div>
+<!-- <div class="side-calendar">
+  <div class="calendar-card">
+    <mat-calendar
+      [(selected)]="selectedDate"
+      (selectedChange)="onDateSelected($event)"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      class="custom-calendar"
+    >
+    </mat-calendar>
+  </div>
+</div> -->
+
+
+<!-- Calendar Modal -->
+<div class="modal-overlay" [class.visible]="calendarVisible">
+  <div
+    class="modal-container"
+    (click)="$event.stopPropagation()"
+    style="
+      padding: 20px;
+      border-radius: 12px;
+      background: white;
+    "
+  >
+    <button
+      class="modal-close"
+      (click)="calendarVisible = false"
+      style="
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: transparent;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        font-size: 1.5rem;
+      "
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <h3
+      style="
+        text-align: center;
+        color: #633c84;
+        margin-top: 0;
+        margin-bottom: 15px;
+      "
+    >
+      اختر التاريخ
+    </h3>
+    <mat-calendar
+      [(selected)]="selectedDate"
+      (selectedChange)="onCalendarDateSelected($event)"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      class="mat-calendar"
+    ></mat-calendar>
+  </div>
+</div>
+
 
     <div class="main-calendar-view">
       @if (loading) {
@@ -53,9 +142,22 @@
           @for (day of weekDays; track day.date) {
           <div class="day-column" [class.today]="isToday(day.date)">
             <div class="day-header">
+
+
+
+
               <div class="day-title">
-                <h4>{{ day.date | date : "d" }} {{ day.dayName }}</h4>
-              </div>
+  <h4>
+    {{ day.date | date : 'd' }} {{ day.dayName }}
+    <span
+      *ngIf="isToday(day.date)"
+      style="color: #f39c12; font-size: 0.8rem; margin-right: 5px;"
+    >
+      (اليوم)
+    </span>
+  </h4>
+</div>
+
               <div class="day-actions">
                 <button
                   mat-icon-button
@@ -83,14 +185,33 @@
                 </mat-menu>
               </div>
             </div>
+<mat-form-field appearance="fill" class="status-dropdown">
+  <mat-label>الحالة</mat-label>
+
+  <mat-select
+    [(value)]="day.selectedStatus"
+    (selectionChange)="onStatusChange(day)"
+  >
+    <mat-option *ngFor="let status of statusList" [value]="status.value">
+      <mat-icon
+        class="status-icon"
+        [style.color]="status.color"
+      >
+        {{ status.icon }}
+      </mat-icon>
+      <span class="status-label">{{ status.label }}</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
             <div class="appointments-container">
               @if (day.appointments.length > 0) { @for (appointment of
               day.appointments; track appointment.id) {
-              <div
-                class="appointment-card"
-                [class]="'status-' + appointment.status"
-              >
+             <div
+  class="appointment-card"
+  [ngClass]="'status-' + appointment.status"
+>
+
                 <div class="appointment-time-badge">
                   {{ appointment.startTime | slice : 0 : 5 }}
                 </div>
@@ -98,10 +219,19 @@
                   <h4 class="patient-name">
                     {{ appointment.patientFullName }}
                   </h4>
+                   <div> {{ appointment.phone }}</div>
                 </div>
-                <div class="appointment-status">
-                  {{ getStatusText(appointment.status) }}
-                </div>
+  <div class="appointment-status">
+  <mat-icon
+    class="status-icon"
+    [style.color]="getStatusColor(appointment.status)"
+  >
+    {{ getStatusIcon(appointment.status) }}
+  </mat-icon>
+  {{ getStatusText(appointment.status) }}
+</div>
+
+
               </div>
               } } @else {
               <div class="no-appointments">
