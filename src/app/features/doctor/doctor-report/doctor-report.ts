@@ -26,8 +26,8 @@ export class DoctorReport implements OnInit, OnDestroy {
   yearlyTotal = 0;
   busiestMonth = '--';
   currentYear = new Date().getFullYear();
+  currentMonthNumber = new Date().getMonth() + 1;
 
-  // ✅ متغيرات جديدة للإجماليات السنوية
   yearlyAttended = 0;
   yearlyCancelled = 0;
   yearlyPostponed = 0;
@@ -49,8 +49,9 @@ export class DoctorReport implements OnInit, OnDestroy {
 
   loadDashboardData(): void {
     const year = this.currentYear;
-    const month = new Date().getMonth() + 1;
+    const month = this.currentMonthNumber;
 
+    // ✅ تحميل بيانات الشهر الحالي فقط في البداية
     this.doctorService.getMonthlyReport(year, month).subscribe({
       next: (res) => {
         this.currentMonthReport = res.success ? res.data : this.getFallbackMonthlyData();
@@ -64,6 +65,7 @@ export class DoctorReport implements OnInit, OnDestroy {
       }
     });
 
+    // ✅ تحميل كل الشهور مرة واحدة فقط
     this.doctorService.getReportHistory().subscribe({
       next: (res) => {
         this.reportHistory = res.success ? res.data : this.getFallbackYearlyData();
@@ -105,10 +107,12 @@ export class DoctorReport implements OnInit, OnDestroy {
     this.busiestMonth = index >= 0 ? `شهر ${this.reportHistory[index].month}` : '--';
   }
 
-  getCurrentMonthName(): string {
-    const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-    return months[new Date().getMonth()];
-  }
+getCurrentMonthName(month?: number): string {
+  const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  const index = (month ?? (new Date().getMonth() + 1)) - 1;
+  return months[index] ?? '--';
+}
+
 
   getFallbackMonthlyData() {
     return { cancelledDays: 0, postponedDays: 0, attended: 0, missed: 0, totalAppointments: 0 };
@@ -161,6 +165,19 @@ export class DoctorReport implements OnInit, OnDestroy {
     });
   }
 
+  // ✅ تحميل بيانات شهر محدد من history فقط
+  loadSelectedMonthFromHistory(month: number): void {
+    const selectedReport = this.reportHistory.find(r => r.month === month);
+    if (!selectedReport) return;
+
+    this.currentMonthReport = selectedReport;
+    this.currentMonthNumber = month;
+    this.calculateAttendancePercentage();
+    this.renderMonthChart();
+
+    console.log("✅ عرض بيانات من reportHistory - شهر:", month);
+  }
+
   renderYearChart(): void {
     if (!this.yearChartRef) return;
 
@@ -208,5 +225,17 @@ export class DoctorReport implements OnInit, OnDestroy {
         cutout: '60%'
       }
     });
+
+    // ✅ عند الضغط على شهر معين
+    this.yearChart.canvas.onclick = (event: MouseEvent) => {
+      const points = this.yearChart?.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+      if (points && points.length > 0) {
+        const index = points[0].index;
+        const selectedMonth = this.reportHistory[index]?.month;
+        if (selectedMonth) {
+          this.loadSelectedMonthFromHistory(selectedMonth);
+        }
+      }
+    };
   }
 }
