@@ -1,3 +1,54 @@
+<style>
+  ::ng-deep .mat-calendar {
+    color: var(--text-color);
+  }
+
+  ::ng-deep .mat-calendar-body-cell-content {
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+
+  ::ng-deep .mat-calendar-body-cell:hover .mat-calendar-body-cell-content {
+    background-color: var(--hover-bg) !important;
+  }
+
+  ::ng-deep .mat-calendar-body-selected {
+    background-color: var(--selected-bg) !important;
+    color: var(--selected-text) !important;
+  }
+
+  ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border: var(--today-border) !important;
+    background-color: var(--hover-bg) !important;
+    color: var(--main-color) !important;
+  }
+
+  ::ng-deep .mat-calendar-header {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  ::ng-deep .mat-calendar-arrow {
+    color: white !important;
+  }
+
+  ::ng-deep .mat-calendar-table-header th {
+    color: var(--main-color);
+    font-weight: 600;
+  }
+
+  ::ng-deep .mat-calendar-body-label {
+    color: var(--main-color);
+    font-weight: bold;
+  }
+
+  ::ng-deep .mat-calendar-previous-button,
+  ::ng-deep .mat-calendar-next-button {
+    color: white !important;
+  }
+</style>
 <div class="calendar-container" dir="rtl">
   <div class="d-flex justify-content-center mb-4">
 
@@ -13,8 +64,8 @@
       borderRadius: '10px',
       padding: '12px 24px',
       fontSize: '1rem',
-      boxShadow: isHovering 
-        ? '0 6px 15px rgba(99, 60, 132, 0.3)' 
+      boxShadow: isHovering
+        ? '0 6px 15px rgba(99, 60, 132, 0.3)'
         : '0 4px 10px rgba(99, 60, 132, 0.2)',
       transition: 'all 0.3s ease',
       cursor: 'pointer',
@@ -91,13 +142,37 @@
     >
       اختر التاريخ
     </h3>
-    <mat-calendar
-      [(selected)]="selectedDate"
-      (selectedChange)="onCalendarDateSelected($event)"
-      [minDate]="minDate"
-      [maxDate]="maxDate"
-      class="mat-calendar"
-    ></mat-calendar>
+<div style="
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(99, 60, 132, 0.2);
+  padding: 20px;
+  font-family: 'Cairo', sans-serif;
+">
+  <div style="
+    background-color: #633c84;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+  ">
+    التقويم
+  </div>
+
+  <mat-calendar
+    [(selected)]="selectedDate"
+    (selectedChange)="onCalendarDateSelected($event)"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    style="
+      display: block;
+      font-family: 'Cairo', sans-serif;
+    "
+  ></mat-calendar>
+</div>
+
   </div>
 </div>
 
@@ -185,8 +260,8 @@
                 </mat-menu>
               </div>
             </div>
-<mat-form-field appearance="fill" class="status-dropdown">
-  <mat-label>الحالة</mat-label>
+<mat-form-field appearance="fill" class="status-dropdown" style="height: 60px; margin-top: -6px;">
+  <mat-label style="font-size: small;">الحالة</mat-label>
 
   <mat-select
     [(value)]="day.selectedStatus"

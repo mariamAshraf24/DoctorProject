@@ -10,50 +10,51 @@ $success: #2ecc71;
 $warning: #f39c12;
 
 .status-icon {
-  font-size: 18px;
-  vertical-align: middle;
-  margin-left: 5px;
+  color: #633c84;
+  margin-left: 6px;
+  font-size: 16px;
+}
+::ng-deep .mat-select-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(99, 60, 132, 0.2) !important;
+  background-color: white !important;
 }
 
-.status-dropdown {
-  width: 100%;
-  margin-top: -5px;
+::ng-deep .mat-option {
+  font-size: 13px;
+  padding: 8px 12px !important;
+  color: #3f0071;
 
-  .mat-form-field-wrapper {
-    padding-bottom: 0px !important;
-    padding-top: 0px !important;
+  &:hover {
+    background-color: rgba(99, 60, 132, 0.1) !important;
   }
+}
 
-  .mat-form-field-flex {
-    height: 36px;
-    font-size: 13px;
-    align-items: center;
-  }
+::ng-deep .mat-option.mat-selected {
+  background-color: rgba(99, 60, 132, 0.15) !important;
+  color: #633c84;
+  font-weight: bold;
+}
+::ng-deep .mat-select-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(99, 60, 132, 0.2) !important;
+  background-color: white !important;
+}
 
-  .mat-select {
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-    height: 36px;
-    line-height: 36px;
-  }
+::ng-deep .mat-option {
+  font-size: 13px;
+  padding: 8px 12px !important;
+  color: #3f0071;
 
-  .mat-option {
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    padding: 4px 8px;
+  &:hover {
+    background-color: rgba(99, 60, 132, 0.1) !important;
   }
+}
 
-  .status-icon {
-    margin-left: 6px;
-    font-size: 18px;
-    line-height: 1;
-  }
-
-  .status-label {
-    font-size: 13px;
-    color: #333;
-  }
+::ng-deep .mat-option.mat-selected {
+  background-color: rgba(99, 60, 132, 0.15) !important;
+  color: #633c84;
+  font-weight: bold;
 }
 
 .day-header {
@@ -471,6 +472,25 @@ $warning: #f39c12;
   color: #633c84;
 }
 
+.mat-calendar-body-cell-content {
+  border-radius: 50% !important;
+  transition: 0.3s;
+}
+
+.mat-calendar-body-cell:hover .mat-calendar-body-cell-content {
+  background-color: rgba(99, 60, 132, 0.1) !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #3b0656 !important;
+  color: white !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border: 1px solid #633c84 !important;
+  background-color: rgba(99, 60, 132, 0.1) !important;
+  color: #633c84 !important;
+}
 
 
 // Responsive Adjustments
