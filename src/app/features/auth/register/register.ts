@@ -19,7 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgSelectModule, RouterModule],
+  imports: [ReactiveFormsModule, NgSelectModule, RouterModule ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -34,7 +34,7 @@ export class Register implements OnInit {
     private _formBuilder: FormBuilder,
     private _authService: Auth,
     private _router: Router,
-    private _DoctorService: DoctorService,
+    private _DoctorService: DoctorService
   ) {}
 
   ngOnInit(): void {
@@ -146,12 +146,20 @@ export class Register implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         console.error(err);
+        const message = err.error?.message;
         if (err.error?.message?.includes('Username already exists')) {
           this.usernameError = 'اسم المستخدم موجود بالفعل، يرجى اختيار اسم آخر';
           this.registerForm.get('userName')?.setErrors({ notUnique: true });
           this.registerForm.get('userName')?.markAsTouched();
+        } else if (
+          message?.includes('Username') &&
+          message?.includes('is invalid')
+        ) {
+          this.usernameError =
+            'اسم المستخدم غير صالح، يجب أن يحتوي فقط على حروف انجليزي أو أرقام';
+          this.registerForm.get('userName')?.setErrors({ invalidFormat: true });
+          this.registerForm.get('userName')?.markAsTouched();
         }
-        // alert('حدث خطأ أثناء التسجيل');
       },
     });
   }
