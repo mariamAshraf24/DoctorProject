@@ -25,7 +25,7 @@ $warning: #f39c12;
   }
 
   .mat-form-field-flex {
-    height: 36px; 
+    height: 36px;
     font-size: 13px;
     align-items: center;
   }
@@ -75,21 +75,21 @@ $warning: #f39c12;
 
     .side-calendar {
       width: 320px;
-      
+
       .calendar-card {
         // background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         overflow: hidden;
         padding: 15px;
-        
+
         .custom-calendar {
           width: 100%;
-          
+
           .mat-calendar-header {
             padding: 8px 8px 0 8px;
           }
-          
+
           .mat-calendar-body-cell-content {
             border-radius: 50%;
           }
@@ -115,7 +115,7 @@ $warning: #f39c12;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       position: relative;
-      
+
       .loading-overlay, .error-overlay {
         position: absolute;
         top: 0;
@@ -127,10 +127,10 @@ $warning: #f39c12;
         align-items: center;
         justify-content: center;
         z-index: 100;
-        
+
         .loading-content, .error-content {
           text-align: center;
-          
+
           p {
             margin-top: 15px;
             font-size: 16px;
@@ -138,7 +138,7 @@ $warning: #f39c12;
           }
         }
       }
-      
+
       .error-icon {
         color: $danger;
         font-size: 48px;
@@ -148,10 +148,10 @@ $warning: #f39c12;
 
       .week-view-container {
         padding: 20px;
-        
+
         .week-header {
           margin-bottom: 20px;
-          
+
           .header-content {
             display: flex;
             align-items: center;
@@ -160,16 +160,16 @@ $warning: #f39c12;
             padding: 12px 20px;
             border-radius: 8px;
             color: white;
-            
+
             .nav-button {
               color: white;
               background: rgba(255, 255, 255, 0.1);
-              
+
               &:hover {
                 background: rgba(255, 255, 255, 0.2);
               }
             }
-            
+
             .week-title {
               direction: ltr;
               margin: 0;
@@ -183,28 +183,33 @@ $warning: #f39c12;
           display: grid;
           grid-template-columns: repeat(7, 1fr);
           gap: 15px;
-          
+
           .day-column {
             background: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             transition: all 0.3s ease;
-            height: 750px;
-            
+              display: flex;
+  flex-direction: column;
+  max-height: 750px;
+            /*height: 750px;*/
+
             &:hover {
               transform: translateY(-3px);
               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
-            
+
             &.today {
               border: 2px solid rgba(100, 60, 132, 0.826);
-              
+
               .day-header {
+                 flex: 0 0 auto;
                 background: linear-gradient(135deg, rgba(100, 60, 132, 0.906), lighten(rgba(100, 60, 132, 0.861), 10%));
               }
+
             }
-            
+
             .day-header {
               padding: 10px;
               background: rgb(99,60,132);
@@ -212,46 +217,48 @@ $warning: #f39c12;
               display: flex;
               justify-content: space-between;
               align-items: center;
-              
+
               .day-title {
                 h4 {
                   margin: 0;
                   font-size: 1rem;
                   font-weight: 500;
                 }
-                
+
                 .date-number {
                   margin: 5px 0 0;
                   font-size: 1.4rem;
                   font-weight: bold;
                 }
               }
-              
+
               .day-actions {
                 .action-button.menu {
                   color: white;
                   width: 32px;
                   height: 32px;
                   line-height: 32px;
-                  
+
                   &:hover {
                     background: rgba(255, 255, 255, 0.2);
                   }
                 }
               }
             }
-            
+
             .appointments-container {
               padding: 10px;
               // height: calc(100% - 60px);
                max-height: 750px;
               overflow-y: auto;
-              
+              flex: 1 1 auto;
+
+
               .no-appointments {
                 text-align: center;
                 padding: 30px 10px;
                 color: #999;
-                
+
                 mat-icon {
                   font-size: 2rem;
                   width: auto;
@@ -259,13 +266,13 @@ $warning: #f39c12;
                   margin-bottom: 10px;
                   color: #ddd;
                 }
-                
+
                 p {
                   margin: 0;
                   font-size: 0.9rem;
                 }
               }
-              
+
               .appointment-card {
                 background: #f0e1fbeb;
                 border-radius: 8px;
@@ -274,12 +281,12 @@ $warning: #f39c12;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
                 border-right: 4px solid $primary;
                 transition: all 0.2s ease;
-                
+
                 &:hover {
                   transform: translateX(-3px);
                   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
                 }
-                
+
                 .appointment-time-badge {
                   background: rgba($primary, 0.1);
                   color: $primary;
@@ -289,7 +296,7 @@ $warning: #f39c12;
                   font-weight: 500;
                   display: inline-block;
                 }
-                
+
                 .appointment-details {
                   .patient-name {
                     font-size: 0.95rem;
@@ -298,13 +305,13 @@ $warning: #f39c12;
                     margin: 8px 0;
                   }
                 }
-                
+
                 .appointment-status {
                   font-size: 0.9rem;
                   padding: 2px 8px;
                   border-radius: 12px;
                   display: inline-block;
-                  
+
                   // Status colors
                   .status-0 & { background: rgba($success, 0.1); color: $success; }
                   .status-1 & { background: rgba($warning, 0.1); color: $warning; }
@@ -335,7 +342,7 @@ $warning: #f39c12;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    
+
     &.visible {
       opacity: 1;
       visibility: visible;
@@ -351,11 +358,11 @@ $warning: #f39c12;
       transform: translateY(20px);
       transition: transform 0.3s ease;
       position: relative;
-      
+
       .modal-overlay.visible & {
         transform: translateY(0);
       }
-      
+
       .modal-close {
         position: absolute;
         top: 15px;
@@ -365,36 +372,36 @@ $warning: #f39c12;
         color: #999;
         cursor: pointer;
         font-size: 1.5rem;
-        
+
         &:hover {
           color: $danger;
         }
       }
-      
+
       h3 {
         margin-top: 0;
         color: $primary;
         font-size: 1.3rem;
         text-align: center;
       }
-      
+
       p {
         color: $muted-text;
         text-align: center;
         margin-bottom: 20px;
       }
-      
+
       .full-width {
         width: 100%;
         margin-bottom: 20px;
       }
-      
+
       .modal-actions {
         display: flex;
         justify-content: flex-end;
         gap: 10px;
         margin-top: 20px;
-        
+
         button {
           min-width: 100px;
         }
@@ -470,7 +477,7 @@ $warning: #f39c12;
 @media (max-width: 1200px) {
   .calendar-content {
     flex-direction: column;
-    
+
     .side-calendar {
       width: 100%;
       margin-bottom: 20px;
@@ -482,12 +489,12 @@ $warning: #f39c12;
 @media (max-width: 768px) {
   .week-days-grid {
     grid-template-columns: 1fr;
-    
+
     .day-column {
       margin-bottom: 20px;
     }
   }
-  
+
   .calendar-container {
     padding: 10px;
   }
