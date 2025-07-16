@@ -67,6 +67,11 @@
                                     }
                                 </div>
                                 }
+                                @if (serverErrorMessage && loginForm.get('password')?.touched) {
+                                <div class="invalid-feedback d-block">
+                                    <span>{{serverErrorMessage}}</span>
+                                </div>
+                                }
                             </div>
 
                             <!-- نسيان كلمة المرور -->

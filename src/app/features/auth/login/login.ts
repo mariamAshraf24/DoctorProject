@@ -14,64 +14,65 @@ import { Router, RouterLink } from '@angular/router';
 export class Login implements OnInit {
   loginForm!: FormGroup;
   usernameError: string = '';
+  serverErrorMessage: string | null = null; 
+
   private readonly _authService = inject(Auth);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _Router = inject(Router);
 
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      userName: [null, [Validators.required, Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)]],
+      userName: [null, [
+        Validators.required,
+        Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)
+      ]],
       password: [null, [
         Validators.required,
-        // Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
       ]],
-
     });
   }
 
   loginSubmit(): void {
-
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
+
     const formData = this.loginForm.value;
+
     this._authService.login(formData).subscribe({
       next: (res) => {
-
         if (res.isSuccess && res.token) {
+          this.serverErrorMessage = null; // ✅ إخفاء الخطأ في حال نجاح تسجيل الدخول
           this._authService.saveToken(res.token);
-          // alert('تم التسجيل بنجاح!');
           this.loginForm.reset();
 
-
-          //  استخراج doctorId من التوكن وتخزينه
           const doctorId = this._authService.getDoctorIdFromToken();
           localStorage.setItem('doctorId', doctorId);
-
-        
-
-
           localStorage.setItem('roles', res.roles);
+
           if (this._authService.isAdmin()) {
             this._Router.navigate(['/admin/Specializations']);
           } else {
             this._Router.navigate(['/doctor/home']);
           }
-          // setTimeout(() => {
-          //   this._Router.navigate(['/home']);
-          // }, 1000)
-        } 
-        // else {
-        //   alert('حدث خطأ أثناء التسجيل');
-        // }
+        }
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err);
-        // alert('حدث خطأ أثناء التسجيل');
-      }
-    });
-  }
+        if (err.status === 400 && err.error?.message) {
+          const message = err.error.message;
 
+          // ✅ حطي الرسالة تحت كلمة المرور بدل العام
+          if (message === 'Invalid email or password.') {
+            this.serverErrorMessage = 'كلمة المرور غير صحيحة أو لا تطابق اسم المستخدم';
+          } else {
+            this.serverErrorMessage = 'حدث خطأ غير متوقع. حاول مرة أخرى.';
+          }
+        } else {
+          this.serverErrorMessage = 'فشل في الاتصال بالخادم. حاول لاحقاً.';
+        }
+      }
+    }); 
+  }
 }
