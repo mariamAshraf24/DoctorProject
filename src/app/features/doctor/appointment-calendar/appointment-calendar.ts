@@ -22,7 +22,7 @@ interface WeekDay {
   dayName: string;
   dateString: string;
   appointments: Appointment[];
-  selectedStatus?: number | null; 
+  selectedStatus?: number | null;
 }
 
 
@@ -44,7 +44,7 @@ interface WeekDay {
     MatFormFieldModule,
     MatInputModule,
 
-      
+
   MatSelectModule
 
   ],
@@ -52,7 +52,7 @@ interface WeekDay {
   templateUrl: './appointment-calendar.html',
   styleUrls: ['./appointment-calendar.scss'],
   encapsulation: ViewEncapsulation.None
-  
+
 })
 export class AppointmentCalendar implements OnInit {
   private appointmentsService = inject(Appointments);
@@ -73,7 +73,7 @@ isHovering = false;
   selectedDayForDelay: string | null = null;
   delayDuration = '';
   selectedDayForCancel = '';
-calendarVisible = false 
+calendarVisible = false
   // Add these near your other state variables
 modalMessage = '';
 modalType: 'success' | 'error' | 'info' = 'info';
@@ -97,7 +97,7 @@ showModal = false;
 
   generateWeekDays(): void {
     this.weekDays = [];
-    
+
 
     const daysOfWeek = [
       'السبت',
@@ -218,13 +218,21 @@ statusList = [
     default: return '';
   }
 }
+getTypeText(appointmentType: number): string {
+  switch (appointmentType) {
+    case 0: return 'كشف';
+    case 1: return 'مُتابعة';
+
+    default: return '';
+  }
+}
 getStatusIcon(status: number): string {
   switch (status) {
-    case 0: return 'event'; 
-    case 1: return 'schedule'; 
-    case 2: return 'check_circle'; 
-    case 3: return 'cancel'; 
-    case 4: return 'do_not_disturb'; 
+    case 0: return 'event';
+    case 1: return 'schedule';
+    case 2: return 'check_circle';
+    case 3: return 'cancel';
+    case 4: return 'do_not_disturb';
     default: return 'info';
   }
 }
@@ -337,7 +345,7 @@ onStatusChange(day: WeekDay): void {
       },
       error: (error) => {
   let errorMessage = 'فشل في تأجيل المواعيد';
-  
+
   if (error?.error?.message?.includes('Failed to delay appointments.')) {
     errorMessage = 'تم تأجيل اليوم من قبل';
   } else if (error?.error?.errors) {
@@ -380,14 +388,14 @@ onStatusChange(day: WeekDay): void {
       this.showMessageModal('فشل الإلغاء', 'error');
     },
   });
- 
+
 
 
 
 }
 onCalendarDateSelected(date: Date): void {
   this.calendarVisible = false;
-  this.onDateSelected(date); 
+  this.onDateSelected(date);
 }
 
 }

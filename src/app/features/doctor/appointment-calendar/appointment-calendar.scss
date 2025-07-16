@@ -10,10 +10,12 @@ $success: #2ecc71;
 $warning: #f39c12;
 
 .status-icon {
-  color: #633c84;
-  margin-left: 6px;
+  margin-top: 8px;
   font-size: 16px;
+  vertical-align: middle;
+  display: inline-flex;
 }
+
 ::ng-deep .mat-select-panel {
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(99, 60, 132, 0.2) !important;
@@ -307,19 +309,21 @@ $warning: #f39c12;
                   }
                 }
 
-                .appointment-status {
-                  font-size: 0.9rem;
-                  padding: 2px 8px;
-                  border-radius: 12px;
-                  display: inline-block;
+         .appointment-status {
+  font-size: 0.9rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px; //
 
-                  // Status colors
-                  .status-0 & { background: rgba($success, 0.1); color: $success; }
-                  .status-1 & { background: rgba($warning, 0.1); color: $warning; }
-                  .status-2 & { background: rgba(#fff, 0.1); color: #fff; }
-                  .status-3 & { background: rgba($danger, 0.1); color: $danger; }
-                  .status-4 & { background: rgba(#95a5a6, 0.1); color: #95a5a6; }
-                }
+  .status-0 & { background: rgba($success, 0.1); color: $success; }
+  .status-1 & { background: rgba($warning, 0.1); color: $warning; }
+  .status-2 & { background: rgba(#fff, 0.1); color: #fff; }
+  .status-3 & { background: rgba($danger, 0.1); color: $danger; }
+  .status-4 & { background: rgba(#95a5a6, 0.1); color: #95a5a6; }
+}
+
               }
             }
           }
@@ -492,6 +496,12 @@ $warning: #f39c12;
   color: #633c84 !important;
 }
 
+.mat-mdc-form-field-subscript-wrapper {
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+}
 
 // Responsive Adjustments
 @media (max-width: 1200px) {
@@ -504,6 +514,7 @@ $warning: #f39c12;
     }
   }
 }
+
 
 
 @media (max-width: 768px) {
