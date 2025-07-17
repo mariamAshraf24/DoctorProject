@@ -22,10 +22,12 @@ export class Login implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      userName: [null, [
-        Validators.required,
-        Validators.pattern(/^[\u0600-\u06FFa-zA-Z ]+$/)
-      ]],
+      userName: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z\u0600-\u06FF0-9]*$/),
+        ]],
       password: [null, [
         Validators.required,
         Validators.pattern(/^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/)
@@ -44,7 +46,7 @@ export class Login implements OnInit {
     this._authService.login(formData).subscribe({
       next: (res) => {
         if (res.isSuccess && res.token) {
-          this.serverErrorMessage = null; // ✅ إخفاء الخطأ في حال نجاح تسجيل الدخول
+          this.serverErrorMessage = null; 
           this._authService.saveToken(res.token);
           this.loginForm.reset();
 
@@ -63,7 +65,7 @@ export class Login implements OnInit {
         if (err.status === 400 && err.error?.message) {
           const message = err.error.message;
 
-          // ✅ حطي الرسالة تحت كلمة المرور بدل العام
+          
           if (message === 'Invalid email or password.') {
             this.serverErrorMessage = 'كلمة المرور غير صحيحة أو لا تطابق اسم المستخدم';
           } else {

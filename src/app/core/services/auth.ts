@@ -55,7 +55,7 @@ export class Auth {
   if (!token) return '';
 
   try {
-    const payload = token.split('.')[1]; // الجزء الأوسط من التوكن
+    const payload = token.split('.')[1]; 
     const decodedPayload = JSON.parse(atob(payload));
     return decodedPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || '';
   } catch (e) {
