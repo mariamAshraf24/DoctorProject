@@ -12,8 +12,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class UpdateProfile implements OnInit {
   editForm!: FormGroup;
-  specializations: Specialization[] = [];
+  imageUrl: string = '';
   error: string = '';
+  loading: boolean = false;
+  successMessage: string = '';
 
   constructor(
     private _DoctorService: DoctorService,
@@ -39,28 +41,32 @@ export class UpdateProfile implements OnInit {
           Validators.pattern(/^[\u0600-\u06FFa-zA-Z0-9\s\-]*$/),
         ],
       ],
-      country: ['مصر'],
+      country: [''],
       bookingPrice: [null, Validators.required],
-      specializationId: [null, Validators.required],
     });
-
-    this.loadProfileAndSpecializations();
+     this.loadDoctorData();
   }
 
-  loadProfileAndSpecializations(): void {
+  loadDoctorData(): void {
     this._DoctorService.getDoctorProfile().subscribe({
-      next: (profile) => {
-        console.log(profile);
-        this.editForm.patchValue(profile.data);
+      next: (res) => {
+        const data = res.data;
+        this.editForm.patchValue({
+          fName: data.fName,
+          lName: data.lName,
+          city: data.city,
+          street: data.street,
+          country: data.country,
+          bookingPrice: data.bookingPrice
+        });
+        this.imageUrl = data.imageUrl;
+        this.loading = false;
       },
       error: () => {
-        this.error = 'تعذر تحميل بيانات الطبيب';
+        // alert('❌ حدث خطأ أثناء تحميل البيانات');
+        this.error = 'حدث خطأ أثناء تحميل البيانات';
+        this.loading = false;
       }
-    });
-
-    this._DoctorService.getSpecializations().subscribe({
-      next: (res) => (this.specializations = res.data),
-      error: () => (this.error = 'تعذر تحميل التخصصات')
     });
   }
 
@@ -70,12 +76,31 @@ export class UpdateProfile implements OnInit {
       return;
     }
 
-    this._DoctorService.updateDoctorProfile(this.editForm.value).subscribe({
+    this.loading = true;
+    this.error = '';
+    this.successMessage = '';
+
+    const updatedData = {
+      ...this.editForm.value,
+      imageUrl: this.imageUrl
+    };
+
+    this._DoctorService.updateDoctorProfile(updatedData).subscribe({
       next: () => {
-        alert('تم تحديث البيانات بنجاح');
-        this._Router.navigate(['/doctor/profile']);
+        // alert('تم تحديث البيانات بنجاح');
+        this.successMessage = 'تم تحديث البيانات بنجاح';
+        this.loading = false;
+
+       setTimeout(() => {
+          this._Router.navigate(['/doctor/profile']);
+        }, 2000);
       },
-      error: () => alert('حدث خطأ أثناء تحديث البيانات')
+      error: (err) => 
+        {
+          // alert('حدث خطأ أثناء تحديث البيانات')
+          this.error = err.message || 'حدث خطأ أثناء تحديث البيانات';
+        this.loading = false;
+      }
     });
   }
 }

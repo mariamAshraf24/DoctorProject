@@ -1,74 +1,77 @@
 <div class="profile-container">
-  <div class="profile-header">
-    
-  </div>
+  <div class="profile-header"></div>
 
   @if (isLoading) {
-    <div class="loading-spinner">
-      <div class="spinner"></div>
-      <p>جاري تحميل الملف الشخصي...</p>
-    </div>
-  }
-
-  @if (error) {
-    <div class="error-message">
-      <span style="font-size: 2rem;">&#9888;</span>
-      <p>{{ error }}</p>
-      <button class="edit-btn" (click)="loadDoctorProfile()">إعادة المحاولة</button>
-    </div>
-  }
-
-  @if (doctorProfile && !isLoading) {
-    <div class="profile-layout">
-      <!-- Right Side: Doctor Image with background -->
-      <div class="image-section">
-        <div class="image-blob">
-          <img
-            [src]="doctorProfile.imageUrl"
-            alt="Doctor Image"
-            class="doctor-image"
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+    <p>جاري تحميل الملف الشخصي...</p>
+  </div>
+  } @if (error) {
+  <div class="error-message">
+    <span style="font-size: 2rem">&#9888;</span>
+    <p>{{ error }}</p>
+    <button class="edit-btn" (click)="loadDoctorProfile()">
+      إعادة المحاولة
+    </button>
+  </div>
+  } @if (doctorProfile && !isLoading) {
+  <div class="profile-layout">
+    <!-- Right Side: Doctor Image with background -->
+    <div class="image-section">
+      <div class="image-blob">
+        <img
+          [src]="doctorProfile.imageUrl"
+          alt="Doctor Image"
+          class="doctor-image"
+        />
+        <label class="change-image-btn">
+          <div class="icon-container">
+            <i class="fa-solid fa-camera fa-2xl"></i>
+          </div>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            hidden
           />
-        </div>
-      </div>
-
-      <!-- Left Side: Info -->
-      <div class="info-section">
-        <h2 class="title">د. {{ doctorProfile.fName }} {{ doctorProfile.lName }}</h2>
-        <p class="username">{{ doctorProfile.username }}</p>
-
-        <div class="info-item">
-          <span class="icon"><i class="fa-solid fa-user-doctor"></i></span>
-          <span>{{ doctorProfile.specializationName }}</span>
-        </div>
-
-        <div class="info-item">
-          <span class="icon"><i class="fa-regular fa-heart"></i></span>
-          <span>{{ getAge(doctorProfile.dateOfBirth) }} سنة</span>
-        </div>
-
-        <div class="info-item">
-          <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
-          <span>
-            {{ doctorProfile.street }}، {{ doctorProfile.city }}، {{ doctorProfile.country }}
-          </span>
-        </div>
-
-        <div class="info-item">
-          <span class="icon"><i class="fa-solid fa-sack-dollar"></i></span>
-          <span>{{ doctorProfile.bookingPrice }} جنيه مصرى</span>
-        </div>
-
-        <button
-          class="edit-btn"
-          routerLink="/doctor/update-profile"
-        >
-
-          تعديل البيانات
-
-        </button>
-       
-     
+        </label>
       </div>
     </div>
+
+    <!-- Left Side: Info -->
+    <div class="info-section">
+      <h2 class="title">
+        د. {{ doctorProfile.fName }} {{ doctorProfile.lName }}
+      </h2>
+      <p class="username">{{ doctorProfile.username }}</p>
+
+      <div class="info-item">
+        <span class="icon"><i class="fa-solid fa-user-doctor"></i></span>
+        <span>{{ doctorProfile.specializationName }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="icon"><i class="fa-regular fa-heart"></i></span>
+        <span>{{ getAge(doctorProfile.dateOfBirth) }} سنة</span>
+      </div>
+
+      <div class="info-item">
+        <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+        <span>
+          {{ doctorProfile.street }}، {{ doctorProfile.city }}،
+          {{ doctorProfile.country }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="icon"><i class="fa-solid fa-sack-dollar"></i></span>
+        <span>{{ doctorProfile.bookingPrice }} جنيه مصرى</span>
+      </div>
+
+      <button class="edit-btn" routerLink="/doctor/update-profile">
+        تعديل البيانات
+      </button>
+    </div>
+  </div>
   }
 </div>

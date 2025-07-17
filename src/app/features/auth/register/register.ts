@@ -19,7 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgSelectModule, RouterModule ],
+  imports: [ReactiveFormsModule, NgSelectModule, RouterModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -160,6 +160,11 @@ export class Register implements OnInit {
           this.registerForm.get('userName')?.setErrors({ invalidFormat: true });
           this.registerForm.get('userName')?.markAsTouched();
         }
+        else if (message?.includes('Email') && message?.includes('taken')) {
+        this.usernameError = 'الايميل موجود بالفعل، يرجى كتابه ايميل آخر';
+        this.registerForm.get('Email')?.setErrors({ emailTaken: true });
+        this.registerForm.get('Email')?.markAsTouched();
+      }
       },
     });
   }

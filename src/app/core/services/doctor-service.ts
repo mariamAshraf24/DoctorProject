@@ -41,6 +41,7 @@ export class DoctorService {
       data
     );
   }
+  
   getMonthlyReport(year: number, month: number): Observable<any> {
     const params = new HttpParams()
       .set('year', year.toString())

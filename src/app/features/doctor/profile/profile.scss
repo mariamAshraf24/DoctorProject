@@ -52,7 +52,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  // overflow: hidden;
+  position: relative;
 }
 
 .doctor-image {
@@ -60,6 +61,52 @@
   height: 340px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.change-image-btn {
+  position: absolute;
+  bottom: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-container {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icon-container i {
+  color: white;
+  font-size: 20px;
+}
+
+/* Pulse animation for attention */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.icon-container {
+  animation: pulse 2s infinite;
+}
+
+/* Remove animation after first interaction */
+.change-image-btn:active .icon-container,
+.change-image-btn:focus .icon-container {
+  animation: none;
 }
 
 .info-section {

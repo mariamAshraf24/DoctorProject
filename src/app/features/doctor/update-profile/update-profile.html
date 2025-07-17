@@ -12,6 +12,14 @@
 
     <!-- Main Form Content -->
     <div class="profile-body">
+      <!-- Success Message -->
+      @if (successMessage) {
+        <div class="success-message">
+          <i class="fas fa-check-circle"></i>
+          <span>{{ successMessage }}</span>
+        </div>
+      }
+
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="edit-form">
         <!-- Personal Information Section -->
         <div class="form-section">
@@ -150,31 +158,6 @@
           </div>
 
           <div class="form-grid">
-            <!-- Specialization -->
-            <div class="form-group">
-              <label for="specializationId" class="select-label">التخصص الطبي</label>
-              <div class="custom-select">
-                <select
-                  id="specializationId"
-                  formControlName="specializationId"
-                  [class.invalid]="editForm.get('specializationId')?.invalid && editForm.get('specializationId')?.touched"
-                >
-                  <option value="" disabled selected>اختر التخصص</option>
-                  @for (spec of specializations; track spec.id) {
-                    <option [value]="spec.id">{{ spec.name }}</option>
-                  }
-                </select>
-                <div class="select-arrow">
-                  <i class="fas fa-chevron-down"></i>
-                </div>
-              </div>
-              @if (editForm.get('specializationId')?.touched && editForm.get('specializationId')?.invalid) {
-                <div class="form-error">
-                  <span><i class="fas fa-exclamation-circle"></i> التخصص مطلوب</span>
-                </div>
-              }
-            </div>
-            
             <!-- Booking Price -->
             <div class="form-group floating with-currency">
               <input
@@ -206,14 +189,19 @@
             <i class="fas fa-arrow-right"></i>
             <span>العودة للصفحة السابقة</span>
           </button>
+
           
           <button
             type="submit"
             class="btn btn-save"
-            [disabled]="editForm.invalid"
+            [disabled]="editForm.invalid || loading"
           >
-            <i class="fas fa-save"></i>
-            <span>حفظ التغييرات</span>
+            @if (loading) {
+              <i class="fas fa-spinner fa-spin"></i>
+            } @else {
+              <i class="fas fa-save"></i>
+              <span>حفظ التغييرات</span>
+            }
           </button>
         </div>
       </form>

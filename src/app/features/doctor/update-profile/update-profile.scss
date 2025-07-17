@@ -346,6 +346,23 @@ font-family: 'Cairo';
   margin-left: 10px;
 }
 
+.success-message {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid var(--success-color);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.success-message i {
+  margin-left: 10px;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .form-grid {
