@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -36,7 +37,7 @@ html, body {
   z-index: 1;
   width: 100%;
   max-width: 1400px;
-  font-family: 'Cairo';
+  font-family: "Cairo";
 }
 
 .register-card {
@@ -60,7 +61,7 @@ html, body {
   justify-content: center;
   overflow: hidden;
   position: relative;
-   height: 100vh;
+  height: 100vh;
 
   img {
     width: 100%;
@@ -116,13 +117,9 @@ html, body {
   margin-top: 0.25rem;
 }
 
-.is-invalid {
-  border-color: #dc3545;
-}
-
 /* Buttons */
 .gradient-button {
-  background-color:  #633c84;
+  background-color: #633c84;
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -139,7 +136,7 @@ html, body {
 }
 
 .gradient-button::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -240,6 +237,21 @@ html, body {
 
 .form-group {
   margin-bottom: 1.25rem;
+}
+
+.error-message {
+  background: rgba(220, 53, 69, 0.1);
+  color: red;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 1.5rem;
+  display: flex;
+  align-items: center;
+  border-left: 4px solid red;
+}
+
+.error-message i {
+  margin-left: 10px;
 }
 
 /* Responsive */

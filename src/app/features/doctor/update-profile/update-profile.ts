@@ -87,7 +87,6 @@ export class UpdateProfile implements OnInit {
 
     this._DoctorService.updateDoctorProfile(updatedData).subscribe({
       next: () => {
-        // alert('تم تحديث البيانات بنجاح');
         this.successMessage = 'تم تحديث البيانات بنجاح';
         this.loading = false;
 
@@ -97,8 +96,7 @@ export class UpdateProfile implements OnInit {
       },
       error: (err) => 
         {
-          // alert('حدث خطأ أثناء تحديث البيانات')
-          this.error = err.message || 'حدث خطأ أثناء تحديث البيانات';
+        this.error = err.message || 'حدث خطأ أثناء تحديث البيانات';
         this.loading = false;
       }
     });
