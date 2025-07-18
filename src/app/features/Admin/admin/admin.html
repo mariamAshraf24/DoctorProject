@@ -94,7 +94,7 @@
                       <i class="fa fa-edit"></i>
                     </button>
                     <button title="حذف التخصص" class="btn btn-sm btn-outline-danger"
-                      (click)="deleteSpecialization(specialization.id)">
+                      (click)="openDeleteDialog(specialization.id)">
                       <i class="fa fa-trash"></i>
                     </button>
                   </div>
@@ -179,6 +179,25 @@
             [disabled]="!editForm.valid || editNameError || !editSpecializationData.name.trim()">حفظ</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog تأكيد الحذف -->
+<div class="delete-dialog-overlay" *ngIf="showDeleteDialog">
+  <div class="delete-dialog">
+    <div class="dialog-header">
+      <span class="warning-icon">&#9888;</span>
+      <span class="dialog-title">تأكيد الحذف</span>
+    </div>
+    <div class="dialog-body">
+      هل أنت متأكد أنك تريد حذف هذا التخصص؟
+    </div>
+    <div class="dialog-actions">
+      <button class="cancel-btn" (click)="closeDeleteDialog()">إلغاء</button>
+      <button class="confirm-btn" (click)="confirmDelete()">
+        تأكيد
+      </button>
     </div>
   </div>
 </div>

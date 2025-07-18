@@ -38,7 +38,7 @@
       <td>{{ schedule.endTime }}</td>
       <td>{{ schedule.slotDuration }}</td>
       <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+        <button class="btn btn-danger btn-sm" (click)="openDeleteDialog(schedule.id)">
           <i class="fa fa-trash-alt"></i> حذف
         </button>
       </td>
@@ -69,7 +69,7 @@
       <td>{{ schedule.endTime }}</td>
       <td>{{ schedule.slotDuration }}</td>
       <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule.id)">
+        <button class="btn btn-danger btn-sm" (click)="openDeleteDialog(schedule.id)">
           <i class="fa fa-trash-alt"></i> حذف
         </button>
       </td>
@@ -146,4 +146,24 @@
       </form>
     </div>
   </div>
+
+<!-- Dialog تأكيد الحذف -->
+<div class="delete-dialog-overlay" *ngIf="showDeleteDialog">
+  <div class="delete-dialog">
+    <div class="dialog-header">
+      <span class="warning-icon">&#9888;</span>
+      <span class="dialog-title">تأكيد الحذف</span>
+    </div>
+    <div class="dialog-body">
+      هل أنت متأكد أنك تريد حذف هذا الموعد؟
+    </div>
+    <div class="dialog-actions">
+      <button class="confirm-btn" (click)="confirmDelete()">
+        تأكيد
+      </button>
+      <button class="cancel-btn" (click)="closeDeleteDialog()">إلغاء</button>
+      
+    </div>
+  </div>
+</div>
 </div>

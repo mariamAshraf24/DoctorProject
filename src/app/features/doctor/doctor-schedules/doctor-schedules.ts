@@ -10,6 +10,7 @@ import { Router} from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 import { DoctorSchedulesService } from '../../../core/services/doctor-schedules';
 import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -47,7 +48,10 @@ export class DoctorSchedules implements OnInit {
   showDaysDropdown: boolean = false;
   showAddForm: boolean = false;
 
-  constructor(private router: Router) { }
+  showDeleteDialog = false;
+  scheduleToDeleteId: string | null = null;
+
+  constructor(private router: Router, private toastr: ToastrService) { }
 
   // دالة التعامل مع تغيير الأيام
   onDayChange(event: any, day: number): void {
@@ -180,6 +184,7 @@ export class DoctorSchedules implements OnInit {
           this.loadSchedules(); // إعادة تحميل المواعيد من السيرفر
           // إعادة تعيين الفورم
           this.addForm = { startTime: '', endTime: '', slotDurationMinutes: 30, daysOfWeek: [] };
+          this.toastr.success('تم إضافة الموعد بنجاح'); // Toast بنفسجي بعد الإضافة
         } else {
           this.addError = res.message || 'حدث خطأ أثناء الإضافة';
         }
@@ -256,30 +261,6 @@ export class DoctorSchedules implements OnInit {
   //   });
   // }
 
-  deleteSchedule(id:string): void {
-    console.log('Schedule to delete:', id);
-
-    const confirmed = window.confirm('هل أنت متأكد أنك تريد حذف هذا الموعد؟');
-    if (!confirmed) {
-      return;
-    }
-    
-    // استخدام الـ ID للحذف
-    this._doctorSchedulesService.deleteSchedule(id).subscribe({
-      next: (res) => {
-        console.log('Schedule deleted successfully:', res);
-        // إزالة العنصر من القائمة
-        this.loadSchedules(); // إعادة تحميل المواعيد من السيرفر
-      },
-      error: (err) => {
-        console.error('Error deleting schedule:', err);
-        alert('لا يمكن حذف هذا الموعد');
-      }
-    });
-  }
-
-
-
   openAddForm() {
     this.showAddForm = true;
   }
@@ -287,23 +268,37 @@ export class DoctorSchedules implements OnInit {
     this.showAddForm = false;
     this.addError = null;
   }
+
+  openDeleteDialog(id: string) {
+    this.scheduleToDeleteId = id;
+    this.showDeleteDialog = true;
+  }
+
+  closeDeleteDialog() {
+    this.showDeleteDialog = false;
+    this.scheduleToDeleteId = null;
+  }
+
+  confirmDelete() {
+    if (!this.scheduleToDeleteId) return;
+    this._doctorSchedulesService.deleteSchedule(this.scheduleToDeleteId).subscribe({
+      next: (res) => {
+        this.loadSchedules();
+        this.toastr.success('تم حذف الموعد بنجاح'); // بدون عنوان
+      },
+      error: (err) => {
+        this.toastr.error('لا يمكن حذف هذا الموعد'); // بدون عنوان
+      },
+      complete: () => {
+        this.closeDeleteDialog();
+      }
+    });
+  }
+
+  deleteSchedule(id: string): void {
+    this.openDeleteDialog(id);
+  }
 }
-
-
-
-
-
-// deleteSchedule(id: string): void {
-//   this._doctorSchedulesService.deleteSchedule(id).subscribe({
-//     next: (res) => {
-//       console.log('Schedule deleted successfully:', res);
-//       this.DoctorScheduleslist = this.DoctorScheduleslist.filter(schedule => schedule.id !== id);
-//     },
-//     error: (err) => {
-//       console.error('Error deleting schedule:', err);
-//     }
-//   });
-// }
 
 
 

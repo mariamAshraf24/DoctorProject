@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { Admin } from '../../../core/services/admin';
 import { IAdmin } from '../../../core/models/IAdmin';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { Auth } from '../../../core/services/auth';
 export class AdminComponent implements OnInit {
   private readonly _authService = inject(Auth);
   private readonly _router = inject(Router);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   // دالة تسجيل الخروج
   logout(): void {
@@ -178,24 +179,37 @@ export class AdminComponent implements OnInit {
     }, 0);
   }
 
-  deleteSpecialization(id: string): void {
-    if (!confirm('هل أنت متأكد أنك تريد حذف هذا التخصص؟')) {
-      return;
-    }
-    this._adminService.deleteSpecialization(id).subscribe({
+  showDeleteDialog = false;
+  specializationToDeleteId: string | null = null;
+
+  openDeleteDialog(id: string) {
+    this.specializationToDeleteId = id;
+    this.showDeleteDialog = true;
+  }
+
+  closeDeleteDialog() {
+    this.showDeleteDialog = false;
+    this.specializationToDeleteId = null;
+  }
+
+  confirmDelete() {
+    if (!this.specializationToDeleteId) return;
+    this._adminService.deleteSpecialization(this.specializationToDeleteId).subscribe({
       next: (res: any) => {
-        this.specializations = this.specializations.filter((s: IAdmin) => s.id !== id);
-        this.filteredSpecializations = this.filteredSpecializations.filter((s: IAdmin) => s.id !== id);
+        this.specializations = this.specializations.filter((s: IAdmin) => s.id !== this.specializationToDeleteId);
+        this.filteredSpecializations = this.filteredSpecializations.filter((s: IAdmin) => s.id !== this.specializationToDeleteId);
         this.totalSpecializations = this.specializations.length;
         this.showToast('تم حذف التخصص بنجاح');
       },
       error: (err: any) => {
         alert('حدث خطأ أثناء حذف التخصص');
         console.error(err);
+      },
+      complete: () => {
+        this.closeDeleteDialog();
       }
     });
   }
-
 
 
   filterSpecializations(): void {
@@ -240,10 +254,30 @@ export class AdminComponent implements OnInit {
         this.filterSpecializations();
         const modalEl = document.getElementById('addModal');
         if (modalEl) {
+          // استخدمي دوال Bootstrap الرسمية
           // @ts-ignore
           const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
           modal.hide();
         }
+        // أجبري Angular على تحديث الـ View
+        this.cdr.detectChanges();
+        // إزالة كل آثار المودال والـ overlay فورًا بعد إغلاق المودال
+        setTimeout(() => {
+          document.body.classList.remove('modal-open');
+          document.querySelectorAll('.modal-backdrop').forEach(b => b.remove());
+          document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
+          document.querySelectorAll('.modal').forEach(m => {
+            (m as HTMLElement).style.display = 'none';
+            (m as HTMLElement).setAttribute('aria-hidden', 'true');
+          });
+          (document.activeElement as HTMLElement)?.blur();
+          const tableResponsive = document.querySelector('.table-responsive');
+          if (tableResponsive) {
+            (tableResponsive as HTMLElement).style.overflowY = 'hidden';
+            void (tableResponsive as HTMLElement).offsetHeight;
+            (tableResponsive as HTMLElement).style.overflowY = 'auto';
+          }
+        }, 100);
         this.resetModal();
         this.showToast('تمت إضافة التخصص بنجاح');
       },
