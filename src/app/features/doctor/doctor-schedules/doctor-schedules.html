@@ -34,8 +34,8 @@
   <tbody>
     <tr *ngFor="let schedule of morningSchedules">
       <td>{{ getDayName(schedule.dayOfWeek) }}</td>
-      <td>{{ schedule.startTime }}</td>
-      <td>{{ schedule.endTime }}</td>
+      <td>{{ schedule.startTime | time12}}</td>
+      <td>{{ schedule.endTime | time12}}</td>
       <td>{{ schedule.slotDuration }}</td>
       <td>
         <button class="btn btn-danger btn-sm" (click)="openDeleteDialog(schedule.id)">
@@ -65,8 +65,8 @@
   <tbody>
     <tr *ngFor="let schedule of eveningSchedules">
       <td>{{ getDayName(schedule.dayOfWeek) }}</td>
-      <td>{{ schedule.startTime }}</td>
-      <td>{{ schedule.endTime }}</td>
+      <td>{{ schedule.startTime |time12 }}</td>
+      <td>{{ schedule.endTime | time12}}</td>
       <td>{{ schedule.slotDuration }}</td>
       <td>
         <button class="btn btn-danger btn-sm" (click)="openDeleteDialog(schedule.id)">
@@ -158,10 +158,11 @@
       هل أنت متأكد أنك تريد حذف هذا الموعد؟
     </div>
     <div class="dialog-actions">
+      <button class="cancel-btn" (click)="closeDeleteDialog()">إلغاء</button>
       <button class="confirm-btn" (click)="confirmDelete()">
         تأكيد
       </button>
-      <button class="cancel-btn" (click)="closeDeleteDialog()">إلغاء</button>
+      
       
     </div>
   </div>
