@@ -127,7 +127,6 @@ export class AppointmentCalendar implements OnInit {
     { value: 0, label: 'حجز قادم', icon: 'event', color: '#3498db' },
     { value: 1, label: 'مؤجل', icon: 'schedule', color: '#f39c12' },
     { value: 2, label: 'مكتمل', icon: 'check_circle', color: '#27ae60' },
-    { value: 3, label: 'ملغي', icon: 'cancel', color: '#e74c3c' },
     { value: 4, label: 'لم يحضر', icon: 'highlight_off', color: '#c0392b' },
   ];
 
@@ -212,8 +211,6 @@ export class AppointmentCalendar implements OnInit {
         return 'مُؤجَّل';
       case 2:
         return 'تمت الزيارة';
-      case 3:
-        return 'ملغى';
       case 4:
         return 'لم يحضر';
       default:
