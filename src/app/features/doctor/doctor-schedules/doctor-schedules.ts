@@ -10,11 +10,12 @@ import { Router} from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 import { DoctorSchedulesService } from '../../../core/services/doctor-schedules';
 import { IDoctorSchedules } from '../../../core/models/idoctor-schedules';
+import { Time12Pipe } from '../../../shared/time12-pipe';
 
 
 @Component({
   selector: 'app-doctor-schedules',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule , Time12Pipe],
   templateUrl: './doctor-schedules.html',
   styleUrls: ['./doctor-schedules.scss','./doctor-schedules.temp.scss'],
 })

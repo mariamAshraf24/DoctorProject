@@ -140,7 +140,8 @@ export class Register implements OnInit {
           this._authService.saveToken(res.token);
           this.registerForm.reset();
           this._router.navigate(['/doctor/home']);
-        } else {
+        } 
+        else {
           this.errorMessage = '❌ حدث خطأ أثناء التسجيل';
           // alert('حدث خطأ أثناء التسجيل');
         }
@@ -148,7 +149,7 @@ export class Register implements OnInit {
       error: (err: HttpErrorResponse) => {
         console.error(err);
         const message = err.error?.message;
-        if (message?.includes('Username already exists')) {
+        if (err.error?.message?.includes('Username already exists')) {
           this.usernameError = 'اسم المستخدم موجود بالفعل، يرجى اختيار اسم آخر';
           this.registerForm.get('userName')?.setErrors({ notUnique: true });
           this.registerForm.get('userName')?.markAsTouched();
@@ -160,11 +161,13 @@ export class Register implements OnInit {
             'اسم المستخدم غير صالح، يجب أن يحتوي فقط على حروف انجليزي أو أرقام';
           this.registerForm.get('userName')?.setErrors({ invalidFormat: true });
           this.registerForm.get('userName')?.markAsTouched();
-        } else if (message?.includes('Email') && message?.includes('taken')) {
-          this.usernameError = 'الايميل موجود بالفعل، يرجى كتابه ايميل آخر';
-          this.registerForm.get('Email')?.setErrors({ emailTaken: true });
-          this.registerForm.get('Email')?.markAsTouched();
-        } else {
+        } 
+        // else if (message?.includes('Email') && message?.includes('taken')) {
+        //   this.usernameError = 'الايميل موجود بالفعل، يرجى كتابه ايميل آخر';
+        //   this.registerForm.get('Email')?.setErrors({ emailTaken: true });
+        //   this.registerForm.get('Email')?.markAsTouched();
+        //  }
+          else {
           this.errorMessage = '❌ حدث خطأ أثناء التسجيل';
         }
       },
