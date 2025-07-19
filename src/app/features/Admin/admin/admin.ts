@@ -41,6 +41,12 @@ export class AdminComponent implements OnInit {
       this.editNameError = 'يجب ألا يقل الاسم عن 3 أحرف';
       return;
     }
+    // تحقق إذا لم يتغير الاسم فعليًا
+    const original = this.specializations.find(s => s.id === this.editSpecializationData.id)?.name;
+    if (name === original) {
+      this.editNameError = 'لم تقم بتغيير الاسم';
+      return;
+    }
     const exists = this.specializations.some(
       spec => spec.name.trim().toLowerCase() === name.toLowerCase() && spec.id !== this.editSpecializationData.id
     );
@@ -287,7 +293,7 @@ export class AdminComponent implements OnInit {
     this.validateEditSpecializationName();
     const { id, name } = this.editSpecializationData;
     if (this.editNameError || !name || name.trim().length < 3) {
-      this.closeEditDialog();
+      // فقط امنع الحفظ ولا تغلق النافذة
       return;
     }
     this._adminService.updateSpecialization(id, name.trim()).subscribe({
