@@ -138,6 +138,9 @@ export class Register implements OnInit {
       next: (res: any) => {
         if (res.isSuccess && res.token) {
           this._authService.saveToken(res.token);
+          if (res.roles) {
+            localStorage.setItem('roles', res.roles);
+          }
           this.registerForm.reset();
           this._router.navigate(['/doctor/home']);
         } 

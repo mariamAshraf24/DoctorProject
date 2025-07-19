@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { Admin } from '../../../core/services/admin';
 import { IAdmin } from '../../../core/models/IAdmin';
 import { FormsModule } from '@angular/forms';
@@ -16,25 +16,12 @@ import { Auth } from '../../../core/services/auth';
 export class AdminComponent implements OnInit {
   private readonly _authService = inject(Auth);
   private readonly _router = inject(Router);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   // دالة تسجيل الخروج
   logout(): void {
     this._authService.logout();
     this._router.navigate(['/login']);
-  }
-
-  // فتح مودال التعديل مع تعبئة البيانات
-  openEditModal(s: IAdmin): void {
-    this.editSpecializationData = { ...s };
-    this.editNameError = '';
-    setTimeout(() => {
-      const modalEl = document.getElementById('editModal');
-      if (modalEl) {
-        // @ts-ignore
-        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-        modal.show();
-      }
-    }, 0);
   }
 
   // إعادة تعيين بيانات مودال التعديل
@@ -64,48 +51,49 @@ export class AdminComponent implements OnInit {
     this.editNameError = '';
   }
 
+  // احذف النسخة القديمة بالكامل:
   // تنفيذ التعديل
-  updateSpecialization(): void {
-    this.validateEditSpecializationName();
-    const { id, name } = this.editSpecializationData;
-    if (this.editNameError || !name || name.trim().length < 3) {
-      return;
-    }
-    this._adminService.updateSpecialization(id, name.trim()).subscribe({
-      next: () => {
-        // ابحث عن العنصر القديم
-        const idx = this.specializations.findIndex(s => s.id === id);
-        if (idx !== -1) {
-          // احذف العنصر القديم
-          const old = this.specializations.splice(idx, 1)[0];
-          // أنشئ العنصر المعدل
-          const updated = { ...old, name: name.trim() };
-          // أدرجه في المكان الصحيح أبجدياً
-          let insertIdx = this.specializations.findIndex(
-            s => s.name.localeCompare(updated.name, 'ar', { sensitivity: 'base' }) > 0
-          );
-          if (insertIdx === -1) {
-            this.specializations.push(updated);
-          } else {
-            this.specializations.splice(insertIdx, 0, updated);
-          }
-        }
-        this.filterSpecializations();
-        const modalEl = document.getElementById('editModal');
-        if (modalEl) {
-          // @ts-ignore
-          const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-          modal.hide();
-        }
-        this.resetEditModal();
-        this.showToast('تم تعديل التخصص بنجاح');
-      },
-      error: (err: any) => {
-        alert('حدث خطأ أثناء تعديل التخصص');
-        console.error(err);
-      }
-    });
-  }
+  // updateSpecialization(): void {
+  //   this.validateEditSpecializationName();
+  //   const { id, name } = this.editSpecializationData;
+  //   if (this.editNameError || !name || name.trim().length < 3) {
+  //     return;
+  //   }
+  //   this._adminService.updateSpecialization(id, name.trim()).subscribe({
+  //     next: () => {
+  //       // ابحث عن العنصر القديم
+  //       const idx = this.specializations.findIndex(s => s.id === id);
+  //       if (idx !== -1) {
+  //         // احذف العنصر القديم
+  //         const old = this.specializations.splice(idx, 1)[0];
+  //         // أنشئ العنصر المعدل
+  //         const updated = { ...old, name: name.trim() };
+  //         // أدرجه في المكان الصحيح أبجدياً
+  //         let insertIdx = this.specializations.findIndex(
+  //           s => s.name.localeCompare(updated.name, 'ar', { sensitivity: 'base' }) > 0
+  //         );
+  //         if (insertIdx === -1) {
+  //           this.specializations.push(updated);
+  //         } else {
+  //           this.specializations.splice(insertIdx, 0, updated);
+  //         }
+  //       }
+  //       this.filterSpecializations();
+  //       const modalEl = document.getElementById('editModal');
+  //       if (modalEl) {
+  //         // @ts-ignore
+  //         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+  //         modal.hide();
+  //       }
+  //       this.resetEditModal();
+  //       this.showToast('تم تعديل التخصص بنجاح');
+  //     },
+  //     error: (err: any) => {
+  //       alert('حدث خطأ أثناء تعديل التخصص');
+  //       console.error(err);
+  //     }
+  //   });
+  // }
 
 
   editSpecializationData = { id: '', name: '', doctors: [] };
@@ -178,24 +166,37 @@ export class AdminComponent implements OnInit {
     }, 0);
   }
 
-  deleteSpecialization(id: string): void {
-    if (!confirm('هل أنت متأكد أنك تريد حذف هذا التخصص؟')) {
-      return;
-    }
-    this._adminService.deleteSpecialization(id).subscribe({
+  showDeleteDialog = false;
+  specializationToDeleteId: string | null = null;
+
+  openDeleteDialog(id: string) {
+    this.specializationToDeleteId = id;
+    this.showDeleteDialog = true;
+  }
+
+  closeDeleteDialog() {
+    this.showDeleteDialog = false;
+    this.specializationToDeleteId = null;
+  }
+
+  confirmDelete() {
+    if (!this.specializationToDeleteId) return;
+    this._adminService.deleteSpecialization(this.specializationToDeleteId).subscribe({
       next: (res: any) => {
-        this.specializations = this.specializations.filter((s: IAdmin) => s.id !== id);
-        this.filteredSpecializations = this.filteredSpecializations.filter((s: IAdmin) => s.id !== id);
+        this.specializations = this.specializations.filter((s: IAdmin) => s.id !== this.specializationToDeleteId);
+        this.filteredSpecializations = this.filteredSpecializations.filter((s: IAdmin) => s.id !== this.specializationToDeleteId);
         this.totalSpecializations = this.specializations.length;
         this.showToast('تم حذف التخصص بنجاح');
       },
       error: (err: any) => {
-        alert('حدث خطأ أثناء حذف التخصص');
+        this.showToast('حدث خطأ أثناء حذف التخصص');
         console.error(err);
+      },
+      complete: () => {
+        this.closeDeleteDialog();
       }
     });
   }
-
 
 
   filterSpecializations(): void {
@@ -213,21 +214,25 @@ export class AdminComponent implements OnInit {
   loadData(): void { }
 
 
+  showAddDialog = false;
+
+  openAddDialog() {
+    this.showAddDialog = true;
+    this.resetModal();
+  }
+
+  closeAddDialog() {
+    this.showAddDialog = false;
+  }
+
   addSpecialization(): void {
     this.validateSpecializationName();
     if (this.nameError || !this.newSpecialization.name?.trim()) {
-      const modalEl = document.getElementById('addModal');
-      if (modalEl) {
-        // @ts-ignore
-        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-        modal.hide();
-      }
-      this.resetModal();
+      this.closeAddDialog();
       return;
     }
     this._adminService.addSpecialization(this.newSpecialization.name.trim()).subscribe({
       next: (res) => {
-        // أضف التخصص الجديد في المكان الصحيح أبجدياً بدون refresh كامل
         const newSpec = { ...res.data };
         let insertIdx = this.specializations.findIndex(
           s => s.name.localeCompare(newSpec.name, 'ar', { sensitivity: 'base' }) > 0
@@ -238,17 +243,14 @@ export class AdminComponent implements OnInit {
           this.specializations.splice(insertIdx, 0, newSpec);
         }
         this.filterSpecializations();
-        const modalEl = document.getElementById('addModal');
-        if (modalEl) {
-          // @ts-ignore
-          const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-          modal.hide();
-        }
+        this.closeAddDialog();
         this.resetModal();
         this.showToast('تمت إضافة التخصص بنجاح');
       },
       error: (err) => {
-        alert('حدث خطأ أثناء إضافة التخصص');
+        this.showToast('حدث خطأ أثناء إضافة التخصص');
+        this.closeAddDialog();
+        this.resetModal();
         console.error(err);
       }
     });
@@ -266,6 +268,53 @@ export class AdminComponent implements OnInit {
         toast.show();
       }
     }, 0);
+  }
+
+  showEditDialog = false;
+
+  openEditDialog(s: IAdmin): void {
+    this.editSpecializationData = { ...s };
+    this.editNameError = '';
+    this.showEditDialog = true;
+  }
+
+  closeEditDialog() {
+    this.showEditDialog = false;
+    this.resetEditModal();
+  }
+
+  updateSpecialization(): void {
+    this.validateEditSpecializationName();
+    const { id, name } = this.editSpecializationData;
+    if (this.editNameError || !name || name.trim().length < 3) {
+      this.closeEditDialog();
+      return;
+    }
+    this._adminService.updateSpecialization(id, name.trim()).subscribe({
+      next: () => {
+        const idx = this.specializations.findIndex(s => s.id === id);
+        if (idx !== -1) {
+          const old = this.specializations.splice(idx, 1)[0];
+          const updated = { ...old, name: name.trim() };
+          let insertIdx = this.specializations.findIndex(
+            s => s.name.localeCompare(updated.name, 'ar', { sensitivity: 'base' }) > 0
+          );
+          if (insertIdx === -1) {
+            this.specializations.push(updated);
+          } else {
+            this.specializations.splice(insertIdx, 0, updated);
+          }
+        }
+        this.filterSpecializations();
+        this.closeEditDialog();
+        this.showToast('تم تعديل التخصص بنجاح');
+      },
+      error: (err: any) => {
+        this.showToast('حدث خطأ أثناء تعديل التخصص');
+        this.closeEditDialog();
+        console.error(err);
+      }
+    });
   }
 }
 

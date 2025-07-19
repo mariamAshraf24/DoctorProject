@@ -53,7 +53,7 @@
               حذف كلمات البحث
             </button>
             <button class="btn btn-primary d-flex align-items-center gap-2"
-        data-bs-toggle="modal" data-bs-target="#addModal">
+  (click)="openAddDialog()">
   <i class="fa fa-plus"></i>
   <span>اضافه تخصص</span>
 </button>        </div>
@@ -90,11 +90,11 @@
                 <td class="text-end">
                   <div class="d-flex justify-content-end me-3 gap-2">
                     <button title="تعديل التخصص" class="btn btn-sm btn-outline-secondary"
-                      (click)="openEditModal(specialization)">
+                      (click)="openEditDialog(specialization)">
                       <i class="fa fa-edit"></i>
                     </button>
                     <button title="حذف التخصص" class="btn btn-sm btn-outline-danger"
-                      (click)="deleteSpecialization(specialization.id)">
+                      (click)="openDeleteDialog(specialization.id)">
                       <i class="fa fa-trash"></i>
                     </button>
                   </div>
@@ -120,65 +120,78 @@
   </div>
 </div>
 
-<!-- Add Specialization Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <form (ngSubmit)="addSpecialization()" #form="ngForm">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addModalLabel">إضافة تخصص</h5>
-          
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="name" class="form-label">اسم التخصص</label>
-            <input type="text" class="form-control" id="name" required
-              [(ngModel)]="newSpecialization.name" name="name" placeholder="اسم التخصص"
-              (input)="validateSpecializationName()" (blur)="validateSpecializationName()">
-            <div *ngIf="nameError" class="text-danger mt-1" style="font-size: 0.95em;">
-              {{ nameError }}
-            </div>
+<!-- Dialog إضافة تخصص مخصص -->
+<div class="add-dialog-overlay" *ngIf="showAddDialog">
+  <div class="add-dialog">
+    <div class="dialog-header">
+      <span class="dialog-title">إضافة تخصص</span>
+    </div>
+    <form (ngSubmit)="addSpecialization()" #form="ngForm">
+      <div class="dialog-body">
+        <div class="mb-3">
+          <label for="name" class="form-label">اسم التخصص</label>
+          <input type="text" class="form-control" id="name" required
+            [(ngModel)]="newSpecialization.name" name="name" placeholder="اسم التخصص"
+            (input)="validateSpecializationName()" (blur)="validateSpecializationName()">
+          <div *ngIf="nameError" class="text-danger mt-1" style="font-size: 0.95em;">
+            {{ nameError }}
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-          <button type="submit" class="btn btn-primary" [disabled]="!form.valid || nameError || !newSpecialization.name.trim()">إضافة</button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="cancel-btn" (click)="closeAddDialog()">إلغاء</button>
+        <button type="submit" class="confirm-btn" [disabled]="!form.valid || nameError || !newSpecialization.name.trim()">إضافة</button>
+      </div>
+    </form>
   </div>
 </div>
 
 
 
-<!-- Edit Specialization Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <form (ngSubmit)="updateSpecialization()" #editForm="ngForm">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">تعديل التخصص</h5>
-          <button type="button" class="btn-close custom-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="editName" class="form-label">اسم التخصص</label>
-            <input type="text" class="form-control" id="editName" required
-              [(ngModel)]="editSpecializationData.name" name="editName"
-              placeholder="اسم التخصص"
-              (input)="validateEditSpecializationName()"
-              (blur)="validateEditSpecializationName()" />
-            <div *ngIf="editNameError" class="text-danger mt-1" style="font-size: 0.95em;">
-              {{ editNameError }}
-            </div>
+<!-- Dialog تعديل تخصص مخصص -->
+<div class="add-dialog-overlay" *ngIf="showEditDialog">
+  <div class="add-dialog">
+    <div class="dialog-header">
+      <span class="dialog-title">تعديل التخصص</span>
+    </div>
+    <form (ngSubmit)="updateSpecialization()" #editForm="ngForm">
+      <div class="dialog-body">
+        <div class="mb-3">
+          <label for="editName" class="form-label">اسم التخصص</label>
+          <input type="text" class="form-control" id="editName" required
+            [(ngModel)]="editSpecializationData.name" name="editName"
+            placeholder="اسم التخصص"
+            (input)="validateEditSpecializationName()"
+            (blur)="validateEditSpecializationName()" />
+          <div *ngIf="editNameError" class="text-danger mt-1" style="font-size: 0.95em;">
+            {{ editNameError }}
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-          <button type="submit" class="btn btn-primary"
-            [disabled]="!editForm.valid || editNameError || !editSpecializationData.name.trim()">حفظ</button>
-        </div>
-      </form>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="cancel-btn" (click)="closeEditDialog()">إلغاء</button>
+        <button type="submit" class="confirm-btn"
+          [disabled]="!editForm.valid || editNameError || !editSpecializationData.name.trim()">حفظ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Dialog تأكيد الحذف -->
+<div class="delete-dialog-overlay" *ngIf="showDeleteDialog">
+  <div class="delete-dialog">
+    <div class="dialog-header">
+      <span class="warning-icon">&#9888;</span>
+      <span class="dialog-title">تأكيد الحذف</span>
+    </div>
+    <div class="dialog-body">
+      هل أنت متأكد أنك تريد حذف هذا التخصص؟
+    </div>
+    <div class="dialog-actions">
+      <button class="cancel-btn" (click)="closeDeleteDialog()">إلغاء</button>
+      <button class="confirm-btn" (click)="confirmDelete()">
+        تأكيد
+      </button>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+@import 'ngx-toastr/toastr';
 
 /* Theme variables */
 :root {
@@ -40,4 +41,22 @@ button.add-btn:hover, .add-btn:hover, .add-btn[_ngcontent-ng-c3675662402]:hover 
   background: linear-gradient(135deg, #7b2ff2 0%, #6c47ff 100%) !important;
   color: #fff !important;
   transform: scale(1.07);
+}
+
+.toast-success {
+  background-color: #6c4a8c !important; // بنفسجي غامق
+  color: #fff !important;
+  font-family: 'Cairo', sans-serif;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 12px rgba(80, 0, 80, 0.10);
+  border: none !important;
+}
+.toast-success .toast-title {
+  color: #fff !important;
+}
+
+body:not(.modal-open) .modal-backdrop {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
